@@ -54,6 +54,15 @@ if (!index.includes('<link rel="shortcut icon" href="/favicon.ico">')) {
 if (index.indexOf('class="site-mark"') > index.indexOf('class="work-title"')) {
   fail('The logo must appear above the Golden Calf H1.');
 }
+const expectedNavOrder = ['>W.O.R.K<', '>A.B.O.U.T<', '>P.R.A.C.T.I.C.E<'];
+let previousNavIndex = -1;
+expectedNavOrder.forEach(label => {
+  const navIndex = index.indexOf(label);
+  if (navIndex <= previousNavIndex) {
+    fail('index.html nav order must be W.O.R.K, A.B.O.U.T, P.R.A.C.T.I.C.E.');
+  }
+  previousNavIndex = navIndex;
+});
 
 const css = read('css/styles.css');
 [
@@ -64,6 +73,10 @@ const css = read('css/styles.css');
   '.page-work .main',
   '--nav-height: 48px',
   'font-size: clamp(15px, 1.55vw, 21px)',
+  'color: var(--ink)',
+  'min-height: clamp(440px, 62vh, 620px)',
+  'padding: clamp(54px, 7vw, 88px)',
+  'font-size: clamp(28px, 4.2vw, 58px)',
   'font-size: clamp(17px, 1.65vw, 24px)',
   'font-style: italic',
   'font-weight: 700',

@@ -78,9 +78,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   font-family: var(--font-display);
   font-size: clamp(15px, 1.55vw, 21px);
   letter-spacing: 0.08em;
-  color: var(--white);
-  opacity: 0.7;
-  text-shadow: 0 1px 7px rgba(25,25,22,0.22);
+  color: var(--ink);
+  opacity: 0.68;
+  text-shadow: none;
   transition: opacity 0.25s ease;
 }
 .nav-link::before {
@@ -118,8 +118,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   display: block;
   width: 100%;
   height: 1.5px;
-  background-color: var(--white);
-  box-shadow: 0 1px 7px rgba(25,25,22,0.2);
+  background-color: var(--ink);
+  box-shadow: none;
   transition: transform 0.3s, opacity 0.3s;
   transform-origin: center;
 }
@@ -152,8 +152,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   font-family: var(--font-display);
   font-size: 18px;
   letter-spacing: 0.08em;
-  color: var(--white);
-  text-shadow: 0 1px 7px rgba(25,25,22,0.22);
+  color: var(--ink);
+  text-shadow: none;
 }
 
 /* === MAIN === */
@@ -174,15 +174,15 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   background-image: url('/images/background.png');
   background-size: cover;
   background-position: center top;
-  min-height: clamp(520px, 76vh, 760px);
+  min-height: clamp(440px, 62vh, 620px);
   justify-content: center;
-  padding: clamp(72px, 10vw, 128px) var(--pad-x) clamp(40px, 7vw, 88px);
+  padding: clamp(54px, 7vw, 88px) var(--pad-x) clamp(28px, 4vw, 54px);
   text-align: center;
 }
 
 .work-title {
   font-family: var(--font-display);
-  font-size: clamp(34px, 5.4vw, 76px);
+  font-size: clamp(28px, 4.2vw, 58px);
   font-weight: 400;
   line-height: 0.95;
   color: var(--white);
