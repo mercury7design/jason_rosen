@@ -69,6 +69,8 @@ const css = read('css/styles.css');
   "url('/images/background.png')",
   'rgba(255, 255, 255, 0.2)',
   'border-bottom: 1px solid var(--ink)',
+  '.site-header.menu-open .nav',
+  'border-bottom-color: transparent',
   '.nav-link::before',
   '.nav-link:hover::before',
   '.page-work .main',
