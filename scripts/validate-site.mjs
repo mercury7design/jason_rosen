@@ -68,6 +68,7 @@ const css = read('css/styles.css');
 [
   "url('/images/background.png')",
   'rgba(255, 255, 255, 0.2)',
+  'border-bottom: 1px solid var(--ink)',
   '.nav-link::before',
   '.nav-link:hover::before',
   '.page-work .main',
@@ -78,7 +79,12 @@ const css = read('css/styles.css');
   'padding: clamp(54px, 7vw, 88px)',
   'font-size: clamp(28px, 4.2vw, 58px)',
   'font-size: clamp(17px, 1.65vw, 24px)',
+  'font-size: clamp(14px, 1.15vw, 17px)',
+  'color: rgba(255,255,255,0.88)',
   'font-style: italic',
+  'background-color: color-mix(in srgb, var(--sand) 85%, var(--ink))',
+  '.footer-mark',
+  'color: var(--white)',
   'font-weight: 700',
   'text-shadow: 0 2px 10px',
 ].forEach(token => {

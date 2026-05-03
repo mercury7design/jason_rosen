@@ -58,7 +58,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255,255,255,0.18);
+  border-bottom: 1px solid var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,7 +134,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255,255,255,0.18);
+  border-bottom: 1px solid var(--ink);
   padding: 32px var(--pad-x);
   gap: 24px;
   max-height: 0;
@@ -379,12 +379,13 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 }
 
 .lb-caption {
-  margin-top: 12px;
+  margin-top: 14px;
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-style: italic;
   font-weight: 300;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.88);
 }
 
 /* === ABOUT PAGE === */
@@ -443,7 +444,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   border-top: 1px solid var(--ink);
   padding: 40px var(--pad-x);
   margin-top: auto;
-  background-color: var(--sand);
+  background-color: color-mix(in srgb, var(--sand) 85%, var(--ink));
 }
 
 .footer-inner {
@@ -457,6 +458,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .footer-mark {
   font-size: 20px;
   line-height: 1;
+  color: var(--white);
 }
 
 .footer-est {
