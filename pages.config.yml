@@ -13,7 +13,11 @@ content:
         type: "text"
       - name: "items"
         label: "Projects"
-        type: "list"
+        type: "object"
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
         fields:
           - name: "title"
             label: "Project Title"
@@ -29,7 +33,11 @@ content:
             type: "image"
           - name: "media"
             label: "Media Items (images and/or videos)"
-            type: "list"
+            type: "object"
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{type}: {caption}"
             fields:
               - name: "type"
                 label: "Type"
@@ -47,8 +55,9 @@ content:
                 label: "External URL (for video, or external image)"
                 type: "string"
               - name: "caption"
-                label: "Caption"
-                type: "string"
+                label: "Media Description"
+                type: "text"
+                description: "Concise 1-2 sentence description shown beneath this media item."
 
   - name: "about"
     label: "About Page"
