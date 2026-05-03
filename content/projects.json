@@ -1,5 +1,5 @@
 {
-  "work_intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "work_intro": "Select productions I have led from concept to launch.",
   "items": [
     {
       "title": "Harry Potter: Visions of Magic",
@@ -7,15 +7,51 @@
       "description": "Three themed immersive attractions produced for Warner Bros and NEON, bringing the wizarding world to life through experiential design and production.\n\nOversaw installation delivery across 3 large-scale instances totalling $4M, managing 2 traveling modular units deployed across Europe and the Americas, plus a permanent version at Resorts World Singapore.",
       "thumbnail": "https://a.storyblok.com/f/164420/3200x1800/77e2ae3e3c/06_dk_hp_031125.jpg",
       "media": [
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4", "caption": "DK designed an immersive touring journey that brings the wizarding world to life through artful, interactive environments." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4", "caption": "Guests move through mysterious locations activated by responsive video, theatrical lighting, props, architecture, and sound." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4", "caption": "A bespoke interactive wand gives visitors agency, triggering hidden effects and revealing layers of the story." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4", "caption": "The environments remix iconic IP into a contemporary multi-sensory experience for global audiences." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4", "caption": "Embedded sensors reveal responsive projections, soundscapes, and other hidden traces of magic throughout the rooms." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4", "caption": "The experience culminates in an immersive finale with wand-responsive projections and interactive floors." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/1faccd22c1/20_dk_hp_031725.mp4", "caption": "The global attraction launched across Cologne, Brussels, Singapore, and other touring destinations." },
-        { "type": "image", "url": "https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg", "caption": "Large-scale scenic environments combine physical build, media, and theatrical cues into a continuous visitor journey." },
-        { "type": "image", "url": "https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg", "caption": "DK also shaped the brand story, including creative direction, visual identity, and campaign storytelling." }
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4",
+          "caption": "DK designed an immersive touring journey that brings the wizarding world to life through artful, interactive environments."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4",
+          "caption": "Guests move through mysterious locations activated by responsive video, theatrical lighting, props, architecture, and sound."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4",
+          "caption": "A bespoke interactive wand gives visitors agency, triggering hidden effects and revealing layers of the story."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4",
+          "caption": "The environments remix iconic IP into a contemporary multi-sensory experience for global audiences."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4",
+          "caption": "Embedded sensors reveal responsive projections, soundscapes, and other hidden traces of magic throughout the rooms."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4",
+          "caption": "The experience culminates in an immersive finale with wand-responsive projections and interactive floors."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/1faccd22c1/20_dk_hp_031725.mp4",
+          "caption": "The global attraction launched across Cologne, Brussels, Singapore, and other touring destinations."
+        },
+        {
+          "type": "image",
+          "url": "https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg",
+          "caption": "Large-scale scenic environments combine physical build, media, and theatrical cues into a continuous visitor journey."
+        },
+        {
+          "type": "image",
+          "url": "https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg",
+          "caption": "DK also shaped the brand story, including creative direction, visual identity, and campaign storytelling."
+        }
       ]
     },
     {
@@ -24,11 +60,31 @@
       "description": "Title sequence post-production for the Apple TV+ limited series.",
       "thumbnail": "https://a.storyblok.com/f/164420/1757x1012/45ab5099c4/03_dk_manhunt_031825.jpg",
       "media": [
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/9ad98eca37/16d_preview_dk_manhunt_043025-1.mp4", "caption": "DK created a title sequence that drops viewers into the 12-day chase for Lincoln's killer." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/a11758b6bb/01b_preview_dk_manhunt_031825-1.mp4", "caption": "The sequence uses restored, colorized, and projection-mapped Civil War imagery with live action and animation." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/6a3527b365/02_dk_manhunt_031825-1.mp4", "caption": "A corrosive visual treatment evokes damaged 1800s photographic processes and rising national tension." },
-        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/adbd0594c6/04_dk_manhunt_031825-1.mp4", "caption": "Kinetic editorial pacing, photogrammetry, and original music build the pressure of a historical thriller." },
-        { "type": "image", "url": "https://a.storyblok.com/f/164420/952x867/2d8a376a62/05_dk_manhunt_031825.jpg", "caption": "Degraded imagery centers Booth's rage and the terror of a nation under threat." }
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/9ad98eca37/16d_preview_dk_manhunt_043025-1.mp4",
+          "caption": "DK created a title sequence that drops viewers into the 12-day chase for Lincoln's killer."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/a11758b6bb/01b_preview_dk_manhunt_031825-1.mp4",
+          "caption": "The sequence uses restored, colorized, and projection-mapped Civil War imagery with live action and animation."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/6a3527b365/02_dk_manhunt_031825-1.mp4",
+          "caption": "A corrosive visual treatment evokes damaged 1800s photographic processes and rising national tension."
+        },
+        {
+          "type": "video",
+          "url": "https://a.storyblok.com/f/164420/x/adbd0594c6/04_dk_manhunt_031825-1.mp4",
+          "caption": "Kinetic editorial pacing, photogrammetry, and original music build the pressure of a historical thriller."
+        },
+        {
+          "type": "image",
+          "url": "https://a.storyblok.com/f/164420/952x867/2d8a376a62/05_dk_manhunt_031825.jpg",
+          "caption": "Degraded imagery centers Booth's rage and the terror of a nation under threat."
+        }
       ]
     },
     {
@@ -37,9 +93,21 @@
       "description": "Title sequence post-production for the Apple TV+ limited series.",
       "thumbnail": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen.jpg",
       "media": [
-        { "type": "video", "url": "https://www.youtube.com/watch?v=cff-gXm-aAk", "caption": "Digital Kitchen shaped an unsettling title sequence for Before around grief, loss, and ties to the past." },
-        { "type": "image", "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen4.jpg", "caption": "The visual approach blends archival and modern looks into a dreamscape where time feels directionless." },
-        { "type": "image", "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen9.jpg", "caption": "Infrared digital cameras and vintage lenses helped create the sequence's otherworldly atmosphere." }
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/watch?v=cff-gXm-aAk",
+          "caption": "Digital Kitchen shaped an unsettling title sequence for Before around grief, loss, and ties to the past."
+        },
+        {
+          "type": "image",
+          "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen4.jpg",
+          "caption": "The visual approach blends archival and modern looks into a dreamscape where time feels directionless."
+        },
+        {
+          "type": "image",
+          "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen9.jpg",
+          "caption": "Infrared digital cameras and vintage lenses helped create the sequence's otherworldly atmosphere."
+        }
       ]
     },
     {
@@ -48,10 +116,26 @@
       "description": "Open source Google Maps Geospatial API demo showcasing GPS-based VPS technology, produced for its debut at Google I/O.",
       "thumbnail": "https://cdn.sanity.io/images/uk7b627p/production/9401f2fb083faeb2e14e78335edbbb39f62fb8ed-1124x986.png",
       "media": [
-        { "type": "video", "url": "https://stream.mux.com/827vmqXHn00gK6b01cnQ2pEIcruSbtwFjdhOpJ8k374Ys.m3u8", "caption": "Pocket Garden showcased Google's Geospatial API through an open source AR demo for developers." },
-        { "type": "video", "url": "https://stream.mux.com/cUseZlIhXq2bgWSwCo6VO1AVejbileHPvBCCVr00L88c.m3u8", "caption": "The experience turned real-world location data into a playful spatial garden for Google I/O." },
-        { "type": "image", "url": "https://cdn.sanity.io/images/uk7b627p/production/cdbf16e5ba0a35329c9675e97d174c252aa9303c-2048x2048.png", "caption": "BUCK's demo used ARCore and location-aware interaction to explore how digital objects can inhabit public space." },
-        { "type": "image", "url": "https://cdn.sanity.io/images/uk7b627p/production/f55ed23e408ed931e85603ea191c88ec04d3afbf-2048x2048.png", "caption": "The project paired developer utility with a friendly visual system designed to make VPS technology legible." }
+        {
+          "type": "video",
+          "url": "https://stream.mux.com/827vmqXHn00gK6b01cnQ2pEIcruSbtwFjdhOpJ8k374Ys.m3u8",
+          "caption": "Pocket Garden showcased Google's Geospatial API through an open source AR demo for developers."
+        },
+        {
+          "type": "video",
+          "url": "https://stream.mux.com/cUseZlIhXq2bgWSwCo6VO1AVejbileHPvBCCVr00L88c.m3u8",
+          "caption": "The experience turned real-world location data into a playful spatial garden for Google I/O."
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.sanity.io/images/uk7b627p/production/cdbf16e5ba0a35329c9675e97d174c252aa9303c-2048x2048.png",
+          "caption": "BUCK's demo used ARCore and location-aware interaction to explore how digital objects can inhabit public space."
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.sanity.io/images/uk7b627p/production/f55ed23e408ed931e85603ea191c88ec04d3afbf-2048x2048.png",
+          "caption": "The project paired developer utility with a friendly visual system designed to make VPS technology legible."
+        }
       ]
     },
     {
@@ -60,19 +144,38 @@
       "description": "Philadelphia museum featuring interactive exhibitry, tangible media, and immersive experiences. $2.75M content development and design phase.",
       "thumbnail": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_09-1440x960.jpg",
       "media": [
-        { "type": "video", "url": "https://vimeo.com/571735746", "caption": "Local Projects designed the museum as an immersive exploration of values behind American democracy." },
-        { "type": "image", "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_03-1440x960.jpg", "caption": "The visit centers on Liberty, Justice, and Hope through media-rich galleries instead of a traditional timeline." },
-        { "type": "image", "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_04-1440x960.jpg", "caption": "Visitors use a digital torch called The Lamp to collect resonant quotes, songs, and stories." },
-        { "type": "image", "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_02-1440x960.jpg", "caption": "The Unity gallery weaves individual choices into a collective data portrait." }
+        {
+          "type": "video",
+          "url": "https://vimeo.com/571735746",
+          "caption": "Local Projects designed the museum as an immersive exploration of values behind American democracy."
+        },
+        {
+          "type": "image",
+          "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_03-1440x960.jpg",
+          "caption": "The visit centers on Liberty, Justice, and Hope through media-rich galleries instead of a traditional timeline."
+        },
+        {
+          "type": "image",
+          "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_04-1440x960.jpg",
+          "caption": "Visitors use a digital torch called The Lamp to collect resonant quotes, songs, and stories."
+        },
+        {
+          "type": "image",
+          "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_02-1440x960.jpg",
+          "caption": "The Unity gallery weaves individual choices into a collective data portrait."
+        }
       ]
     },
     {
       "title": "New York City Ballet Art Series",
       "client": "New York City Ballet / Lincoln Center",
       "description": "Immersive multimedia installation in the Promenade of Lincoln Center's David H. Koch Theater by artist Santtu Mustonen.",
-      "thumbnail": "https://res.cloudinary.com/new-york-city-ballet/image/upload/f_auto/q_auto/c_fill,g_auto,h_600,w_800/f_auto/v1613088709/Art-Series/2017/art-series-mustonen",
       "media": [
-        { "type": "video", "url": "https://vimeo.com/196906533", "caption": "Santtu Mustonen combined handcrafted imagery with new technology for New York City Ballet's 2017 Art Series." }
+        {
+          "type": "video",
+          "url": "https://vimeo.com/196906533",
+          "caption": "Santtu Mustonen combined handcrafted imagery with new technology for New York City Ballet's 2017 Art Series."
+        }
       ]
     },
     {
@@ -81,9 +184,21 @@
       "description": "WebGL and API integration for the inaugural Spotify Wrapped campaign - the first edition of what became one of the most celebrated annual digital experiences.",
       "thumbnail": "https://cdn.sanity.io/images/e2h42t5o/stage/f5cd6ea2cdec57b4885eafa083b0a0b888fe97e8-1600x800.jpg",
       "media": [
-        { "type": "video", "url": "https://stream.mux.com/lzRQJ93R9u5NnxJUpbpCQrr7x9ssPWzwDXsbhR1A02gU.m3u8", "caption": "Stink Studios partnered with Spotify to turn listener data into personalized Year in Music insights." },
-        { "type": "image", "url": "https://cdn.sanity.io/images/e2h42t5o/stage/e8acdb66383ac5da49a344fbbaa222b401d2064e-1366x768.jpg", "caption": "The WebGL centerpiece used Spotify's API, custom shaders, gradients, and duotone effects to visualize the year." },
-        { "type": "image", "url": "https://cdn.sanity.io/images/e2h42t5o/stage/ddf71b61b23edc2c4d9f793596122cbb99bb02a2-1920x1080.png", "caption": "A custom CMS supported copy updates and translations across 35 languages and 57 countries." }
+        {
+          "type": "video",
+          "url": "https://stream.mux.com/lzRQJ93R9u5NnxJUpbpCQrr7x9ssPWzwDXsbhR1A02gU.m3u8",
+          "caption": "Stink Studios partnered with Spotify to turn listener data into personalized Year in Music insights."
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.sanity.io/images/e2h42t5o/stage/e8acdb66383ac5da49a344fbbaa222b401d2064e-1366x768.jpg",
+          "caption": "The WebGL centerpiece used Spotify's API, custom shaders, gradients, and duotone effects to visualize the year."
+        },
+        {
+          "type": "image",
+          "url": "https://cdn.sanity.io/images/e2h42t5o/stage/ddf71b61b23edc2c4d9f793596122cbb99bb02a2-1920x1080.png",
+          "caption": "A custom CMS supported copy updates and translations across 35 languages and 57 countries."
+        }
       ]
     },
     {
@@ -92,7 +207,11 @@
       "description": "Foundation portal and dynamic archive built in Drupal, creating a living digital home for the legacy of one of America's most influential artists.",
       "thumbnail": "https://www.rauschenbergfoundation.org/sites/default/files/styles/767x767/public/2026-04/Taking%20Venice%201.jpg",
       "media": [
-        { "type": "video", "url": "https://www.rauschenbergfoundation.org/sites/default/files/2026-04/01_rrf_EDIT.mp4", "caption": "The Robert Rauschenberg Foundation site brings together the artist's work, archives, programs, and legacy." }
+        {
+          "type": "video",
+          "url": "https://www.rauschenbergfoundation.org/sites/default/files/2026-04/01_rrf_EDIT.mp4",
+          "caption": "The Robert Rauschenberg Foundation site brings together the artist's work, archives, programs, and legacy."
+        }
       ]
     },
     {
@@ -101,9 +220,21 @@
       "description": "Custom arcade cabinet development at Dreamhouse Queens - a creative queer safe space merged with a DIY tech collective, culminating in 9 original games known as the Dreamboxxx.",
       "thumbnail": "https://gothamist.com/attachments/nyc_arts_john/053018dbaainsert.jpg",
       "media": [
-        { "type": "video", "url": "https://www.youtube.com/watch?v=svWf6SVhhuk", "caption": "DreamboxXx joined Death By Audio Arcade and The Dreamhouse around DIY games and queer culture." },
-        { "type": "image", "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1f031d079walter-wlodarczyk-2018-05-13-_87a3224-jpg.jpeg", "caption": "The custom cabinet features nine games by queer designers built around an unusual shared-button control scheme." },
-        { "type": "image", "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1b09cc0e5walter-wlodarczyk-2018-05-12-_87a2752-jpg.jpeg", "caption": "The residency paired Dreamhouse's community space with DBAA's collaborative arcade-building practice." }
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/watch?v=svWf6SVhhuk",
+          "caption": "DreamboxXx joined Death By Audio Arcade and The Dreamhouse around DIY games and queer culture."
+        },
+        {
+          "type": "image",
+          "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1f031d079walter-wlodarczyk-2018-05-13-_87a3224-jpg.jpeg",
+          "caption": "The custom cabinet features nine games by queer designers built around an unusual shared-button control scheme."
+        },
+        {
+          "type": "image",
+          "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1b09cc0e5walter-wlodarczyk-2018-05-12-_87a2752-jpg.jpeg",
+          "caption": "The residency paired Dreamhouse's community space with DBAA's collaborative arcade-building practice."
+        }
       ]
     }
   ]
