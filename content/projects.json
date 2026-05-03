@@ -1,0 +1,110 @@
+{
+  "work_intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "items": [
+    {
+      "title": "Harry Potter: Visions of Magic",
+      "client": "Warner Brothers / NEON",
+      "description": "Three themed immersive attractions produced for Warner Bros and NEON, bringing the wizarding world to life through experiential design and production.\n\nOversaw installation delivery across 3 large-scale instances totalling $4M, managing 2 traveling modular units deployed across Europe and the Americas, plus a permanent version at Resorts World Singapore.",
+      "thumbnail": "https://a.storyblok.com/f/164420/3200x1800/77e2ae3e3c/06_dk_hp_031125.jpg",
+      "media": [
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/1faccd22c1/20_dk_hp_031725.mp4", "caption": "" },
+        { "type": "image", "url": "https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg", "caption": "" },
+        { "type": "image", "url": "https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg", "caption": "" }
+      ]
+    },
+    {
+      "title": "Manhunt",
+      "client": "Apple TV+",
+      "description": "Title sequence post-production for the Apple TV+ limited series.",
+      "thumbnail": "https://a.storyblok.com/f/164420/1757x1012/45ab5099c4/03_dk_manhunt_031825.jpg",
+      "media": [
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/9ad98eca37/16d_preview_dk_manhunt_043025-1.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/a11758b6bb/01b_preview_dk_manhunt_031825-1.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/6a3527b365/02_dk_manhunt_031825-1.mp4", "caption": "" },
+        { "type": "video", "url": "https://a.storyblok.com/f/164420/x/adbd0594c6/04_dk_manhunt_031825-1.mp4", "caption": "" },
+        { "type": "image", "url": "https://a.storyblok.com/f/164420/952x867/2d8a376a62/05_dk_manhunt_031825.jpg", "caption": "" }
+      ]
+    },
+    {
+      "title": "Before",
+      "client": "Apple TV+",
+      "description": "Title sequence post-production for the Apple TV+ limited series.",
+      "thumbnail": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen.jpg",
+      "media": [
+        { "type": "video", "url": "https://www.youtube.com/watch?v=cff-gXm-aAk", "caption": "" },
+        { "type": "image", "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen4.jpg", "caption": "" },
+        { "type": "image", "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen9.jpg", "caption": "" }
+      ]
+    },
+    {
+      "title": "Pocket Garden",
+      "client": "Google",
+      "description": "Open source Google Maps Geospatial API demo showcasing GPS-based VPS technology, produced for its debut at Google I/O.",
+      "thumbnail": "https://cdn.sanity.io/images/uk7b627p/production/9401f2fb083faeb2e14e78335edbbb39f62fb8ed-1124x986.png",
+      "media": [
+        { "type": "video", "url": "https://stream.mux.com/827vmqXHn00gK6b01cnQ2pEIcruSbtwFjdhOpJ8k374Ys.m3u8", "caption": "" },
+        { "type": "video", "url": "https://stream.mux.com/cUseZlIhXq2bgWSwCo6VO1AVejbileHPvBCCVr00L88c.m3u8", "caption": "" },
+        { "type": "image", "url": "https://cdn.sanity.io/images/uk7b627p/production/cdbf16e5ba0a35329c9675e97d174c252aa9303c-2048x2048.png", "caption": "" },
+        { "type": "image", "url": "https://cdn.sanity.io/images/uk7b627p/production/f55ed23e408ed931e85603ea191c88ec04d3afbf-2048x2048.png", "caption": "" }
+      ]
+    },
+    {
+      "title": "American Bible Society FLDC",
+      "client": "American Bible Society",
+      "description": "Philadelphia museum featuring interactive exhibitry, tangible media, and immersive experiences. $2.75M content development and design phase.",
+      "thumbnail": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_09-1440x960.jpg",
+      "media": [
+        { "type": "video", "url": "https://vimeo.com/571735746", "caption": "" },
+        { "type": "image", "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_03-1440x960.jpg", "caption": "" },
+        { "type": "image", "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_04-1440x960.jpg", "caption": "" },
+        { "type": "image", "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_02-1440x960.jpg", "caption": "" }
+      ]
+    },
+    {
+      "title": "New York City Ballet Art Series",
+      "client": "New York City Ballet / Lincoln Center",
+      "description": "Immersive multimedia installation in the Promenade of Lincoln Center's David H. Koch Theater by artist Santtu Mustonen.",
+      "thumbnail": "https://res.cloudinary.com/new-york-city-ballet/image/upload/f_auto/q_auto/c_fill,g_auto,h_600,w_800/f_auto/v1613088709/Art-Series/2017/art-series-mustonen",
+      "media": [
+        { "type": "video", "url": "https://vimeo.com/196906533", "caption": "" }
+      ]
+    },
+    {
+      "title": "Spotify Year in Music 2016",
+      "client": "Spotify",
+      "description": "WebGL and API integration for the inaugural Spotify Wrapped campaign - the first edition of what became one of the most celebrated annual digital experiences.",
+      "thumbnail": "https://cdn.sanity.io/images/e2h42t5o/stage/f5cd6ea2cdec57b4885eafa083b0a0b888fe97e8-1600x800.jpg",
+      "media": [
+        { "type": "video", "url": "https://stream.mux.com/lzRQJ93R9u5NnxJUpbpCQrr7x9ssPWzwDXsbhR1A02gU.m3u8", "caption": "" },
+        { "type": "image", "url": "https://cdn.sanity.io/images/e2h42t5o/stage/e8acdb66383ac5da49a344fbbaa222b401d2064e-1366x768.jpg", "caption": "" },
+        { "type": "image", "url": "https://cdn.sanity.io/images/e2h42t5o/stage/ddf71b61b23edc2c4d9f793596122cbb99bb02a2-1920x1080.png", "caption": "" }
+      ]
+    },
+    {
+      "title": "Robert Rauschenberg Foundation",
+      "client": "Robert Rauschenberg Foundation",
+      "description": "Foundation portal and dynamic archive built in Drupal, creating a living digital home for the legacy of one of America's most influential artists.",
+      "thumbnail": "https://www.rauschenbergfoundation.org/sites/default/files/styles/767x767/public/2026-04/Taking%20Venice%201.jpg",
+      "media": [
+        { "type": "video", "url": "https://www.rauschenbergfoundation.org/sites/default/files/2026-04/01_rrf_EDIT.mp4", "caption": "" }
+      ]
+    },
+    {
+      "title": "DreamboxXx Video Arcade Residency",
+      "client": "Death by Audio / Dreamhouse Queens",
+      "description": "Custom arcade cabinet development at Dreamhouse Queens - a creative queer safe space merged with a DIY tech collective, culminating in 9 original games known as the Dreamboxxx.",
+      "thumbnail": "https://gothamist.com/attachments/nyc_arts_john/053018dbaainsert.jpg",
+      "media": [
+        { "type": "video", "url": "https://www.youtube.com/watch?v=svWf6SVhhuk", "caption": "" },
+        { "type": "image", "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1f031d079walter-wlodarczyk-2018-05-13-_87a3224-jpg.jpeg", "caption": "" },
+        { "type": "image", "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1b09cc0e5walter-wlodarczyk-2018-05-12-_87a2752-jpg.jpeg", "caption": "" }
+      ]
+    }
+  ]
+}
