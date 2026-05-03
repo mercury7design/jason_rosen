@@ -48,6 +48,12 @@ const index = read('index.html');
 if (!index.includes('class="work-title"')) {
   fail('index.html must include the Golden Calf H1.');
 }
+if (!index.includes('<link rel="shortcut icon" href="/favicon.ico">')) {
+  fail('index.html must include the site favicon.');
+}
+if (index.indexOf('class="site-mark"') > index.indexOf('class="work-title"')) {
+  fail('The logo must appear above the Golden Calf H1.');
+}
 
 const css = read('css/styles.css');
 [
@@ -55,8 +61,16 @@ const css = read('css/styles.css');
   'rgba(255, 255, 255, 0.2)',
   '.nav-link::before',
   '.nav-link:hover::before',
+  '.page-work .main',
+  'font-style: italic',
+  'font-weight: 700',
+  'text-shadow: 0 2px 10px',
 ].forEach(token => {
   if (!css.includes(token)) fail(`css/styles.css missing ${token}`);
 });
+
+if (!fs.existsSync('favicon.ico')) {
+  fail('favicon.ico must exist.');
+}
 
 console.log('site validation ok');
