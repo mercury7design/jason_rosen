@@ -1,0 +1,96 @@
+media:
+  input: "images"
+  output: "/images"
+
+content:
+  - name: "work"
+    label: "Work Page"
+    type: "file"
+    path: "content/projects.json"
+    fields:
+      - name: "work_intro"
+        label: "Work Page Intro (1–2 sentences)"
+        type: "text"
+      - name: "items"
+        label: "Projects"
+        type: "object"
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: "title"
+            label: "Project Title"
+            type: "string"
+          - name: "client"
+            label: "Client"
+            type: "string"
+          - name: "description"
+            label: "Description (up to 2 paragraphs — separate with a blank line)"
+            type: "text"
+          - name: "thumbnail"
+            label: "Thumbnail Image"
+            type: "image"
+          - name: "media"
+            label: "Media Items (images and/or videos)"
+            type: "object"
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{type}: {caption}"
+            fields:
+              - name: "type"
+                label: "Type"
+                type: "select"
+                options:
+                  values:
+                    - value: "image"
+                      label: "Image"
+                    - value: "video"
+                      label: "Video"
+              - name: "image"
+                label: "Upload Image (for image type)"
+                type: "image"
+              - name: "url"
+                label: "External URL (for video, or external image)"
+                type: "string"
+              - name: "caption"
+                label: "Media Description"
+                type: "text"
+                description: "Concise 1-2 sentence description shown beneath this media item."
+
+  - name: "about"
+    label: "About Page"
+    type: "file"
+    path: "content/about.json"
+    fields:
+      - name: "headshot"
+        label: "Headshot Photo"
+        type: "image"
+      - name: "body"
+        label: "About Text (separate paragraphs with a blank line)"
+        type: "text"
+
+  - name: "practice"
+    label: "Practice Page"
+    type: "file"
+    path: "content/practice.json"
+    fields:
+      - name: "body"
+        label: "Practice Text (separate paragraphs with a blank line)"
+        type: "text"
+
+  - name: "footer"
+    label: "Footer"
+    type: "file"
+    path: "content/footer.json"
+    fields:
+      - name: "mark"
+        label: "Footer Mark"
+        type: "string"
+      - name: "est"
+        label: "Footer Lockup"
+        type: "string"
+      - name: "email"
+        label: "Contact Email"
+        type: "string"

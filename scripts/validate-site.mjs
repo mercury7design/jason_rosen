@@ -30,7 +30,11 @@ projects.items.forEach((project, projectIndex) => {
   });
 });
 
-const cms = read('pages.config.yml');
+if (!fs.existsSync('.pages.yml')) {
+  fail('.pages.yml must exist for Pages CMS discovery.');
+}
+
+const cms = read('.pages.yml');
 [
   'name: "items"',
   'label: "Projects"',
@@ -41,7 +45,7 @@ const cms = read('pages.config.yml');
   'name: "caption"',
   'label: "Media Description"',
 ].forEach(token => {
-  if (!cms.includes(token)) fail(`pages.config.yml missing ${token}`);
+  if (!cms.includes(token)) fail(`.pages.yml missing ${token}`);
 });
 
 const index = read('index.html');
