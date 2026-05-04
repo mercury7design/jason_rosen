@@ -72,7 +72,7 @@ const css = read('css/styles.css');
 [
   "url('../images/background.png')",
   'background-position: center top',
-  'animation: hero-color-wash 16s ease-in-out infinite alternate',
+  'animation: hero-color-wash 12s ease-in-out infinite alternate',
   'mix-blend-mode: color',
   'rgba(255, 255, 255, 0.2)',
   'border-bottom: 1px solid var(--ink)',
