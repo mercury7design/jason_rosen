@@ -52,7 +52,7 @@ const index = read('index.html');
 if (!index.includes('class="work-title"')) {
   fail('index.html must include the Golden Calf H1.');
 }
-if (!index.includes('<link rel="shortcut icon" href="/favicon.ico">')) {
+if (!index.includes('<link rel="shortcut icon" href="favicon.ico">')) {
   fail('index.html must include the site favicon.');
 }
 if (index.indexOf('class="site-mark"') > index.indexOf('class="work-title"')) {
@@ -70,7 +70,7 @@ expectedNavOrder.forEach(label => {
 
 const css = read('css/styles.css');
 [
-  "url('/images/background.png')",
+  "url('../images/background.png')",
   'rgba(255, 255, 255, 0.2)',
   'border-bottom: 1px solid var(--ink)',
   '.site-header.menu-open .nav',

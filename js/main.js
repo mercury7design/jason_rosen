@@ -149,7 +149,7 @@ async function loadProjects() {
   if (!container) return;
 
   try {
-    const res = await fetch('/content/projects.json');
+    const res = await fetch('content/projects.json');
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
     projectsData = data.items || [];
@@ -199,7 +199,7 @@ async function loadAbout() {
   if (!body && !headshot) return;
 
   try {
-    const res = await fetch('/content/about.json');
+    const res = await fetch('content/about.json');
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
     if (headshot && data.headshot) headshot.src = data.headshot;
@@ -215,7 +215,7 @@ async function loadPractice() {
   if (!body) return;
 
   try {
-    const res = await fetch('/content/practice.json');
+    const res = await fetch('content/practice.json');
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
     if (data.body) body.innerHTML = textToHtml(data.body);
@@ -230,7 +230,7 @@ async function loadFooter() {
   if (!footers.length) return;
 
   try {
-    const res = await fetch('/content/footer.json');
+    const res = await fetch('content/footer.json');
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
     footers.forEach(footer => {

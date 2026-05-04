@@ -4,37 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Golden Calf — Jason Scott Rosen</title>
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="page-work">
 
   <header class="site-header">
     <nav class="nav">
       <div class="nav-links">
-        <a href="/" class="nav-link nav-link--active">W.O.R.K</a>
-        <a href="/about.html" class="nav-link">A.B.O.U.T</a>
-        <a href="/practice.html" class="nav-link">P.R.A.C.T.I.C.E</a>
+        <a href="index.html" class="nav-link nav-link--active">W.O.R.K</a>
+        <a href="about.html" class="nav-link">A.B.O.U.T</a>
+        <a href="practice.html" class="nav-link">P.R.A.C.T.I.C.E</a>
       </div>
       <button class="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </nav>
     <div class="mobile-menu" aria-hidden="true">
-      <a href="/" class="mobile-link">W.O.R.K</a>
-      <a href="/about.html" class="mobile-link">A.B.O.U.T</a>
-      <a href="/practice.html" class="mobile-link">P.R.A.C.T.I.C.E</a>
+      <a href="index.html" class="mobile-link">W.O.R.K</a>
+      <a href="about.html" class="mobile-link">A.B.O.U.T</a>
+      <a href="practice.html" class="mobile-link">P.R.A.C.T.I.C.E</a>
     </div>
   </header>
 
   <main class="main">
     <div class="work-hero">
-      <img src="/images/logo-mark.png" alt="A Golden Calf" class="site-mark">
-      <h1 class="work-title">Golden Calf</h1>
-      <p class="work-intro" id="work-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div class="work-hero-bg" aria-hidden="true">
+        <div class="work-hero-bg-layer work-hero-bg-layer--1"></div>
+        <div class="work-hero-bg-layer work-hero-bg-layer--2"></div>
+        <div class="work-hero-bg-layer work-hero-bg-layer--3"></div>
+      </div>
+      <div class="work-hero-content">
+        <img src="images/logo-mark.png" alt="A Golden Calf" class="site-mark">
+        <h1 class="work-title">Golden Calf</h1>
+        <p class="work-intro" id="work-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
     </div>
 
     <section class="projects" id="projects">
@@ -65,6 +72,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
-  <script src="/js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

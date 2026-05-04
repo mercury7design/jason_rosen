@@ -1,14 +1,14 @@
 /* === FONTS === */
 @font-face {
   font-family: 'Fondamento';
-  src: url('/fonts/fondamento-regular.woff2') format('woff2');
+  src: url('../fonts/fondamento-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Fondamento';
-  src: url('/fonts/fondamento-italic.woff2') format('woff2');
+  src: url('../fonts/fondamento-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -170,17 +170,63 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 
 /* === WORK PAGE === */
 .work-hero {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--sand);
-  background-image: url('/images/background.png');
-  background-size: cover;
-  background-position: center top;
   min-height: clamp(440px, 62vh, 620px);
   justify-content: center;
   padding: clamp(54px, 7vw, 88px) var(--pad-x) clamp(28px, 4vw, 54px);
   text-align: center;
+  overflow: hidden;
+}
+
+.work-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.work-hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/background.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  will-change: opacity;
+}
+
+.work-hero-bg-layer--1 {
+  opacity: 1;
+  animation: hero-fade-out 8s 4s infinite alternate;
+}
+
+.work-hero-bg-layer--2 {
+  opacity: 0;
+  animation: hero-fade-in 8s 5s infinite alternate;
+}
+
+.work-hero-bg-layer--3 {
+  opacity: 0;
+  animation: hero-fade-in 12s 12s infinite alternate;
+}
+
+.work-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hero-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .work-title {
