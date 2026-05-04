@@ -70,8 +70,10 @@ expectedNavOrder.forEach(label => {
 
 const css = read('css/styles.css');
 [
-  'object-fit: cover',
-  'object-position: center top',
+  "url('../images/background.png')",
+  'background-position: center top',
+  'animation: hero-color-wash 16s ease-in-out infinite alternate',
+  'mix-blend-mode: color',
   'rgba(255, 255, 255, 0.2)',
   'border-bottom: 1px solid var(--ink)',
   '.site-header.menu-open .nav',
