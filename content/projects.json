@@ -216,16 +216,11 @@
       ]
     },
     {
-      "title": "DreamboxXx Video Arcade Residency",
-      "client": "Death by Audio / Dreamhouse Queens",
+      "title": "DreamboxXx ",
+      "client": "Video Arcade Cabinet and Residency by Death by Audio",
       "description": "Custom arcade cabinet development at Dreamhouse Queens - a creative queer safe space merged with a DIY tech collective, culminating in 9 original games known as the Dreamboxxx.",
       "thumbnail": "https://gothamist.com/attachments/nyc_arts_john/053018dbaainsert.jpg",
       "media": [
-        {
-          "type": "video",
-          "url": "https://www.youtube.com/watch?v=svWf6SVhhuk",
-          "caption": "DreamboxXx joined Death By Audio Arcade and The Dreamhouse around DIY games and queer culture."
-        },
         {
           "type": "image",
           "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1f031d079walter-wlodarczyk-2018-05-13-_87a3224-jpg.jpeg",
@@ -235,7 +230,12 @@
           "type": "image",
           "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1b09cc0e5walter-wlodarczyk-2018-05-12-_87a2752-jpg.jpeg",
           "caption": "The residency paired Dreamhouse's community space with DBAA's collaborative arcade-building practice."
-        }
+        },
+        {
+          "type": "image",
+          "image": "/images/dreamboxx-gif-master-500w-256.gif"
+        },
+        {}
       ]
     },
     {
@@ -258,6 +258,7 @@
         },
         {}
       ]
-    }
+    },
+    {}
   ]
 }
