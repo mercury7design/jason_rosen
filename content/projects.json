@@ -223,6 +223,10 @@
       "media": [
         {
           "type": "image",
+          "image": "/images/dreamboxx-gif-master-500w-256.gif"
+        },
+        {
+          "type": "image",
           "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1f031d079walter-wlodarczyk-2018-05-13-_87a3224-jpg.jpeg",
           "caption": "The custom cabinet features nine games by queer designers built around an unusual shared-button control scheme."
         },
@@ -230,10 +234,6 @@
           "type": "image",
           "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1b09cc0e5walter-wlodarczyk-2018-05-12-_87a2752-jpg.jpeg",
           "caption": "The residency paired Dreamhouse's community space with DBAA's collaborative arcade-building practice."
-        },
-        {
-          "type": "image",
-          "image": "/images/dreamboxx-gif-master-500w-256.gif"
         },
         {}
       ]
