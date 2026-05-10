@@ -240,13 +240,17 @@
     },
     {
       "title": "Sally LaPointe ",
-      "client": "Sally LaPointe",
-      "description": "Led creative direction, design, and development, and Live phases.\nDesigned minimalistic UI with streamlined page-to-page animation\nBuilt e-commerce on Magento\nLaunched hub for ready-to-wear collections and brand collaborations",
+      "client": "Brand Site + E-commerce",
+      "description": "Led creative direction, design, development, launch, and management phases.\nDesigned minimalistic UI with streamlined page-to-page animation.\nLaunched hub for ready-to-wear collections and brand collaborations.\nBuilt e-commerce on Magento.",
       "thumbnail": "/images/a69417af-4eb1-42a7-befc-3c39f51c7263_fallsinglehp.jpg",
       "media": [
         {
           "type": "video",
           "url": "https://vimeo.com/1190792551"
+        },
+        {
+          "type": "video",
+          "url": "https://vimeo.com/1190792557?activityReferer=1"
         },
         {}
       ]
