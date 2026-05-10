@@ -235,7 +235,10 @@
           "url": "https://images-prod.gothamist.com/gothamistgallery/2018/5/30/1b09cc0e5walter-wlodarczyk-2018-05-12-_87a2752-jpg.jpeg",
           "caption": "The residency paired Dreamhouse's community space with DBAA's collaborative arcade-building practice."
         },
-        {}
+        {
+          "type": "image",
+          "image": "/images/Dreamboxxx.webp"
+        }
       ]
     },
     {
@@ -258,7 +261,6 @@
         },
         {}
       ]
-    },
-    {}
+    }
   ]
 }
