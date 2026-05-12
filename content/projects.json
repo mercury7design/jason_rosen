@@ -261,6 +261,18 @@
         },
         {}
       ]
+    },
+    {
+      "title": "Armand de Brignac",
+      "client": "Brand Site + Social Content ",
+      "description": "Led a multi-year integrated content and web production partnership with Armand de Brignac, Jay Z's luxury champagne brand — overseeing web design and development, content production, and social media strategy from concept through execution.",
+      "thumbnail": "/images/AdB_02.png",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://drive.google.com/drive/folders/1KTnIiHkfnsAg96abSW7f739hYK72rxMk"
+        }
+      ]
     }
   ]
 }
