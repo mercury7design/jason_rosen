@@ -284,9 +284,13 @@
           "type": "video",
           "url": "https://vimeo.com/1190792512?fl=pl&fe=sh"
         },
-        {},
         {
-          "type": "image"
+          "type": "video",
+          "url": "https://vimeo.com/1190792629?fl=pl&fe=sh"
+        },
+        {
+          "type": "video",
+          "url": "https://vimeo.com/1190792528?fl=pl&fe=sh"
         }
       ]
     }
