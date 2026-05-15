@@ -1,1 +1,653 @@
-file:///Users/jasonrosen/Downloads/jason_scott_rosen_resume%20(7).html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jason Scott Rosen — Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8962A;
+    --ink: #1A1713;
+    --mid: #7A7060;
+    --light: #B0A898;
+    --rule: #D8D0C0;
+    --bg: #F6F3EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #E8E4DE;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--ink);
+    font-size: 9.5pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    background: var(--bg);
+    width: 8.5in;
+    margin: 0.3in auto;
+    padding: 0.5in 0.6in 0.45in 0.65in;
+    box-shadow: 0 6px 40px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3.5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold), transparent 85%);
+  }
+
+  @media print {
+    body { background: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      padding: 0.45in 0.55in 0.4in 0.6in;
+      width: 100%;
+    }
+    @page { size: letter; margin: 0; }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0.2in 0.22in;
+    margin: -0.5in -0.6in 0.18in -0.65in;
+    border-bottom: 0.75px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(172, 50, 20, 0.33), rgba(165, 138, 108, 0.12) 40%, rgba(165, 138, 108, 0.12) 60%, rgba(172, 50, 20, 0.29));
+    pointer-events: none;
+  }
+
+  .name-unit {
+    display: flex;
+    align-items: stretch;
+    gap: 0.16in;
+  }
+
+  .name-col {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .name-col span {
+    font-family: 'Squada One', sans-serif;
+    font-size: 28pt;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 0.95;
+    color: var(--ink);
+  }
+
+  .name-col span.gold { color: var(--gold); }
+
+  .rule-v {
+    width: 1px;
+    background: var(--rule);
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+
+  .title-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2px 0;
+  }
+
+  .title-col span {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5pt;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    line-height: 1;
+  }
+
+  .contact-col {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: stretch;
+    gap: 0;
+  }
+
+  .contact-col p {
+    font-family: 'DM Mono', monospace;
+    font-size: 8pt;
+    font-weight: 300;
+    color: var(--mid);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .contact-col a {
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .contact-col a:hover { color: var(--gold); }
+
+  .linkedin-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+
+  .linkedin-link svg {
+    width: 13px;
+    height: 13px;
+    fill: var(--mid);
+    flex-shrink: 0;
+    transition: fill 0.15s ease;
+  }
+
+  .linkedin-link:hover svg { fill: var(--gold); }
+
+  .body-wrap { width: 100%; }
+
+  .section {
+    display: flex;
+    gap: 0.2in;
+    margin-bottom: 0.12in;
+  }
+
+  .s-label {
+    width: 0.75in;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 5.8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 2px;
+    line-height: 1.5;
+  }
+
+  .s-content { flex: 1; min-width: 0; }
+
+  hr.rule {
+    border: none;
+    border-top: 0.75px solid var(--rule);
+    margin: 0.12in 0;
+  }
+
+  .intent-text {
+    font-size: 9.8pt;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 0.07in;
+  }
+
+  .clients {
+    font-family: 'DM Mono', monospace;
+    font-size: 7.5pt;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.65;
+    letter-spacing: 0.03em;
+  }
+
+  .clients strong {
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    font-size: 5.5pt;
+    text-transform: uppercase;
+  }
+
+  .job { margin-bottom: 0.13in; }
+  .job:last-child { margin-bottom: 0; }
+
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .job-name {
+    font-size: 10.5pt;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  .job-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 300;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .job-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 6pt;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.055in;
+  }
+
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul.bullets li {
+    font-size: 8.8pt;
+    font-weight: 300;
+    line-height: 1.48;
+    color: var(--ink);
+    padding-left: 0.65em;
+    position: relative;
+    margin-bottom: 0.025in;
+  }
+
+  ul.bullets li::before {
+    content: '—';
+    position: absolute;
+    left: -0.55em;
+    color: var(--gold);
+  }
+
+  .subs {
+    border-left: 2px solid var(--gold);
+    padding-left: 0.12in;
+    margin-top: 0.08in;
+  }
+
+  .sub { margin-bottom: 0.1in; }
+  .sub:last-child { margin-bottom: 0; }
+
+  .sub-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .sub-name {
+    font-size: 9.8pt;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+
+  .sub-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 6.2pt;
+    font-weight: 300;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .sub-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 5.8pt;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.045in;
+  }
+
+  .prods {
+    display: flex;
+    gap: 0.12in;
+    flex-wrap: nowrap;
+  }
+
+  .prod {
+    flex: 1;
+    border-top: 0.75px solid var(--rule);
+    padding-top: 0.055in;
+  }
+
+  .prod-title {
+    font-size: 8.2pt;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .prod-title a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .prod-title a:hover { color: var(--gold); }
+
+  .prod-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 5.5pt;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .port-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 6.2pt;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    margin-top: 0.08in;
+  }
+
+  .port-note a { color: var(--gold); text-decoration: none; }
+  .port-note a:hover { color: var(--ink); }
+
+  .edu-grid {
+    display: flex;
+    gap: 0.15in;
+  }
+
+  .edu-item { flex: 1; }
+
+  .edu-school {
+    font-size: 9pt;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 1px;
+  }
+
+  .edu-detail {
+    font-family: 'DM Mono', monospace;
+    font-size: 5.8pt;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+  }
+
+  .closing {
+    font-family: 'DM Mono', monospace;
+    font-size: 5.8pt;
+    color: var(--light);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 0.14in;
+    padding-top: 0.1in;
+    border-top: 0.75px solid var(--rule);
+  }
+
+  em { font-style: italic; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="name-unit">
+      <div class="name-col">
+        <span>Jason</span>
+        <span>Scott</span>
+        <span class="gold">Rosen</span>
+      </div>
+      <div class="rule-v"></div>
+      <div class="title-col">
+        <span>Senior</span>
+        <span>Immersive</span>
+        <span>Experience</span>
+        <span>Producer</span>
+      </div>
+    </div>
+    <div class="contact-col">
+      <p>NYC &nbsp;/&nbsp; ATL &nbsp;/&nbsp; SEA &nbsp;/&nbsp; ATX &nbsp;/&nbsp; LA</p>
+      <p><a href="tel:+12564734717">+1 256 473 4717</a></p>
+      <p><a href="mailto:hello@agoldencalf.com">hello@agoldencalf.com</a></p>
+      <p><a href="https://agoldencalf.com" target="_blank">agoldencalf.com</a></p>
+      <p><a href="https://linkedin.com/in/jason-scott-r-182b6423" target="_blank" class="linkedin-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/jason-scott-r-182b6423</a></p>
+    </div>
+  </div>
+
+  <div class="body-wrap">
+
+    <div class="section">
+      <div class="s-label">Intent</div>
+      <div class="s-content">
+        <p class="intent-text">A seasoned production leader specializing in compelling storytelling from inception to launch — across physical, digital, transmedia, and immersive experience productions. I integrate seamlessly with brands, creative agencies, production companies, and cross-disciplinary teams, bringing executive-level production, account leadership, creative-technical management, and new business development to every engagement.</p>
+        <p class="clients"><strong>Select Clients</strong>&nbsp;&nbsp;Warner Brothers · Apple TV+ · Google ATAP, YouTube · Meta · Netflix · Spotify · Nike · Levi's · Twitter · Havas Health · Newport Mansions · New York City Ballet · Robert Rauschenberg Foundation · CFDA · Equinox · Lancôme · American Bible Society</p>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="section">
+      <div class="s-label">Experience</div>
+      <div class="s-content">
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-name">A Golden Calf LLC</div>
+            <div class="job-dates">2025 — Present</div>
+          </div>
+          <div class="job-role">Independent Production Consultant &amp; Project Director</div>
+          <ul class="bullets">
+            <li>Returned to independent practice following in-house tenure at Digital Kitchen; consulting across immersive experience design, creative technology, transmedia production, and integrated brand and product campaigns</li>
+            <li>Lead projects spanning video game design, institutional archiving, e-commerce, 360 brand and product campaigns, title sequences, and native/browser-based product experiences</li>
+            <li>Proven budget management up to $4.5M across fine art, museum, entertainment, and institutional environments</li>
+          </ul>
+        </div>
+
+        <hr class="rule">
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-name">Digital Kitchen</div>
+            <div class="job-dates">2022 — 2025</div>
+          </div>
+          <div class="job-role">Senior Producer — In-House</div>
+          <ul class="bullets">
+            <li>Led experience design, creative technology, and transmedia production for <em>Harry Potter: Visions of Magic</em>, a global immersive attraction for Warner Brothers' Themed Entertainment team</li>
+            <li>Oversaw installation delivery across 3 large-scale instances totalling $4M; managed 2 traveling modular units deployed across Europe and the Americas</li>
+            <li>Directed development of a permanent installation at Resorts World, Singapore, adding 3 further narrative zones</li>
+            <li>Oversaw post-production of 2 Apple TV+ title sequences: <em>Manhunt</em> and <em>Before</em></li>
+          </ul>
+        </div>
+
+        <hr class="rule">
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-name">A Golden Calf LLC</div>
+            <div class="job-dates">2017 — 2022</div>
+          </div>
+          <div class="job-role">Independent Production Consultant &amp; Project Director</div>
+          <ul class="bullets">
+            <li>Built and ran an independent production practice serving agencies, studios, and enterprise clients across digital, cultural, entertainment, and institutional contexts — from Brand DNA and R&amp;D prototyping through launch and install</li>
+          </ul>
+
+          <div class="subs">
+            <div class="sub">
+              <div class="sub-head">
+                <div class="sub-name">Buck Design</div>
+                <div class="sub-dates">2021 — 2022</div>
+              </div>
+              <div class="sub-role">Senior Producer, Experiences</div>
+              <ul class="bullets">
+                <li>Brought two lenses to life for Meta Quest, supporting the development and delivery of immersive product experiences</li>
+                <li>Steered the complex AR demonstration of a new GPS-based precedent known as VPS for its debut at Google I/O</li>
+                <li>Led technical and creative delivery across a $10M interactive and tangible media program; delivered bespoke tangible media devices for museum objectives within a 4-month cycle at $450K</li>
+                <li>Oversaw media and technical production for the Faith and Liberty Discovery Center (American Bible Society) — a $2.75M museum content development and design phase</li>
+              </ul>
+            </div>
+
+            <div class="sub">
+              <div class="sub-head">
+                <div class="sub-name">Manifest</div>
+                <div class="sub-dates">2021</div>
+              </div>
+              <div class="sub-role">Technical Producer</div>
+              <ul class="bullets">
+                <li>Served as sole producer owning the Technology Department — leading new business pursuits, building interactive budgets, and defining scopes of work across all agency accounts</li>
+                <li>Managed the full vendor and contractor ecosystem across digital productions</li>
+                <li>Established the agency's foundational network of development partners for complex platform builds including Drupal, WordPress, and bespoke full-stack solutions; led optimizations and CMS overhauls across multi-year enterprise retainers</li>
+              </ul>
+            </div>
+
+            <div class="sub">
+              <div class="sub-head">
+                <div class="sub-name">Local Projects</div>
+                <div class="sub-dates">2018 — 2019</div>
+              </div>
+              <div class="sub-role">Senior Interactive Media Production Consultant</div>
+              <ul class="bullets">
+                <li>Led technical and creative delivery of interactive and tangible media programs, facilitating client-facing prototype demonstrations throughout the Design and Development Phase, a $10M scope</li>
+                <li>Oversaw cross-functional productions of creative technology initiatives with internal teams, partners, and vendors</li>
+                <li>Managed development, execution, and ROM of bespoke tangible media devices aligned with museum program objectives within a 4-month cycle for $450K</li>
+              </ul>
+            </div>
+
+            <div class="sub">
+              <div class="sub-head">
+                <div class="sub-name">Siberia</div>
+                <div class="sub-dates">2019 — 2020</div>
+              </div>
+              <div class="sub-role">Product Lead</div>
+              <ul class="bullets">
+                <li>Oversaw the redevelopment of the Insomnia Cookies brand and fulfillment app across iOS, Android, and browser experiences</li>
+                <li>Facilitated cross-functional collaboration between external Insomnia DevOps and internal Design, UX, Strategy, and Development teams</li>
+              </ul>
+            </div>
+
+            <div class="sub" style="page-break-before: always; break-before: page;">
+              <div class="sub-head">
+                <div class="sub-name">Imprint Projects</div>
+                <div class="sub-dates">2018 — 2020</div>
+              </div>
+              <div class="sub-role">Production Partner — Experiential, Campaign &amp; Brand</div>
+              <ul class="bullets">
+                <li>Led production, experience design, content strategy, media output, network building, conceptualization, and execution across 4 large-scale experiential and integrated production scopes</li>
+                <li><em>Google Jacquard</em> — Brand DNA, executive keynote, and environmental immersive footprint for brand product exhibition at technology conference for gesture-based interactive apparel</li>
+                <li><em>YouTube Election Campaign</em> — Product innovation leveraging virality and game theory implementation</li>
+                <li><em>Sonos Apollo Launch</em> — Pivoted from in-person media product launch to interactive WebGL website within a 3-week turnaround due to COVID-19</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <hr class="rule">
+
+        <div class="job">
+          <div class="job-head">
+            <div class="job-name">Hugo &amp; Marie</div>
+            <div class="job-dates">2016 — 2017</div>
+          </div>
+          <div class="job-role">Senior Producer — In-House</div>
+          <ul class="bullets">
+            <li>Led integrated production across immersive art installations, brand identity systems, e-commerce platforms, editorial and social content production, and linear motion content</li>
+            <li>Delivered production for enterprise-level e-commerce platforms built on Spree, Shopify, and Magento</li>
+            <li>Produced linear motion content including brand anthems, animations, and prototypes for global prestige brands</li>
+            <li>Supported client engagements across the arts, culture, and luxury sectors for Nike, Equinox, Roc Nation, Netflix, DKNY, and New York City Ballet — budgets up to $1M</li>
+          </ul>
+        </div>
+
+        <hr class="rule">
+
+        <div class="job" style="margin-bottom:0;">
+          <div class="job-head">
+            <div class="job-name">Stink Studios</div>
+            <div class="job-dates">2015 — 2016</div>
+          </div>
+          <div class="job-role">Interactive Producer — In-House</div>
+          <ul class="bullets">
+            <li>Produced world-class interactive sites and campaigns from inception to launch for leading global brands, pushing creative and production boundaries to develop engaging interactive work aligned with brand objectives</li>
+            <li>Managed end-to-end production for Spotify, Twitter, Etsy, and Google Chrome — budgets up to $2.5M</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="section">
+      <div class="s-label">Select<br>Productions</div>
+      <div class="s-content">
+        <div class="prods">
+          <div class="prod">
+            <div class="prod-title"><a href="https://www.thisisdk.com/harry-potter-visions-of-magic" target="_blank">Harry Potter: Visions of Magic</a></div>
+            <div class="prod-desc">3 Themed Immersive Attractions · Warner Brothers &amp; NEON</div>
+          </div>
+          <div class="prod">
+            <div class="prod-title"><a href="https://www.thisisdk.com/manhunt" target="_blank">Manhunt</a></div>
+            <div class="prod-desc">Title Sequence · Apple TV+ Limited Series</div>
+          </div>
+          <div class="prod">
+            <div class="prod-title"><a href="https://www.stashmedia.tv/digital-kitchen-captures-dreams-of-before-on-apple-tv/" target="_blank">Before</a></div>
+            <div class="prod-desc">Title Sequence · Apple TV+ Limited Series</div>
+          </div>
+          <div class="prod">
+            <div class="prod-title"><a href="https://buck.co/work/google-gracie-pocket-garden" target="_blank">Pocket Garden</a></div>
+            <div class="prod-desc">Open-source VPS / Geospatial API demo · Google Maps</div>
+          </div>
+          <div class="prod">
+            <div class="prod-title"><a href="https://localprojects.com/work/museums-attractions/the-faith-and-liberty-discovery-center/" target="_blank">American Bible Society FLDC</a></div>
+            <div class="prod-desc">Interactive exhibitry, tangible media &amp; immersive experiences · Philadelphia</div>
+          </div>
+          <div class="prod">
+            <div class="prod-title"><a href="http://www.santtumustonen.com/catalogue/the-new-york-city-ballet" target="_blank">New York City Ballet Art Series</a></div>
+            <div class="prod-desc">Immersive multimedia installation · Lincoln Center, David H. Koch Theater</div>
+          </div>
+        </div>
+        <p class="port-note">Full body of work at <a href="https://agoldencalf.com" target="_blank">agoldencalf.com</a></p>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="section" style="margin-bottom:0;">
+      <div class="s-label">Education</div>
+      <div class="s-content">
+        <div class="edu-grid">
+          <div class="edu-item">
+            <div class="edu-school">SCI-Arc</div>
+            <div class="edu-detail">MS · Fiction + Entertainment<br>2020 — 2021</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-school">NYU Tisch</div>
+            <div class="edu-detail">MPS · Interactive Telecommunications<br>2011 — 2013</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-school">Sarah Lawrence College</div>
+            <div class="edu-detail">BA · Material &amp; Visual Cultures<br>2000 — 2005</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="closing">Additional case studies and references available upon request</p>
+
+  </div>
+</div>
+</body>
+</html>
