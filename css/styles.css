@@ -51,7 +51,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .site-header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 200;
 }
 
 .nav {
@@ -124,7 +124,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   height: 40px;
   align-items: center;
   justify-content: center;
-  z-index: 102;
+  z-index: 200;
   border-radius: 50%;
   transition: box-shadow 0.75s ease, background 0.75s ease;
 }
