@@ -3,28 +3,134 @@ const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
 const siteHeader = document.querySelector('.site-header');
 
-hamburger?.addEventListener('click', () => {
-  const open = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', open);
-  siteHeader?.classList.toggle('menu-open', open);
-  hamburger.setAttribute('aria-expanded', open);
-  mobileMenu.setAttribute('aria-hidden', !open);
+// Create backdrop
+const backdrop = document.createElement('div');
+backdrop.className = 'menu-backdrop';
+document.body.appendChild(backdrop);
+
+// Wrap each mobile link's text in individual letter spans
+document.querySelectorAll('.mobile-link').forEach(link => {
+  const text = link.textContent.trim();
+  link.innerHTML = text.split('').map((char, i) =>
+    `<span class="letter" data-index="${i}" style="transition-delay: 0ms">${char === ' ' ? '&nbsp;' : char}</span>`
+  ).join('');
 });
 
-document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    siteHeader?.classList.remove('menu-open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    mobileMenu.setAttribute('aria-hidden', 'true');
+// Draw gold speckle on menu canvas
+function drawSpeckle(menu) {
+  if (menu.querySelector('.menu-speckle')) return;
+  const canvas = document.createElement('canvas');
+  canvas.className = 'menu-speckle';
+  menu.insertBefore(canvas, menu.firstChild);
+
+  const w = menu.offsetWidth;
+  const h = menu.offsetHeight;
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  const count = Math.floor((w * h) / 120);
+  for (let i = 0; i < count; i++) {
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    const r = Math.random() * 1.8 + 0.2;
+    const op = Math.random() * 0.5 + 0.05;
+    const hue = 34 + Math.random() * 16;
+    const sat = 55 + Math.random() * 35;
+    const lit = 42 + Math.random() * 28;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${hue}, ${sat}%, ${lit}%, ${op})`;
+    ctx.fill();
+  }
+
+  for (let i = 0; i < count * 0.07; i++) {
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    const rx = Math.random() * 3.5 + 0.8;
+    const ry = rx * (0.25 + Math.random() * 0.75);
+    ctx.beginPath();
+    ctx.ellipse(x, y, rx, ry, Math.random() * Math.PI, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(38, 68%, 48%, ${Math.random() * 0.2 + 0.04})`;
+    ctx.fill();
+  }
+}
+
+// Stagger letters in
+function animateLinksIn() {
+  document.querySelectorAll('.mobile-link').forEach((link, linkIdx) => {
+    const letters = link.querySelectorAll('.letter');
+    letters.forEach((letter, j) => {
+      letter.classList.remove('closing');
+      const delay = 200 + linkIdx * 160 + j * 35;
+      letter.style.transitionDelay = `${delay}ms`;
+    });
   });
+}
+
+// Stagger letters out — last to first per word
+function animateLinksOut() {
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    const letters = link.querySelectorAll('.letter');
+    const lastIdx = letters.length - 1;
+    letters.forEach((letter, j) => {
+      const delay = (lastIdx - j) * 55;
+      letter.style.transitionDelay = `${delay}ms`;
+      letter.classList.add('closing');
+    });
+  });
+}
+
+let speckleDrawn = false;
+
+function openMenu() {
+  if (!speckleDrawn) {
+    drawSpeckle(mobileMenu);
+    speckleDrawn = true;
+  }
+  mobileMenu.classList.add('open');
+  hamburger.classList.add('open');
+  backdrop.classList.add('open');
+  siteHeader?.classList.add('menu-open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  mobileMenu.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  animateLinksIn();
+}
+
+function closeMenu() {
+  animateLinksOut();
+  mobileMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  backdrop.classList.remove('open');
+  siteHeader?.classList.remove('menu-open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+hamburger?.addEventListener('click', () => {
+  mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+});
+
+backdrop.addEventListener('click', closeMenu);
+
+document.querySelectorAll('.mobile-link').forEach(a => {
+  a.addEventListener('click', closeMenu);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
 });
 
 /* === UTILS === */
 function textToHtml(str) {
   if (!str) return '';
-  return str.split(/\n\n+/).filter(p => p.trim()).map(p => `<p>${p.trim().replace(/\n/g, '<br>')}</p>`).join('');
+  return str
+    .split(/\n\n+/)
+    .filter(p => p.trim())
+    .map(p => `<p>${p.trim().replace(/\n/g, '<br>')}</p>`)
+    .join('');
 }
 
 function vimeoId(url) {
