@@ -1,6 +1,4 @@
-That's only the nav section — it's missing all the other functions like loadProjects, loadAbout, loadPractice etc. That's why projects are still showing "Loading...".
-Paste this complete version into main.js replacing everything:
-javascript/* === NAV === */
+/* === NAV === */
 const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
 const siteHeader = document.querySelector('.site-header');
