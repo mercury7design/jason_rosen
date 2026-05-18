@@ -710,3 +710,6 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .menu-close {
   display: none !important;
 }
+.lightbox:not([hidden]) ~ .hamburger {
+  display: none;
+}
