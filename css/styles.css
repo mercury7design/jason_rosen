@@ -701,6 +701,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 @media (max-width: 768px) {
   .hamburger span {
     height: 2px;
-    box-shadow: 0 0 6px rgba(200,150,42,0.5);
+    box-shadow: 0 0 8px rgba(200,150,42,0.9), 0 0 16px rgba(200,150,42,0.5);
+  }
+  .hamburger {
+    filter: drop-shadow(0 0 6px rgba(200,150,42,0.7));
   }
 }
