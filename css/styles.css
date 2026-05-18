@@ -615,3 +615,6 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .mobile-link {
   touch-action: manipulation;
 }
+.mobile-link .letter {
+  pointer-events: none;
+}
