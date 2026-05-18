@@ -618,3 +618,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .mobile-link .letter {
   pointer-events: none;
 }
+.mobile-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
