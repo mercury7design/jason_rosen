@@ -8,10 +8,10 @@ const backdrop = document.createElement('div');
 backdrop.className = 'menu-backdrop';
 document.body.appendChild(backdrop);
 
-// Store hrefs before splitting into spans
-const linkHrefs = new Map();
+// Store hrefs as data attributes before splitting into spans
 document.querySelectorAll('.mobile-link').forEach(link => {
-  linkHrefs.set(link, link.getAttribute('href'));
+  const href = link.getAttribute('href');
+  link.dataset.href = href || '';
   const text = link.textContent.trim();
   link.innerHTML = text.split('').map((char, i) =>
     `<span class="letter" data-index="${i}" style="transition-delay: 0ms">${char === ' ' ? '&nbsp;' : char}</span>`
@@ -114,13 +114,13 @@ hamburger?.addEventListener('click', () => {
 
 backdrop.addEventListener('click', closeMenu);
 
-// Navigate using stored hrefs
+// Navigate using data-href attribute
 document.querySelectorAll('.mobile-link').forEach(a => {
   a.addEventListener('click', (e) => {
     e.preventDefault();
-    const href = linkHrefs.get(a);
+    const href = a.dataset.href;
+    if (href) window.location.href = href;
     closeMenu();
-    setTimeout(() => { if (href) window.location.href = href; }, 50);
   });
 });
 
