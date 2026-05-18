@@ -673,11 +673,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   .project-title { font-size: 18px; }
   .lightbox-title { font-size: 24px; }
 }
-.site-header.menu-open .hamburger {
-  opacity: 0;
-  pointer-events: none;
-}
 
-.mobile-menu:not(.open) .menu-close {
-  display: none;
+@media (max-width: 768px) {
+  .site-header {
+    z-index: 300;
+  }
 }
