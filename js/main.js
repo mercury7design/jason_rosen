@@ -112,15 +112,18 @@ hamburger?.addEventListener('click', () => {
 
 backdrop.addEventListener('click', closeMenu);
 
+// Mobile links — navigate after closing menu
 document.querySelectorAll('.mobile-link').forEach(a => {
   a.addEventListener('click', (e) => {
+    e.preventDefault();
     const href = a.getAttribute('href');
     closeMenu();
-    if (href) window.location.href = href;
+    setTimeout(() => { if (href) window.location.href = href; }, 100);
   });
 });
 
 document.querySelector('.menu-close')?.addEventListener('click', closeMenu);
+
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeMenu();
 });
@@ -194,8 +197,6 @@ function openLightbox(project) {
   document.getElementById('lb-media').innerHTML = (project.media || []).map(renderMediaItem).join('');
   initHlsVideos(document.getElementById('lb-media'));
   lightbox.removeAttribute('hidden');
-  hamburger.style.opacity = '0';
-hamburger.style.pointerEvents = 'none';
   document.body.style.overflow = 'hidden';
   lightbox.scrollTop = 0;
 }
@@ -203,8 +204,6 @@ hamburger.style.pointerEvents = 'none';
 function closeLightbox() {
   const lightbox = document.getElementById('lightbox');
   lightbox.setAttribute('hidden', '');
-  hamburger.style.opacity = '';
-hamburger.style.pointerEvents = '';
   document.body.style.overflow = '';
 }
 
