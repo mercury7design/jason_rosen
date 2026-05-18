@@ -679,3 +679,12 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     z-index: 300;
   }
 }
+@media (max-width: 768px) {
+  .hamburger {
+    position: fixed !important;
+    top: 14px;
+    right: var(--pad-x);
+    z-index: 999 !important;
+    transform: none !important;
+  }
+}
