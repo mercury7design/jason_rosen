@@ -116,6 +116,7 @@ document.querySelectorAll('.mobile-link').forEach(a => {
   a.addEventListener('click', closeMenu);
 });
 
+document.querySelector('.menu-close')?.addEventListener('click', closeMenu);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeMenu();
 });
