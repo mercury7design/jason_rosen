@@ -268,6 +268,34 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   overflow: hidden;
 }
 .mobile-link:last-child { border-bottom: none; }
+.menu-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: var(--gold);
+  z-index: 300;
+  line-height: 1;
+  padding: 4px;
+  filter: drop-shadow(0 0 8px rgba(200,150,42,0.6));
+}
+.menu-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: var(--gold);
+  z-index: 300;
+  line-height: 1;
+  padding: 4px;
+  filter: drop-shadow(0 0 8px rgba(200,150,42,0.6));
+}
 .mobile-link.nav-link--active { color: var(--gold); }
 
 /* Individual letter spans */
