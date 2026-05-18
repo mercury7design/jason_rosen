@@ -113,7 +113,11 @@ hamburger?.addEventListener('click', () => {
 backdrop.addEventListener('click', closeMenu);
 
 document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', closeMenu);
+  a.addEventListener('click', (e) => {
+    const href = a.getAttribute('href');
+    closeMenu();
+    if (href) window.location.href = href;
+  });
 });
 
 document.querySelector('.menu-close')?.addEventListener('click', closeMenu);
