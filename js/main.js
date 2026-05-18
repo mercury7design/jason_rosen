@@ -190,6 +190,8 @@ function openLightbox(project) {
   document.getElementById('lb-media').innerHTML = (project.media || []).map(renderMediaItem).join('');
   initHlsVideos(document.getElementById('lb-media'));
   lightbox.removeAttribute('hidden');
+  hamburger.style.opacity = '0';
+hamburger.style.pointerEvents = 'none';
   document.body.style.overflow = 'hidden';
   lightbox.scrollTop = 0;
 }
@@ -197,6 +199,8 @@ function openLightbox(project) {
 function closeLightbox() {
   const lightbox = document.getElementById('lightbox');
   lightbox.setAttribute('hidden', '');
+  hamburger.style.opacity = '';
+hamburger.style.pointerEvents = '';
   document.body.style.overflow = '';
 }
 
