@@ -688,3 +688,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     transform: none !important;
   }
 }
+@media (max-width: 768px) {
+  .nav::after {
+    display: none;
+  }
+}
