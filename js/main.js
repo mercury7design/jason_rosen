@@ -110,7 +110,7 @@ backdrop.addEventListener('click', closeMenu);
 
 // Navigate using stored href
 document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', (e) => {
+  a.addEventListener('touchend', (e) => {
     e.preventDefault();
     const href = a.dataset.href;
     closeMenu();
