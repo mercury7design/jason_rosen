@@ -8,8 +8,10 @@ const backdrop = document.createElement('div');
 backdrop.className = 'menu-backdrop';
 document.body.appendChild(backdrop);
 
-// Wrap each mobile link's text in individual letter spans
+// Store hrefs before splitting into spans
+const linkHrefs = new Map();
 document.querySelectorAll('.mobile-link').forEach(link => {
+  linkHrefs.set(link, link.getAttribute('href'));
   const text = link.textContent.trim();
   link.innerHTML = text.split('').map((char, i) =>
     `<span class="letter" data-index="${i}" style="transition-delay: 0ms">${char === ' ' ? '&nbsp;' : char}</span>`
@@ -112,10 +114,13 @@ hamburger?.addEventListener('click', () => {
 
 backdrop.addEventListener('click', closeMenu);
 
-// Mobile links — navigate after closing menu
+// Navigate using stored hrefs
 document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', () => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const href = linkHrefs.get(a);
     closeMenu();
+    setTimeout(() => { if (href) window.location.href = href; }, 50);
   });
 });
 
