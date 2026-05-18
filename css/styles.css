@@ -270,17 +270,37 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .mobile-link:last-child { border-bottom: none; }
 .menu-close {
   position: absolute;
-  top: 14px;
-  right: 20px;
+  top: 12px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 28px;
-  color: var(--gold);
   z-index: 300;
-  line-height: 1;
-  padding: 4px;
-  filter: drop-shadow(0 0 8px rgba(200,150,42,0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  animation: glowPulse 2.8s ease-in-out infinite;
+}
+
+.menu-close::before,
+.menu-close::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+
+.menu-close::before {
+  transform: rotate(45deg);
+}
+
+.menu-close::after {
+  transform: rotate(-45deg);
 }
 .menu-close {
   position: absolute;
