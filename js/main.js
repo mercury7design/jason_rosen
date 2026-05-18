@@ -10,8 +10,7 @@ document.body.appendChild(backdrop);
 
 // Store hrefs as data attributes before splitting into spans
 document.querySelectorAll('.mobile-link').forEach(link => {
-  const href = link.getAttribute('href');
-  link.dataset.href = href || '';
+  link.dataset.href = link.getAttribute('href') || '';
   const text = link.textContent.trim();
   link.innerHTML = text.split('').map((char, i) =>
     `<span class="letter" data-index="${i}" style="transition-delay: 0ms">${char === ' ' ? '&nbsp;' : char}</span>`
@@ -55,26 +54,22 @@ function drawSpeckle(menu) {
   }
 }
 
-// Stagger letters in
 function animateLinksIn() {
   document.querySelectorAll('.mobile-link').forEach((link, linkIdx) => {
     const letters = link.querySelectorAll('.letter');
     letters.forEach((letter, j) => {
       letter.classList.remove('closing');
-      const delay = 200 + linkIdx * 160 + j * 35;
-      letter.style.transitionDelay = `${delay}ms`;
+      letter.style.transitionDelay = `${200 + linkIdx * 160 + j * 35}ms`;
     });
   });
 }
 
-// Stagger letters out — last to first per word
 function animateLinksOut() {
   document.querySelectorAll('.mobile-link').forEach(link => {
     const letters = link.querySelectorAll('.letter');
     const lastIdx = letters.length - 1;
     letters.forEach((letter, j) => {
-      const delay = (lastIdx - j) * 55;
-      letter.style.transitionDelay = `${delay}ms`;
+      letter.style.transitionDelay = `${(lastIdx - j) * 55}ms`;
       letter.classList.add('closing');
     });
   });
@@ -83,10 +78,7 @@ function animateLinksOut() {
 let speckleDrawn = false;
 
 function openMenu() {
-  if (!speckleDrawn) {
-    drawSpeckle(mobileMenu);
-    speckleDrawn = true;
-  }
+  if (!speckleDrawn) { drawSpeckle(mobileMenu); speckleDrawn = true; }
   mobileMenu.classList.add('open');
   hamburger.classList.add('open');
   backdrop.classList.add('open');
@@ -98,6 +90,7 @@ function openMenu() {
 }
 
 function closeMenu() {
+  backdrop.style.pointerEvents = 'none';
   animateLinksOut();
   mobileMenu.classList.remove('open');
   hamburger.classList.remove('open');
@@ -106,6 +99,7 @@ function closeMenu() {
   hamburger.setAttribute('aria-expanded', 'false');
   mobileMenu.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  setTimeout(() => { backdrop.style.pointerEvents = ''; }, 1100);
 }
 
 hamburger?.addEventListener('click', () => {
@@ -114,28 +108,25 @@ hamburger?.addEventListener('click', () => {
 
 backdrop.addEventListener('click', closeMenu);
 
-// Let browser handle navigation naturally
+// Navigate using stored href
 document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', () => closeMenu());
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const href = a.dataset.href;
+    closeMenu();
+    setTimeout(() => { if (href) window.location.href = href; }, 200);
+  });
 });
 
 document.querySelector('.menu-close')?.addEventListener('click', closeMenu);
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeMenu();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
 /* === UTILS === */
 function textToHtml(str) {
   if (!str) return '';
   return str.split(/\n\n+/).filter(p => p.trim()).map(p => `<p>${p.trim().replace(/\n/g, '<br>')}</p>`).join('');
 }
-
-function vimeoId(url) {
-  const m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-  return m ? m[1] : null;
-}
-
+function vimeoId(url) { const m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/); return m ? m[1] : null; }
 function youtubeId(url) {
   try {
     const parsed = new URL(url);
@@ -144,37 +135,24 @@ function youtubeId(url) {
   } catch (err) { return null; }
   return null;
 }
-
 function isHlsUrl(url) { return url.endsWith('.m3u8'); }
-
 function initHlsVideos(root = document) {
   root.querySelectorAll('video[data-hls-src]').forEach(video => {
     const src = video.dataset.hlsSrc;
     if (!src) return;
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = src;
-    } else if (window.Hls && Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(src);
-      hls.attachMedia(video);
-    }
+    if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = src; }
+    else if (window.Hls && Hls.isSupported()) { const hls = new Hls(); hls.loadSource(src); hls.attachMedia(video); }
   });
 }
-
 function renderMediaItem(item) {
   let media = '';
   if (item.type === 'video') {
     const url = item.url || '';
     const vid = vimeoId(url);
     const yid = youtubeId(url);
-    if (yid) {
-      media = `<div class="lb-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
-    } else if (vid) {
-      media = `<div class="lb-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
-    } else if (url) {
-      const attrs = isHlsUrl(url) ? `data-hls-src="${url}"` : `src="${url}"`;
-      media = `<div class="lb-video-wrap"><video ${attrs} controls playsinline></video></div>`;
-    }
+    if (yid) media = `<div class="lb-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+    else if (vid) media = `<div class="lb-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+    else if (url) { const attrs = isHlsUrl(url) ? `data-hls-src="${url}"` : `src="${url}"`; media = `<div class="lb-video-wrap"><video ${attrs} controls playsinline></video></div>`; }
   } else {
     const src = item.image || item.url || '';
     if (src) media = `<img src="${src}" alt="${item.caption || ''}" loading="lazy">`;
@@ -185,7 +163,6 @@ function renderMediaItem(item) {
 
 /* === LIGHTBOX === */
 let projectsData = [];
-
 function openLightbox(project) {
   const lightbox = document.getElementById('lightbox');
   document.getElementById('lb-title').textContent = project.title || '';
@@ -197,13 +174,10 @@ function openLightbox(project) {
   document.body.style.overflow = 'hidden';
   lightbox.scrollTop = 0;
 }
-
 function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  lightbox.setAttribute('hidden', '');
+  document.getElementById('lightbox').setAttribute('hidden', '');
   document.body.style.overflow = '';
 }
-
 document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
 document.getElementById('lightbox')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
@@ -219,10 +193,7 @@ async function loadProjects() {
     projectsData = data.items || [];
     const intro = document.getElementById('work-intro');
     if (intro && data.work_intro) intro.textContent = data.work_intro;
-    if (!projectsData.length) {
-      container.innerHTML = '<p class="projects-loading">No projects yet.</p>';
-      return;
-    }
+    if (!projectsData.length) { container.innerHTML = '<p class="projects-loading">No projects yet.</p>'; return; }
     container.innerHTML = projectsData.map((project, i) => {
       const thumb = project.thumbnail ? `<img src="${project.thumbnail}" alt="${project.title || ''}" loading="lazy">` : '';
       const emptyClass = project.thumbnail ? '' : ' project-thumb--empty';
@@ -240,13 +211,9 @@ async function loadProjects() {
       card.addEventListener('click', open);
       card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
     });
-  } catch (err) {
-    console.error('Failed to load projects:', err);
-    container.innerHTML = '<p class="projects-loading">Could not load projects.</p>';
-  }
+  } catch (err) { console.error('Failed to load projects:', err); container.innerHTML = '<p class="projects-loading">Could not load projects.</p>'; }
 }
 
-/* === ABOUT PAGE === */
 async function loadAbout() {
   const body = document.getElementById('about-body');
   const headshot = document.getElementById('about-headshot');
@@ -260,7 +227,6 @@ async function loadAbout() {
   } catch (err) { console.error('Failed to load about:', err); }
 }
 
-/* === PRACTICE PAGE === */
 async function loadPractice() {
   const body = document.getElementById('practice-body');
   if (!body) return;
@@ -272,7 +238,6 @@ async function loadPractice() {
   } catch (err) { console.error('Failed to load practice:', err); }
 }
 
-/* === FOOTER === */
 async function loadFooter() {
   const footers = document.querySelectorAll('.site-footer');
   if (!footers.length) return;
@@ -291,7 +256,6 @@ async function loadFooter() {
   } catch (err) { console.error('Failed to load footer:', err); }
 }
 
-/* === INIT === */
 loadProjects();
 loadAbout();
 loadPractice();
