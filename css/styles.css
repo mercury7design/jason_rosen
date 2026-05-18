@@ -710,13 +710,12 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 .menu-close {
   display: none !important;
 }
-.lightbox:not([hidden]) ~ .hamburger {
-  display: none;
-}
 .lightbox {
-  z-index: 500;
+  z-index: 500 !important;
 }
-
 .mobile-menu {
-  z-index: 400;
+  z-index: 400 !important;
+}
+.hamburger {
+  z-index: 999 !important;
 }
