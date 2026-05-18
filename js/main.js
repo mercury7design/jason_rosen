@@ -114,11 +114,8 @@ backdrop.addEventListener('click', closeMenu);
 
 // Mobile links — navigate after closing menu
 document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    const href = a.getAttribute('href');
+  a.addEventListener('click', () => {
     closeMenu();
-    setTimeout(() => { if (href) window.location.href = href; }, 100);
   });
 });
 
