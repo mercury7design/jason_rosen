@@ -698,3 +698,9 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     display: none;
   }
 }
+@media (max-width: 768px) {
+  .hamburger span {
+    height: 2px;
+    box-shadow: 0 0 6px rgba(200,150,42,0.5);
+  }
+}
