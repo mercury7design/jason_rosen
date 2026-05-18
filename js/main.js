@@ -114,14 +114,9 @@ hamburger?.addEventListener('click', () => {
 
 backdrop.addEventListener('click', closeMenu);
 
-// Navigate using data-href attribute
+// Let browser handle navigation naturally
 document.querySelectorAll('.mobile-link').forEach(a => {
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    const href = a.dataset.href;
-    if (href) window.location.href = href;
-    closeMenu();
-  });
+  a.addEventListener('click', () => closeMenu());
 });
 
 document.querySelector('.menu-close')?.addEventListener('click', closeMenu);
