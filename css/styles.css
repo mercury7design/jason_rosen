@@ -693,3 +693,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     display: none;
   }
 }
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+}
