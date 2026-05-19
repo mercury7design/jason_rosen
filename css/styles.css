@@ -634,3 +634,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   margin-top: 14px;
   text-transform: uppercase;
 }
+@media (max-width: 768px) {
+  .footer-mark {
+    display: none;
+  }
+}
