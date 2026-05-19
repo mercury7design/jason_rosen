@@ -5,7 +5,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jason Scott Rosen — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Squada+One&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  /* Force fonts to load before print */
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
 <style>
   :root {
     --gold: #C8962A;
@@ -263,10 +271,11 @@
       overflow: visible;
       background: none;
       font-size: 9.5pt;
+      font-family: 'Cormorant Garamond', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
     }
-    .slider, .slides { display: block; width: 100%; height: auto; transition: none; }
+    .slider, .slides { display: block; width: 100%; height: auto; transition: none; transform: none !important; }
     .slide { width: 100%; height: auto; overflow: visible; background: none; }
-    .nav-btn, .dots, .print-btn { display: none !important; }
+    .nav-btn, .dots, .print-btn, .back-btn { display: none !important; }
     .pg {
       background: var(--bg);
       width: 100%;
@@ -300,6 +309,7 @@
     .title-col span { font-size: 9.5pt; }
     .contact-col { text-align: right; flex-direction: column; justify-content: space-between; align-self: stretch; gap: 0; }
     .contact-col p { font-size: 8pt; line-height: 1; }
+    .li-link svg { width: 13px !important; height: 13px !important; }
     .p2-name { font-size: 14pt; }
     .p2-pg { font-size: 6.5pt; }
 
@@ -613,7 +623,7 @@
 </div>
 
 <!-- PRINT -->
-<button class="print-btn" onclick="window.print()" aria-label="Print resume">&#8599; Print / PDF</button>
+<a class="print-btn" href="Jason Scott Rosen | 2026 Resume.pdf" download aria-label="Download PDF">&#8599; Download PDF</a>
 
 <script>
   const slides = document.getElementById('slides');
