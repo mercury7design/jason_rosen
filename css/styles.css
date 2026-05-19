@@ -624,3 +624,13 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   inset: 0;
   z-index: 10;
 }
+.work-byline {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 1vw, 14px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  opacity: 0.55;
+  margin-top: 14px;
+  text-transform: uppercase;
+}
