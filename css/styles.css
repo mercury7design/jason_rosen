@@ -629,7 +629,7 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   font-size: clamp(11px, 1vw, 14px);
   font-weight: 400;
   letter-spacing: 0.08em;
-  color: var(--white);
+  color: var(--white) !important;
   opacity: 0.55;
   margin-top: 14px;
   text-transform: uppercase;
