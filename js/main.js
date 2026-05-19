@@ -3,12 +3,10 @@ const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
 const siteHeader = document.querySelector('.site-header');
 
-// Create backdrop
 const backdrop = document.createElement('div');
 backdrop.className = 'menu-backdrop';
 document.body.appendChild(backdrop);
 
-// Store hrefs as data attributes before splitting into spans
 document.querySelectorAll('.mobile-link').forEach(link => {
   link.dataset.href = link.getAttribute('href') || '';
   const text = link.textContent.trim();
@@ -17,7 +15,6 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   ).join('');
 });
 
-// Draw gold speckle on menu canvas
 function drawSpeckle(menu) {
   if (menu.querySelector('.menu-speckle')) return;
   const canvas = document.createElement('canvas');
@@ -105,13 +102,11 @@ function closeMenu() {
 hamburger?.addEventListener('click', () => {
   mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
 });
-
 backdrop.addEventListener('click', closeMenu);
 
-// Navigate using stored href
 document.querySelectorAll('.mobile-link').forEach(a => {
   a.addEventListener('click', (e) => {
-    e.stopPropagation();
+    e.preventDefault();
     const href = a.dataset.href;
     closeMenu();
     setTimeout(() => { if (href) window.location.href = href; }, 200);
@@ -144,6 +139,7 @@ function initHlsVideos(root = document) {
     else if (window.Hls && Hls.isSupported()) { const hls = new Hls(); hls.loadSource(src); hls.attachMedia(video); }
   });
 }
+
 function renderMediaItem(item) {
   let media = '';
   if (item.type === 'video') {
@@ -151,7 +147,8 @@ function renderMediaItem(item) {
     const vid = vimeoId(url);
     const yid = youtubeId(url);
     if (yid) media = `<div class="lb-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
-    else if (vid) media = `<div class="lb-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+    // ── CHANGE 1: Vimeo autoplay + loop + background mode ──
+    else if (vid) media = `<div class="lb-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1&autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
     else if (url) { const attrs = isHlsUrl(url) ? `data-hls-src="${url}"` : `src="${url}"`; media = `<div class="lb-video-wrap"><video ${attrs} controls playsinline></video></div>`; }
   } else {
     const src = item.image || item.url || '';
@@ -163,6 +160,7 @@ function renderMediaItem(item) {
 
 /* === LIGHTBOX === */
 let projectsData = [];
+
 function openLightbox(project) {
   const lightbox = document.getElementById('lightbox');
   document.getElementById('lb-title').textContent = project.title || '';
@@ -173,11 +171,17 @@ function openLightbox(project) {
   lightbox.removeAttribute('hidden');
   document.body.style.overflow = 'hidden';
   lightbox.scrollTop = 0;
+  // ── CHANGE 2: Hide hamburger when lightbox opens ──
+  if (hamburger) hamburger.style.display = 'none';
 }
+
 function closeLightbox() {
   document.getElementById('lightbox').setAttribute('hidden', '');
   document.body.style.overflow = '';
+  // ── CHANGE 2: Restore hamburger when lightbox closes ──
+  if (hamburger) hamburger.style.display = '';
 }
+
 document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
 document.getElementById('lightbox')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
@@ -211,7 +215,29 @@ async function loadProjects() {
       card.addEventListener('click', open);
       card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
     });
+    // ── CHANGE 3: Lazy load videos on scroll ──
+    initLazyVideos();
   } catch (err) { console.error('Failed to load projects:', err); container.innerHTML = '<p class="projects-loading">Could not load projects.</p>'; }
+}
+
+/* === LAZY VIDEO LOADING === */
+function initLazyVideos() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const wrap = entry.target;
+        const src = wrap.dataset.lazySrc;
+        if (src) {
+          wrap.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+          observer.unobserve(wrap);
+        }
+      }
+    });
+  }, { threshold: 0.25 });
+
+  document.querySelectorAll('.lb-video-wrap[data-lazy-src]').forEach(wrap => {
+    observer.observe(wrap);
+  });
 }
 
 async function loadAbout() {
@@ -256,7 +282,218 @@ async function loadFooter() {
   } catch (err) { console.error('Failed to load footer:', err); }
 }
 
+/* === EPHEMERA — LOGO GLINT ANIMATION === */
+function initEphemera() {
+  const heroEl = document.querySelector('.work-hero');
+  const logoEl = document.querySelector('.site-mark');
+  if (!heroEl || !logoEl) return;
+
+  const heroCanvas = document.createElement('canvas');
+  heroCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;';
+  heroEl.appendChild(heroCanvas);
+  const heroCtx = heroCanvas.getContext('2d');
+
+  const logoCanvas = document.createElement('canvas');
+  logoCanvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
+  const logoWrap = document.createElement('div');
+  logoWrap.style.cssText = 'position:relative;display:inline-block;';
+  logoEl.parentNode.insertBefore(logoWrap, logoEl);
+  logoWrap.appendChild(logoEl);
+  logoWrap.appendChild(logoCanvas);
+  const logoCtx = logoCanvas.getContext('2d');
+
+  function resize() {
+    heroCanvas.width = heroEl.offsetWidth;
+    heroCanvas.height = heroEl.offsetHeight;
+    logoCanvas.width = logoEl.offsetWidth;
+    logoCanvas.height = logoEl.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const logoImg = new Image();
+  logoImg.src = logoEl.src;
+
+  let frame = 0;
+  const FOG_DURATION = 180;
+  const FOG_DELAY = 20;
+  let fogFrame = 0;
+  let fogDone = false;
+  let sparkleActive = false;
+  let glintPhase = 0;
+  let glintWait = 0;
+  const GLINT_DURATION = 70;
+  const GLINT_PAUSE = 320;
+
+  function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+  function getSx() { return logoCanvas.width * 0.50; }
+  function getSy() { return logoCanvas.height * 0.23; }
+
+  function drawStarGlint(ctx, x, y, size, opacity) {
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    for (let i = 0; i < 4; i++) {
+      const angle = (i / 4) * Math.PI * 2;
+      const longR = size;
+      const shortR = size * 0.15;
+      const a1 = angle - Math.PI / 4 * 0.3;
+      const a3 = angle + Math.PI / 4 * 0.3;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(a1) * shortR, y + Math.sin(a1) * shortR);
+      ctx.lineTo(x + Math.cos(angle) * longR, y + Math.sin(angle) * longR);
+      ctx.lineTo(x + Math.cos(a3) * shortR, y + Math.sin(a3) * shortR);
+      ctx.closePath();
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, longR);
+      grad.addColorStop(0, 'rgba(255,255,255,1)');
+      grad.addColorStop(0.3, 'rgba(255,248,200,0.8)');
+      grad.addColorStop(1, 'rgba(255,240,150,0)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+    const spot = ctx.createRadialGradient(x, y, 0, x, y, size * 0.4);
+    spot.addColorStop(0, 'rgba(255,255,255,1)');
+    spot.addColorStop(0.5, 'rgba(255,252,220,0.6)');
+    spot.addColorStop(1, 'rgba(255,248,180,0)');
+    ctx.beginPath();
+    ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+    ctx.fillStyle = spot;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawGlimmer(ctx, x, y, size, opacity) {
+    ctx.save();
+    [0, Math.PI/2, Math.PI, Math.PI*1.5].forEach(angle => {
+      const grad = ctx.createLinearGradient(x, y, x + Math.cos(angle) * size, y + Math.sin(angle) * size);
+      grad.addColorStop(0, `rgba(255,255,255,${opacity})`);
+      grad.addColorStop(0.2, `rgba(255,252,210,${opacity * 0.8})`);
+      grad.addColorStop(1, 'rgba(255,240,140,0)');
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(angle) * size, y + Math.sin(angle) * size);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    });
+    [Math.PI/4, Math.PI*3/4, Math.PI*5/4, Math.PI*7/4].forEach(angle => {
+      const grad = ctx.createLinearGradient(x, y, x + Math.cos(angle) * size * 0.45, y + Math.sin(angle) * size * 0.45);
+      grad.addColorStop(0, `rgba(255,255,255,${opacity * 0.7})`);
+      grad.addColorStop(1, 'rgba(255,240,140,0)');
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(angle) * size * 0.45, y + Math.sin(angle) * size * 0.45);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 0.7;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    });
+    const center = ctx.createRadialGradient(x, y, 0, x, y, size * 0.25);
+    center.addColorStop(0, `rgba(255,255,255,${opacity})`);
+    center.addColorStop(1, 'rgba(255,248,180,0)');
+    ctx.beginPath();
+    ctx.arc(x, y, size * 0.25, 0, Math.PI * 2);
+    ctx.fillStyle = center;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawFrame() {
+    frame++;
+    const HW = heroCanvas.width;
+    const HH = heroCanvas.height;
+    const LW = logoCanvas.width;
+    const LH = logoCanvas.height;
+    const sx = getSx();
+    const sy = getSy();
+
+    heroCtx.clearRect(0, 0, HW, HH);
+    if (frame > FOG_DELAY && !fogDone) {
+      fogFrame++;
+      const t = Math.min(1, fogFrame / FOG_DURATION);
+      const eased = easeInOut(t);
+      const diagLen = Math.sqrt(HW * HW + HH * HH);
+      const fogHead = eased * (diagLen + 300);
+      const angle = Math.atan2(HH, HW);
+      const fogW = 320;
+      const headX = Math.cos(angle) * fogHead;
+      const headY = Math.sin(angle) * fogHead;
+      const tailX = Math.cos(angle) * Math.max(0, fogHead - fogW);
+      const tailY = Math.sin(angle) * Math.max(0, fogHead - fogW);
+      const grad = heroCtx.createLinearGradient(tailX, tailY, headX, headY);
+      grad.addColorStop(0, 'rgba(255,252,240,0)');
+      grad.addColorStop(0.25, 'rgba(255,250,235,0.03)');
+      grad.addColorStop(0.55, 'rgba(255,248,228,0.08)');
+      grad.addColorStop(0.8, 'rgba(255,252,240,0.05)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      heroCtx.fillStyle = grad;
+      heroCtx.fillRect(0, 0, HW, HH);
+      const logoCenterX = HW / 2;
+      const logoCenterY = HH * 0.4;
+      const logoDiagDist = Math.cos(angle) * logoCenterX + Math.sin(angle) * logoCenterY;
+      if (fogHead > logoDiagDist && !sparkleActive) { sparkleActive = true; glintPhase = 0; }
+      if (t >= 1) fogDone = true;
+    }
+
+    logoCtx.clearRect(0, 0, LW, LH);
+    if (logoImg.complete && logoImg.naturalWidth) {
+      logoCtx.drawImage(logoImg, 0, 0, LW, LH);
+      logoCtx.save();
+      logoCtx.globalCompositeOperation = 'source-atop';
+      const breathe = (Math.sin(frame * 0.018) + 1) / 2;
+      logoCtx.fillStyle = `rgba(255,210,80,${0.02 + breathe * 0.03})`;
+      logoCtx.fillRect(0, 0, LW, LH);
+      logoCtx.restore();
+    }
+
+    if (sparkleActive) {
+      glintPhase++;
+      const t = glintPhase / GLINT_DURATION;
+      if (t <= 1) {
+        const op = t < 0.4 ? easeInOut(t / 0.4) : 1 - easeInOut((t - 0.4) / 0.6);
+        const glintSize = 8 + op * 6;
+        const halo = logoCtx.createRadialGradient(sx, sy, 0, sx, sy, glintSize * 4);
+        halo.addColorStop(0, `rgba(255,248,180,${op * 0.7})`);
+        halo.addColorStop(0.5, `rgba(255,240,140,${op * 0.2})`);
+        halo.addColorStop(1, 'rgba(255,230,100,0)');
+        logoCtx.beginPath();
+        logoCtx.arc(sx, sy, glintSize * 4, 0, Math.PI * 2);
+        logoCtx.fillStyle = halo;
+        logoCtx.fill();
+        drawStarGlint(logoCtx, sx, sy, glintSize, op);
+        const t2 = Math.max(0, (t - 0.35) / 0.65);
+        if (t2 > 0) {
+          const op2 = t2 < 0.4 ? easeInOut(t2 / 0.4) : 1 - easeInOut((t2 - 0.4) / 0.6);
+          drawStarGlint(logoCtx, sx, sy + 12, glintSize * 0.52, op2 * 0.65);
+        }
+        const t3 = Math.max(0, (t - 0.55) / 0.45);
+        if (t3 > 0) {
+          const op3 = t3 < 0.4 ? easeInOut(t3 / 0.4) : 1 - easeInOut((t3 - 0.4) / 0.6);
+          drawStarGlint(logoCtx, sx + 5, sy + 4, glintSize * 0.38, op3 * 0.50);
+        }
+      } else {
+        glintWait++;
+        if (glintWait > 60 && glintWait < 120) {
+          const shimT = (glintWait - 60) / 60;
+          const shimOp = shimT < 0.3 ? easeInOut(shimT / 0.3) * 0.35 : (1 - easeInOut((shimT - 0.3) / 0.7)) * 0.35;
+          if (shimOp > 0.01) drawGlimmer(logoCtx, sx, sy, 14, shimOp);
+        }
+        if (glintWait > GLINT_PAUSE) { glintPhase = 0; glintWait = 0; }
+      }
+    }
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  if (logoImg.complete && logoImg.naturalWidth) { drawFrame(); }
+  else { logoImg.onload = drawFrame; }
+}
+
+/* === INIT === */
 loadProjects();
 loadAbout();
 loadPractice();
 loadFooter();
+if (document.querySelector('.work-hero')) initEphemera();
