@@ -147,8 +147,7 @@ function renderMediaItem(item) {
     const vid = vimeoId(url);
     const yid = youtubeId(url);
     if (yid) media = `<div class="lb-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
-    // ── CHANGE 1: Vimeo autoplay + loop + background mode ──
-    else if (vid) media = `<div class="lb-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1&autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+    else if (vid) media = `<div class="lb-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
     else if (url) { const attrs = isHlsUrl(url) ? `data-hls-src="${url}"` : `src="${url}"`; media = `<div class="lb-video-wrap"><video ${attrs} controls playsinline></video></div>`; }
   } else {
     const src = item.image || item.url || '';
@@ -171,14 +170,12 @@ function openLightbox(project) {
   lightbox.removeAttribute('hidden');
   document.body.style.overflow = 'hidden';
   lightbox.scrollTop = 0;
-  // ── CHANGE 2: Hide hamburger when lightbox opens ──
   if (hamburger) hamburger.style.display = 'none';
 }
 
 function closeLightbox() {
   document.getElementById('lightbox').setAttribute('hidden', '');
   document.body.style.overflow = '';
-  // ── CHANGE 2: Restore hamburger when lightbox closes ──
   if (hamburger) hamburger.style.display = '';
 }
 
@@ -215,29 +212,7 @@ async function loadProjects() {
       card.addEventListener('click', open);
       card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
     });
-    // ── CHANGE 3: Lazy load videos on scroll ──
-    initLazyVideos();
   } catch (err) { console.error('Failed to load projects:', err); container.innerHTML = '<p class="projects-loading">Could not load projects.</p>'; }
-}
-
-/* === LAZY VIDEO LOADING === */
-function initLazyVideos() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const wrap = entry.target;
-        const src = wrap.dataset.lazySrc;
-        if (src) {
-          wrap.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-          observer.unobserve(wrap);
-        }
-      }
-    });
-  }, { threshold: 0.25 });
-
-  document.querySelectorAll('.lb-video-wrap[data-lazy-src]').forEach(wrap => {
-    observer.observe(wrap);
-  });
 }
 
 async function loadAbout() {
@@ -296,7 +271,7 @@ function initEphemera() {
   const logoCanvas = document.createElement('canvas');
   logoCanvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
   const logoWrap = document.createElement('div');
-  logoWrap.style.cssText = 'position:relative;display:inline-block;';
+  logoWrap.style.cssText = 'position:relative;display:inline-block;line-height:0;';
   logoEl.parentNode.insertBefore(logoWrap, logoEl);
   logoWrap.appendChild(logoEl);
   logoWrap.appendChild(logoCanvas);
@@ -311,9 +286,6 @@ function initEphemera() {
   resize();
   window.addEventListener('resize', resize);
 
-  const logoImg = new Image();
-  logoImg.src = logoEl.src;
-
   let frame = 0;
   const FOG_DURATION = 180;
   const FOG_DELAY = 20;
@@ -326,7 +298,6 @@ function initEphemera() {
   const GLINT_PAUSE = 320;
 
   function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-
   function getSx() { return logoCanvas.width * 0.50; }
   function getSy() { return logoCanvas.height * 0.23; }
 
@@ -409,6 +380,7 @@ function initEphemera() {
     const sx = getSx();
     const sy = getSy();
 
+    // Fog sweep
     heroCtx.clearRect(0, 0, HW, HH);
     if (frame > FOG_DELAY && !fogDone) {
       fogFrame++;
@@ -437,16 +409,8 @@ function initEphemera() {
       if (t >= 1) fogDone = true;
     }
 
+    // Sparkle — canvas only draws effects, logo image shows through underneath
     logoCtx.clearRect(0, 0, LW, LH);
-    if (logoImg.complete && logoImg.naturalWidth) {
-      logoCtx.drawImage(logoImg, 0, 0, LW, LH);
-      logoCtx.save();
-      logoCtx.globalCompositeOperation = 'source-atop';
-      const breathe = (Math.sin(frame * 0.018) + 1) / 2;
-      logoCtx.fillStyle = `rgba(255,210,80,${0.02 + breathe * 0.03})`;
-      logoCtx.fillRect(0, 0, LW, LH);
-      logoCtx.restore();
-    }
 
     if (sparkleActive) {
       glintPhase++;
@@ -487,8 +451,7 @@ function initEphemera() {
     requestAnimationFrame(drawFrame);
   }
 
-  if (logoImg.complete && logoImg.naturalWidth) { drawFrame(); }
-  else { logoImg.onload = drawFrame; }
+  drawFrame();
 }
 
 /* === INIT === */
