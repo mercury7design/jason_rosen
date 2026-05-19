@@ -22,7 +22,7 @@
   --white: #ffffff;
   --nav-height: 48px;
   --font-display: 'Fondamento', serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Tenor Sans', system-ui, -apple-system, sans-serif;
   --max-w: 1320px;
   --pad-x: clamp(24px, 5vw, 80px);
   --gold: #C8962A;
