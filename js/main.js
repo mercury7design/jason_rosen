@@ -188,7 +188,7 @@ const barStates = new Map(); // track spotlight canvas state per bar
 
 function initBarSpotlight(bar, canvas) {
   const ctx = canvas.getContext('2d');
-  const state = { radius: 0.28, target: 0.28, started: false, rafId: null };
+  const state = { radius: 0.08, target: 0.08, started: false, rafId: null };
   barStates.set(bar, state);
 
   function resize() {
@@ -211,28 +211,37 @@ function initBarSpotlight(bar, canvas) {
 
     const cx = W / 2;
     const cy = H / 2;
-    // Fixed pixel spotlight — never stretches with browser width
-    // Base size on bar height so it's always proportional to the bar
-    const baseR = Math.min(W * 0.18, 240); // max 240px wide regardless of screen
-    const rx = baseR + (state.radius - 0.06) * baseR * 8;
-    const ry = H * 1.2; // always taller than bar — no top/bottom cutoff
-    const scaleY = ry / Math.max(rx, 1);
 
+    // Fixed pixel spotlight — same size on every screen
+    // Collapsed: small keyhole showing just a slice of image
+    // Expanded: blooms to reveal more
+    const COLLAPSED_R = 180; // fixed px — narrow enough to vignette edges
+    const EXPANDED_R = Math.min(W * 0.45, 600); // expands but caps on wide screens
+    const rx = COLLAPSED_R + (state.radius - 0.08) * (EXPANDED_R - COLLAPSED_R) / 0.57;
+    const ry = rx * 2.8; // taller than wide — portrait ellipse feel
+
+    // Dark overlay covering everything, cut out by ellipse at center
+    // Fill entire canvas dark first
+    ctx.fillStyle = 'rgba(25,25,22,0.96)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Cut out the spotlight using destination-out on a separate canvas approach
+    // Instead: draw transparent ellipse gradient on top using lighter-than-dark values
     ctx.save();
+    ctx.globalCompositeOperation = 'destination-out';
     ctx.translate(cx, cy);
-    ctx.scale(1, scaleY);
+    ctx.scale(1, ry / Math.max(rx, 1));
 
     const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
-    grad.addColorStop(0,    'rgba(25,25,22,0)');
-    grad.addColorStop(0.25, 'rgba(25,25,22,0)');
-    grad.addColorStop(0.45, 'rgba(25,25,22,0.4)');
-    grad.addColorStop(0.62, 'rgba(25,25,22,0.75)');
-    grad.addColorStop(0.78, 'rgba(25,25,22,0.92)');
-    grad.addColorStop(0.90, 'rgba(25,25,22,0.97)');
-    grad.addColorStop(1,    'rgba(25,25,22,0.99)');
+    grad.addColorStop(0,    'rgba(0,0,0,1)');
+    grad.addColorStop(0.35, 'rgba(0,0,0,0.95)');
+    grad.addColorStop(0.55, 'rgba(0,0,0,0.7)');
+    grad.addColorStop(0.72, 'rgba(0,0,0,0.35)');
+    grad.addColorStop(0.85, 'rgba(0,0,0,0.1)');
+    grad.addColorStop(1,    'rgba(0,0,0,0)');
 
     ctx.beginPath();
-    ctx.arc(0, 0, Math.max(W, H) / scaleY + rx * 2, 0, Math.PI * 2);
+    ctx.arc(0, 0, rx, 0, Math.PI * 2);
     ctx.fillStyle = grad;
     ctx.fill();
     ctx.restore();
@@ -299,8 +308,8 @@ async function loadProjects() {
         });
         bar.addEventListener('mouseleave', () => {
           bar.classList.remove('expanded');
-          state.radius = 0.28;
-          state.target = 0.28;
+          state.radius = 0.08;
+          state.target = 0.08;
           state.started = false;
         });
         bar.addEventListener('click', () => {
