@@ -188,7 +188,7 @@ const barStates = new Map(); // track spotlight canvas state per bar
 
 function initBarSpotlight(bar, canvas) {
   const ctx = canvas.getContext('2d');
-  const state = { radius: 0.06, target: 0.06, started: false, rafId: null };
+  const state = { radius: 0.28, target: 0.28, started: false, rafId: null };
   barStates.set(bar, state);
 
   function resize() {
@@ -224,15 +224,11 @@ function initBarSpotlight(bar, canvas) {
 
     const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
     grad.addColorStop(0,    'rgba(25,25,22,0)');
-    grad.addColorStop(0.08, 'rgba(25,25,22,0.3)');
-    grad.addColorStop(0.18, 'rgba(25,25,22,0.6)');
-    grad.addColorStop(0.30, 'rgba(25,25,22,0.8)');
-    grad.addColorStop(0.42, 'rgba(25,25,22,0.88)');
-    grad.addColorStop(0.54, 'rgba(25,25,22,0.92)');
-    grad.addColorStop(0.65, 'rgba(25,25,22,0.95)');
-    grad.addColorStop(0.75, 'rgba(25,25,22,0.97)');
-    grad.addColorStop(0.84, 'rgba(25,25,22,0.98)');
-    grad.addColorStop(0.92, 'rgba(25,25,22,0.98)');
+    grad.addColorStop(0.25, 'rgba(25,25,22,0)');
+    grad.addColorStop(0.45, 'rgba(25,25,22,0.4)');
+    grad.addColorStop(0.62, 'rgba(25,25,22,0.75)');
+    grad.addColorStop(0.78, 'rgba(25,25,22,0.92)');
+    grad.addColorStop(0.90, 'rgba(25,25,22,0.97)');
     grad.addColorStop(1,    'rgba(25,25,22,0.99)');
 
     ctx.beginPath();
@@ -303,8 +299,8 @@ async function loadProjects() {
         });
         bar.addEventListener('mouseleave', () => {
           bar.classList.remove('expanded');
-          state.radius = 0.06;
-          state.target = 0.06;
+          state.radius = 0.28;
+          state.target = 0.28;
           state.started = false;
         });
         bar.addEventListener('click', () => {
@@ -656,7 +652,14 @@ function initCursor() {
     ctx.fillStyle = core;
     ctx.fill();
 
-    requestAnimationFrame(draw);
+    // Dim cursor in dark project grid
+  const projectsSection = document.getElementById('projects');
+  if (projectsSection) {
+    projectsSection.addEventListener('mouseenter', () => { canvas.style.opacity = '0.2'; });
+    projectsSection.addEventListener('mouseleave', () => { canvas.style.opacity = '1'; });
+  }
+
+  requestAnimationFrame(draw);
   }
 
   draw();
