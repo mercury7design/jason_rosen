@@ -184,73 +184,33 @@ document.getElementById('lightbox')?.addEventListener('click', e => { if (e.targ
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 /* === WORK PAGE — EXPANDING BARS === */
-const barStates = new Map(); // track spotlight canvas state per bar
 
 function initBarSpotlight(bar, canvas) {
-  const ctx = canvas.getContext('2d');
-  const state = { radius: 0.08, target: 0.08, started: false, rafId: null };
-  barStates.set(bar, state);
+  // Remove canvas — use CSS instead (works on every browser including iOS Safari)
+  if (canvas) canvas.remove();
 
-  function resize() {
-    canvas.width = bar.offsetWidth;
-    canvas.height = bar.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
+  const overlay = document.createElement('div');
+  overlay.className = 'project-bar-overlay';
+  overlay.style.cssText = `
+    position:absolute;inset:0;pointer-events:none;z-index:1;
+    background: radial-gradient(ellipse 160px 200% at 50% 50%, 
+      rgba(25,25,22,0) 0%, 
+      rgba(25,25,22,0) 28%, 
+      rgba(25,25,22,0.55) 52%, 
+      rgba(25,25,22,0.88) 70%, 
+      rgba(25,25,22,0.97) 85%, 
+      rgba(25,25,22,0.99) 100%);
+    transition: background 2.8s cubic-bezier(0.16,1,0.3,1);
+  `;
+  bar.appendChild(overlay);
 
-  function draw() {
-    const W = canvas.width;
-    const H = canvas.height;
-    if (!W || !H) { state.rafId = requestAnimationFrame(draw); return; }
+  const COLLAPSED = `radial-gradient(ellipse 160px 200% at 50% 50%, rgba(25,25,22,0) 0%, rgba(25,25,22,0) 28%, rgba(25,25,22,0.55) 52%, rgba(25,25,22,0.88) 70%, rgba(25,25,22,0.97) 85%, rgba(25,25,22,0.99) 100%)`;
+  const EXPANDED  = `radial-gradient(ellipse 75% 200% at 50% 50%, rgba(25,25,22,0) 0%, rgba(25,25,22,0) 50%, rgba(25,25,22,0.35) 68%, rgba(25,25,22,0.82) 84%, rgba(25,25,22,0.95) 100%)`;
 
-    if (state.started) {
-      state.radius += (state.target - state.radius) * 0.018;
-    }
-
-    ctx.clearRect(0, 0, W, H);
-
-    const cx = W / 2;
-    const cy = H / 2;
-
-    // Fixed pixel spotlight — same size on every screen
-    // Collapsed: small keyhole showing just a slice of image
-    // Expanded: blooms to reveal more
-    const COLLAPSED_R = 180; // fixed px — narrow enough to vignette edges
-    const EXPANDED_R = Math.min(W * 0.45, 600); // expands but caps on wide screens
-    const rx = COLLAPSED_R + (state.radius - 0.08) * (EXPANDED_R - COLLAPSED_R) / 0.57;
-    const ry = rx * 2.8; // taller than wide — portrait ellipse feel
-
-    // Dark overlay covering everything, cut out by ellipse at center
-    // Fill entire canvas dark first
-    ctx.fillStyle = 'rgba(25,25,22,0.96)';
-    ctx.fillRect(0, 0, W, H);
-
-    // Cut out the spotlight using destination-out on a separate canvas approach
-    // Instead: draw transparent ellipse gradient on top using lighter-than-dark values
-    ctx.save();
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.translate(cx, cy);
-    ctx.scale(1, ry / Math.max(rx, 1));
-
-    const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
-    grad.addColorStop(0,    'rgba(0,0,0,1)');
-    grad.addColorStop(0.35, 'rgba(0,0,0,0.95)');
-    grad.addColorStop(0.55, 'rgba(0,0,0,0.7)');
-    grad.addColorStop(0.72, 'rgba(0,0,0,0.35)');
-    grad.addColorStop(0.85, 'rgba(0,0,0,0.1)');
-    grad.addColorStop(1,    'rgba(0,0,0,0)');
-
-    ctx.beginPath();
-    ctx.arc(0, 0, rx, 0, Math.PI * 2);
-    ctx.fillStyle = grad;
-    ctx.fill();
-    ctx.restore();
-
-    state.rafId = requestAnimationFrame(draw);
-  }
-
-  draw();
-  return state;
+  return {
+    expand:   () => { overlay.style.background = EXPANDED; },
+    collapse: () => { overlay.style.background = COLLAPSED; },
+  };
 }
 
 async function loadProjects() {
@@ -283,34 +243,28 @@ async function loadProjects() {
     // Init each bar
     container.querySelectorAll('.project-bar').forEach(bar => {
       const canvas = bar.querySelector('.project-bar-spotlight');
-      const state = initBarSpotlight(bar, canvas);
+      const spotlight = initBarSpotlight(bar, canvas);
       const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
       if (isTouchDevice) {
-        // Mobile: first tap expands, second tap opens lightbox
         let expanded = false;
         bar.addEventListener('click', () => {
           if (!expanded) {
             bar.classList.add('expanded');
-            state.target = 0.65;
-            state.started = true;
+            spotlight.expand();
             expanded = true;
           } else {
             openLightbox(projectsData[parseInt(bar.dataset.index)]);
           }
         });
       } else {
-        // Desktop: hover to expand, click to open
         bar.addEventListener('mouseenter', () => {
           bar.classList.add('expanded');
-          state.target = 0.65;
-          state.started = true;
+          spotlight.expand();
         });
         bar.addEventListener('mouseleave', () => {
           bar.classList.remove('expanded');
-          state.radius = 0.08;
-          state.target = 0.08;
-          state.started = false;
+          spotlight.collapse();
         });
         bar.addEventListener('click', () => {
           openLightbox(projectsData[parseInt(bar.dataset.index)]);
