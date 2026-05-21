@@ -183,7 +183,68 @@ document.getElementById('lightbox-close')?.addEventListener('click', closeLightb
 document.getElementById('lightbox')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-/* === WORK PAGE === */
+/* === WORK PAGE — EXPANDING BARS === */
+const barStates = new Map(); // track spotlight canvas state per bar
+
+function initBarSpotlight(bar, canvas) {
+  const ctx = canvas.getContext('2d');
+  const state = { radius: 0.12, target: 0.12, started: false, rafId: null };
+  barStates.set(bar, state);
+
+  function resize() {
+    canvas.width = bar.offsetWidth;
+    canvas.height = bar.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw() {
+    const W = canvas.width;
+    const H = canvas.height;
+    if (!W || !H) { state.rafId = requestAnimationFrame(draw); return; }
+
+    if (state.started) {
+      state.radius += (state.target - state.radius) * 0.018;
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    const cx = W / 2;
+    const cy = H / 2;
+    const rx = W * state.radius * 2.0;
+    const ry = H * state.radius * 4.0;
+    const scaleY = ry / Math.max(rx, 1);
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(1, scaleY);
+
+    const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+    grad.addColorStop(0,    'rgba(25,25,22,0)');
+    grad.addColorStop(0.08, 'rgba(25,25,22,0.01)');
+    grad.addColorStop(0.18, 'rgba(25,25,22,0.04)');
+    grad.addColorStop(0.30, 'rgba(25,25,22,0.09)');
+    grad.addColorStop(0.42, 'rgba(25,25,22,0.18)');
+    grad.addColorStop(0.54, 'rgba(25,25,22,0.32)');
+    grad.addColorStop(0.65, 'rgba(25,25,22,0.50)');
+    grad.addColorStop(0.75, 'rgba(25,25,22,0.68)');
+    grad.addColorStop(0.84, 'rgba(25,25,22,0.82)');
+    grad.addColorStop(0.92, 'rgba(25,25,22,0.92)');
+    grad.addColorStop(1,    'rgba(25,25,22,0.97)');
+
+    ctx.beginPath();
+    ctx.arc(0, 0, Math.max(W, H) / scaleY + rx * 2, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.restore();
+
+    state.rafId = requestAnimationFrame(draw);
+  }
+
+  draw();
+  return state;
+}
+
 async function loadProjects() {
   const container = document.getElementById('projects');
   if (!container) return;
@@ -195,24 +256,67 @@ async function loadProjects() {
     const intro = document.getElementById('work-intro');
     if (intro && data.work_intro) intro.textContent = data.work_intro;
     if (!projectsData.length) { container.innerHTML = '<p class="projects-loading">No projects yet.</p>'; return; }
+
     container.innerHTML = projectsData.map((project, i) => {
-      const thumb = project.thumbnail ? `<img src="${project.thumbnail}" alt="${project.title || ''}" loading="lazy">` : '';
-      const emptyClass = project.thumbnail ? '' : ' project-thumb--empty';
-      return `<article class="project-card" data-index="${i}" role="button" tabindex="0" aria-label="Open ${project.title}">
-        <div class="project-thumb${emptyClass}">${thumb}
-          <div class="project-overlay">
-            <h2 class="project-title">${project.title || ''}</h2>
-            ${project.client ? `<p class="project-client">${project.client}</p>` : ''}
-          </div>
+      const bg = project.thumbnail ? `style="background-image:url('${project.thumbnail}')"` : '';
+      return `<article class="project-bar" data-index="${i}" role="button" tabindex="0" aria-label="Open ${project.title || ''}">
+        <div class="project-bar-bg" ${bg}></div>
+        <canvas class="project-bar-spotlight"></canvas>
+        <div class="project-bar-gradient"></div>
+        <div class="project-bar-client-expanded"><span>${project.client || ''}</span></div>
+        <div class="project-bar-meta">
+          <span class="project-bar-title">${project.title || ''}</span>
+          <span class="project-bar-client">${project.client || ''}</span>
+          <div class="project-bar-sliver"></div>
         </div>
       </article>`;
     }).join('');
-    container.querySelectorAll('.project-card').forEach(card => {
-      const open = () => openLightbox(projectsData[parseInt(card.dataset.index)]);
-      card.addEventListener('click', open);
-      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
+
+    // Init each bar
+    container.querySelectorAll('.project-bar').forEach(bar => {
+      const canvas = bar.querySelector('.project-bar-spotlight');
+      const state = initBarSpotlight(bar, canvas);
+      const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+      if (isTouchDevice) {
+        // Mobile: first tap expands, second tap opens lightbox
+        let expanded = false;
+        bar.addEventListener('click', () => {
+          if (!expanded) {
+            bar.classList.add('expanded');
+            state.target = 0.65;
+            state.started = true;
+            expanded = true;
+          } else {
+            openLightbox(projectsData[parseInt(bar.dataset.index)]);
+          }
+        });
+      } else {
+        // Desktop: hover to expand, click to open
+        bar.addEventListener('mouseenter', () => {
+          bar.classList.add('expanded');
+          state.target = 0.65;
+          state.started = true;
+        });
+        bar.addEventListener('mouseleave', () => {
+          bar.classList.remove('expanded');
+          state.radius = 0.12;
+          state.target = 0.12;
+          state.started = false;
+        });
+        bar.addEventListener('click', () => {
+          openLightbox(projectsData[parseInt(bar.dataset.index)]);
+        });
+        bar.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') openLightbox(projectsData[parseInt(bar.dataset.index)]);
+        });
+      }
     });
-  } catch (err) { console.error('Failed to load projects:', err); container.innerHTML = '<p class="projects-loading">Could not load projects.</p>'; }
+
+  } catch (err) {
+    console.error('Failed to load projects:', err);
+    container.innerHTML = '<p class="projects-loading">Could not load projects.</p>';
+  }
 }
 
 async function loadAbout() {
