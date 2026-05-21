@@ -186,30 +186,46 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 /* === WORK PAGE — EXPANDING BARS === */
 
 function initBarSpotlight(bar, canvas) {
-  // Remove canvas — use CSS instead (works on every browser including iOS Safari)
   if (canvas) canvas.remove();
 
-  const overlay = document.createElement('div');
-  overlay.className = 'project-bar-overlay';
-  overlay.style.cssText = `
+  // Static vignette — always present, gives the chimera keyhole effect
+  const vignette = document.createElement('div');
+  vignette.style.cssText = `
     position:absolute;inset:0;pointer-events:none;z-index:1;
-    background: radial-gradient(ellipse 160px 200% at 50% 50%, 
+    background: radial-gradient(ellipse 38% 200% at 50% 50%, 
       rgba(25,25,22,0) 0%, 
-      rgba(25,25,22,0) 28%, 
-      rgba(25,25,22,0.55) 52%, 
-      rgba(25,25,22,0.88) 70%, 
-      rgba(25,25,22,0.97) 85%, 
-      rgba(25,25,22,0.99) 100%);
-    transition: background 2.8s cubic-bezier(0.16,1,0.3,1);
+      rgba(25,25,22,0) 15%, 
+      rgba(25,25,22,0.06) 25%,
+      rgba(25,25,22,0.16) 35%,
+      rgba(25,25,22,0.30) 45%,
+      rgba(25,25,22,0.52) 55%, 
+      rgba(25,25,22,0.72) 65%, 
+      rgba(25,25,22,0.88) 75%,
+      rgba(25,25,22,0.96) 85%,
+      rgba(25,25,22,0.99) 95%);
+    opacity: 1;
+    transition: opacity 3s cubic-bezier(0.16,1,0.3,1) 0.4s;
   `;
-  bar.appendChild(overlay);
+  bar.appendChild(vignette);
 
-  const COLLAPSED = `radial-gradient(ellipse 160px 200% at 50% 50%, rgba(25,25,22,0) 0%, rgba(25,25,22,0) 28%, rgba(25,25,22,0.55) 52%, rgba(25,25,22,0.88) 70%, rgba(25,25,22,0.97) 85%, rgba(25,25,22,0.99) 100%)`;
-  const EXPANDED  = `radial-gradient(ellipse 75% 200% at 50% 50%, rgba(25,25,22,0) 0%, rgba(25,25,22,0) 50%, rgba(25,25,22,0.35) 68%, rgba(25,25,22,0.82) 84%, rgba(25,25,22,0.95) 100%)`;
+  // Dark overlay on top — fades out on expand to reveal image
+  const darkOverlay = document.createElement('div');
+  darkOverlay.style.cssText = `
+    position:absolute;inset:0;pointer-events:none;z-index:2;
+    background: rgba(25,25,22,0.0);
+    transition: background 2.4s cubic-bezier(0.16,1,0.3,1);
+  `;
+  bar.appendChild(darkOverlay);
 
   return {
-    expand:   () => { overlay.style.background = EXPANDED; },
-    collapse: () => { overlay.style.background = COLLAPSED; },
+    expand:   () => { 
+      vignette.style.transition = 'opacity 2.8s cubic-bezier(0.16,1,0.3,1) 0.3s';
+      vignette.style.opacity = '0';
+    },
+    collapse: () => { 
+      vignette.style.transition = 'opacity 0.6s ease';
+      vignette.style.opacity = '1';
+    },
   };
 }
 
@@ -247,15 +263,9 @@ async function loadProjects() {
       const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
       if (isTouchDevice) {
-        let expanded = false;
+        // Mobile: tap opens lightbox directly — chimera stays intact
         bar.addEventListener('click', () => {
-          if (!expanded) {
-            bar.classList.add('expanded');
-            spotlight.expand();
-            expanded = true;
-          } else {
-            openLightbox(projectsData[parseInt(bar.dataset.index)]);
-          }
+          openLightbox(projectsData[parseInt(bar.dataset.index)]);
         });
       } else {
         bar.addEventListener('mouseenter', () => {
