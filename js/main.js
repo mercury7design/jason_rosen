@@ -192,17 +192,11 @@ function initBarSpotlight(bar, canvas) {
   const vignette = document.createElement('div');
   vignette.style.cssText = `
     position:absolute;inset:0;pointer-events:none;z-index:1;
-    background: radial-gradient(ellipse 38% 200% at 50% 50%, 
+    background: radial-gradient(ellipse 28% 120% at 50% 50%, 
       rgba(25,25,22,0) 0%, 
-      rgba(25,25,22,0) 15%, 
-      rgba(25,25,22,0.06) 25%,
-      rgba(25,25,22,0.16) 35%,
-      rgba(25,25,22,0.30) 45%,
-      rgba(25,25,22,0.52) 55%, 
-      rgba(25,25,22,0.72) 65%, 
-      rgba(25,25,22,0.88) 75%,
-      rgba(25,25,22,0.96) 85%,
-      rgba(25,25,22,0.99) 95%);
+      rgba(25,25,22,0.55) 45%, 
+      rgba(25,25,22,0.92) 75%, 
+      rgba(25,25,22,0.98) 100%);
     opacity: 1;
     transition: opacity 3s cubic-bezier(0.16,1,0.3,1) 0.4s;
   `;
