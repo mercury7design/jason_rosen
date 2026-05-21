@@ -188,7 +188,7 @@ const barStates = new Map(); // track spotlight canvas state per bar
 
 function initBarSpotlight(bar, canvas) {
   const ctx = canvas.getContext('2d');
-  const state = { radius: 0.12, target: 0.12, started: false, rafId: null };
+  const state = { radius: 0.06, target: 0.06, started: false, rafId: null };
   barStates.set(bar, state);
 
   function resize() {
@@ -211,8 +211,11 @@ function initBarSpotlight(bar, canvas) {
 
     const cx = W / 2;
     const cy = H / 2;
-    const rx = W * state.radius * 2.0;
-    const ry = H * state.radius * 4.0;
+    // Fixed pixel spotlight — never stretches with browser width
+    // Base size on bar height so it's always proportional to the bar
+    const baseR = Math.min(W * 0.18, 240); // max 240px wide regardless of screen
+    const rx = baseR + (state.radius - 0.06) * baseR * 8;
+    const ry = H * 1.2; // always taller than bar — no top/bottom cutoff
     const scaleY = ry / Math.max(rx, 1);
 
     ctx.save();
@@ -221,16 +224,16 @@ function initBarSpotlight(bar, canvas) {
 
     const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
     grad.addColorStop(0,    'rgba(25,25,22,0)');
-    grad.addColorStop(0.08, 'rgba(25,25,22,0.01)');
-    grad.addColorStop(0.18, 'rgba(25,25,22,0.04)');
-    grad.addColorStop(0.30, 'rgba(25,25,22,0.09)');
-    grad.addColorStop(0.42, 'rgba(25,25,22,0.18)');
-    grad.addColorStop(0.54, 'rgba(25,25,22,0.32)');
-    grad.addColorStop(0.65, 'rgba(25,25,22,0.50)');
-    grad.addColorStop(0.75, 'rgba(25,25,22,0.68)');
-    grad.addColorStop(0.84, 'rgba(25,25,22,0.82)');
-    grad.addColorStop(0.92, 'rgba(25,25,22,0.92)');
-    grad.addColorStop(1,    'rgba(25,25,22,0.97)');
+    grad.addColorStop(0.08, 'rgba(25,25,22,0.3)');
+    grad.addColorStop(0.18, 'rgba(25,25,22,0.6)');
+    grad.addColorStop(0.30, 'rgba(25,25,22,0.8)');
+    grad.addColorStop(0.42, 'rgba(25,25,22,0.88)');
+    grad.addColorStop(0.54, 'rgba(25,25,22,0.92)');
+    grad.addColorStop(0.65, 'rgba(25,25,22,0.95)');
+    grad.addColorStop(0.75, 'rgba(25,25,22,0.97)');
+    grad.addColorStop(0.84, 'rgba(25,25,22,0.98)');
+    grad.addColorStop(0.92, 'rgba(25,25,22,0.98)');
+    grad.addColorStop(1,    'rgba(25,25,22,0.99)');
 
     ctx.beginPath();
     ctx.arc(0, 0, Math.max(W, H) / scaleY + rx * 2, 0, Math.PI * 2);
@@ -300,8 +303,8 @@ async function loadProjects() {
         });
         bar.addEventListener('mouseleave', () => {
           bar.classList.remove('expanded');
-          state.radius = 0.12;
-          state.target = 0.12;
+          state.radius = 0.06;
+          state.target = 0.06;
           state.started = false;
         });
         bar.addEventListener('click', () => {
