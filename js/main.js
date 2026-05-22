@@ -617,5 +617,5 @@ loadProjects();
 loadAbout();
 loadPractice();
 loadFooter();
-loadProjectPage();
+if (document.querySelector('.project-page-wrap')) loadProjectPage();
 if (document.querySelector('.work-hero')) initEphemera();
