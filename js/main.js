@@ -189,10 +189,11 @@ function initBarSpotlight(bar, canvas) {
   if (canvas) canvas.remove();
 
   // Static vignette — always present, gives the chimera keyhole effect
+  const spotlightW = window.innerWidth < 768 ? '55%' : '28%';
   const vignette = document.createElement('div');
   vignette.style.cssText = `
     position:absolute;inset:0;pointer-events:none;z-index:1;
-    background: radial-gradient(ellipse 28% 120% at 50% 50%, 
+    background: radial-gradient(ellipse ${spotlightW} 120% at 50% 50%, 
       rgba(25,25,22,0) 0%, 
       rgba(25,25,22,0.55) 45%, 
       rgba(25,25,22,0.92) 75%, 
@@ -560,32 +561,44 @@ async function loadProjectPage() {
     // Media
     const mediaEl = document.getElementById('project-media');
     (project.media || []).forEach(item => {
+      if (!item || !item.type) return;
       const block = document.createElement('div');
       block.className = 'project-media-block';
 
       if (item.type === 'video') {
-        const vid = vimeoId(item.url || '');
-        const yid = youtubeId(item.url || '');
+        const url = item.url || '';
+        const vid = vimeoId(url);
+        const yid = youtubeId(url);
         block.className += ' project-media-video';
-        if (vid) block.innerHTML = `<div class="project-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
-        else if (yid) block.innerHTML = `<div class="project-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
-      } else if (item.type === 'portrait-pair') {
-        block.className += ' project-media-pair';
-        block.innerHTML = `
-          <div class="project-pair-images">
-            ${(item.srcs || []).map(src => `<img src="${src}" loading="lazy">`).join('')}
-          </div>
-          ${item.captions ? `<div class="project-pair-captions">${item.captions.map(c => `<p>${c}</p>`).join('')}</div>` : ''}
-        `;
-      } else {
-        const src = item.src || item.url || item.image || '';
+
+        if (vid) {
+          block.innerHTML = `<div class="project-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+        } else if (yid) {
+          block.innerHTML = `<div class="project-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}?autoplay=1&mute=1&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+        } else if (url.endsWith('.m3u8')) {
+          block.innerHTML = `<div class="project-video-wrap"><video data-hls-src="${url}" controls playsinline autoplay muted loop style="width:100%;height:100%;object-fit:cover;"></video></div>`;
+        } else if (url.endsWith('.mp4')) {
+          block.innerHTML = `<div class="project-video-wrap"><video src="${url}" controls playsinline autoplay muted loop style="width:100%;height:100%;object-fit:cover;"></video></div>`;
+        }
+
+        if (item.caption) {
+          block.innerHTML += `<p class="project-media-caption">${item.caption}</p>`;
+        }
+
+      } else if (item.type === 'image') {
+        const src = item.url || item.image || item.src || '';
+        if (!src) return;
         block.innerHTML = `
           <img src="${src}" alt="${item.caption || ''}" loading="lazy">
           ${item.caption ? `<p class="project-media-caption">${item.caption}</p>` : ''}
         `;
       }
-      mediaEl.appendChild(block);
+
+      if (block.innerHTML) mediaEl.appendChild(block);
     });
+
+    // Init HLS videos
+    initHlsVideos(mediaEl);
 
     // More work thumbnails
     const thumbsEl = document.getElementById('project-thumbs');
