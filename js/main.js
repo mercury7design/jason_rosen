@@ -256,10 +256,10 @@ async function loadProjects() {
       const spotlight = initBarSpotlight(bar, canvas);
       const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
-      if (isTouchDevice) {
-        // Mobile: tap opens lightbox directly — chimera stays intact
+        // Mobile: tap navigates to project page
         bar.addEventListener('click', () => {
-          openLightbox(projectsData[parseInt(bar.dataset.index)]);
+          const project = projectsData[parseInt(bar.dataset.index)];
+          window.location.href = `project.html?id=${encodeURIComponent(project.id || bar.dataset.index)}`;
         });
       } else {
         bar.addEventListener('mouseenter', () => {
@@ -271,10 +271,14 @@ async function loadProjects() {
           spotlight.collapse();
         });
         bar.addEventListener('click', () => {
-          openLightbox(projectsData[parseInt(bar.dataset.index)]);
+          const project = projectsData[parseInt(bar.dataset.index)];
+          window.location.href = `project.html?id=${encodeURIComponent(project.id || bar.dataset.index)}`;
         });
         bar.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') openLightbox(projectsData[parseInt(bar.dataset.index)]);
+          if (e.key === 'Enter' || e.key === ' ') {
+            const project = projectsData[parseInt(bar.dataset.index)];
+            window.location.href = `project.html?id=${encodeURIComponent(project.id || bar.dataset.index)}`;
+          }
         });
       }
     });
@@ -524,9 +528,94 @@ function initEphemera() {
   drawFrame();
 }
 
+/* === PROJECT PAGE === */
+async function loadProjectPage() {
+  const wrap = document.querySelector('.project-page-wrap');
+  if (!wrap) return;
+
+  try {
+    const res = await fetch('content/projects.json');
+    if (!res.ok) throw new Error(res.statusText);
+    const data = await res.json();
+    const projects = data.items || [];
+
+    // Get project id from URL
+    const params = new URLSearchParams(window.location.search);
+    const idParam = params.get('id');
+    const project = projects.find((p, i) => 
+      String(p.id) === idParam || String(i) === idParam
+    ) || projects[0];
+
+    if (!project) return;
+
+    // Set page title
+    document.title = `${project.title} — A Golden Calf`;
+
+    // Header
+    document.getElementById('project-client').textContent = project.client || '';
+    document.getElementById('project-title').textContent = project.title || '';
+    document.getElementById('project-description').innerHTML = textToHtml(project.description || '');
+
+    // Media
+    const mediaEl = document.getElementById('project-media');
+    (project.media || []).forEach(item => {
+      const block = document.createElement('div');
+      block.className = 'project-media-block';
+
+      if (item.type === 'video') {
+        const vid = vimeoId(item.url || '');
+        const yid = youtubeId(item.url || '');
+        block.className += ' project-media-video';
+        if (vid) block.innerHTML = `<div class="project-video-wrap"><iframe src="https://player.vimeo.com/video/${vid}?dnt=1&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+        else if (yid) block.innerHTML = `<div class="project-video-wrap"><iframe src="https://www.youtube.com/embed/${yid}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+      } else if (item.type === 'portrait-pair') {
+        block.className += ' project-media-pair';
+        block.innerHTML = `
+          <div class="project-pair-images">
+            ${(item.srcs || []).map(src => `<img src="${src}" loading="lazy">`).join('')}
+          </div>
+          ${item.captions ? `<div class="project-pair-captions">${item.captions.map(c => `<p>${c}</p>`).join('')}</div>` : ''}
+        `;
+      } else {
+        const src = item.src || item.url || item.image || '';
+        block.innerHTML = `
+          <img src="${src}" alt="${item.caption || ''}" loading="lazy">
+          ${item.caption ? `<p class="project-media-caption">${item.caption}</p>` : ''}
+        `;
+      }
+      mediaEl.appendChild(block);
+    });
+
+    // More work thumbnails
+    const thumbsEl = document.getElementById('project-thumbs');
+    projects.filter((p, i) => {
+      const pid = p.id !== undefined ? String(p.id) : String(i);
+      return pid !== idParam && String(i) !== idParam;
+    }).forEach((p, i) => {
+      const idx = projects.indexOf(p);
+      const pid = p.id !== undefined ? p.id : idx;
+      const thumb = document.createElement('a');
+      thumb.href = `project.html?id=${encodeURIComponent(pid)}`;
+      thumb.className = 'project-thumb-card';
+      thumb.innerHTML = `
+        ${p.thumbnail ? `<img src="${p.thumbnail}" alt="${p.title || ''}">` : '<div class="project-thumb-empty"></div>'}
+        <div class="project-thumb-meta">
+          <p class="project-thumb-title">${p.title || ''}</p>
+          <p class="project-thumb-client">${p.client || ''}</p>
+        </div>
+      `;
+      thumbsEl.appendChild(thumb);
+    });
+
+  } catch(err) {
+    console.error('Failed to load project page:', err);
+  }
+}
+
 /* === INIT === */
 loadProjects();
 loadAbout();
 loadPractice();
 loadFooter();
+loadProjectPage();
 if (document.querySelector('.work-hero')) initEphemera();
