@@ -256,6 +256,7 @@ async function loadProjects() {
       const spotlight = initBarSpotlight(bar, canvas);
       const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
+      if (isTouchDevice) {
         // Mobile: tap navigates to project page
         bar.addEventListener('click', () => {
           const project = projectsData[parseInt(bar.dataset.index)];
