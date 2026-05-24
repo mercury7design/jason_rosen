@@ -965,3 +965,81 @@ body.project-page { background: var(--ink); }
   .about-resume-btn { font-size: 14px; }
   .about-actions { gap: 16px; margin-top: 32px; }
 }
+
+/* === PROJECT BAR — HOVER CONTENT === */
+.project-bar-reading-underlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(25,25,22,0.85) 0%, rgba(25,25,22,0.55) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 1.2s ease 0.8s;
+}
+.project-bar.expanded .project-bar-reading-underlay { opacity: 1; }
+
+.project-bar-hover-content {
+  position: absolute;
+  bottom: 88px; left: 0; right: 0;
+  padding: 0 var(--pad-x);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.project-bar-hover-client {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 12px;
+  opacity: 0;
+  transition: opacity 0.8s ease 1.2s;
+}
+.project-bar.expanded .project-bar-hover-client { opacity: 1; }
+
+.project-bar-hover-blurb {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.92);
+  margin: 0;
+  max-width: 620px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease 1.4s, transform 0.8s ease 1.4s;
+}
+.project-bar.expanded .project-bar-hover-blurb {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-bar-cta {
+  background: none;
+  border: 1px solid rgba(255,255,255,0);
+  color: rgba(255,255,255,0);
+  padding: 7px 18px;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.6s ease 1.6s, transform 0.6s ease 1.6s, border-color 0.2s, color 0.2s;
+}
+.project-bar.expanded .project-bar-cta {
+  opacity: 1;
+  transform: translateX(0);
+  border-color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.9);
+}
+.project-bar-cta:hover {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
