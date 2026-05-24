@@ -3,6 +3,7 @@
     {
       "title": "Harry Potter: Visions of Magic",
       "client": "Warner Brothers / NEON",
+      "blurb": "Three immersive worlds. Four continents. One wand.",
       "description": "Three themed immersive attractions produced for Warner Bros and NEON, bringing the wizarding world to life through experiential design and transmedia production.\n\nOversaw installation delivery across 3 large-scale instances totalling $4M, managing the creative media production, vendor contract admin and client/partner relationships for 2 traveling modular units deployed across Europe and the Americas, as well as a permanent version at Resorts World Sentosa, Singapore.",
       "thumbnail": "https://a.storyblok.com/f/164420/3200x1800/77e2ae3e3c/06_dk_hp_031125.jpg",
       "media": [
@@ -52,7 +53,8 @@
     {
       "title": "Manhunt",
       "client": "Apple TV+",
-      "description": "Led the charge on pre, pro, and post on a historically evocative title sequencefor the Apple TV+ limited series. Leveraged media from the Lincolnian Archives at the Library of Congress, oversaw the colorization, projection mapping and 3d visualization of this historic footage as well as interpolating it with live action and animation.",
+      "blurb": "Twelve days. One killer. A nation unraveling. We set the tone.",
+      "description": "Led the charge on pre, pro, and post on a historically evocative title sequence for the Apple TV+ limited series. Leveraged media from the Lincolnian Archives at the Library of Congress, oversaw the colorization, projection mapping and 3d visualization of this historic footage as well as interpolating it with live action and animation.",
       "thumbnail": "https://a.storyblok.com/f/164420/1757x1012/45ab5099c4/03_dk_manhunt_031825.jpg",
       "media": [
         {
@@ -85,6 +87,7 @@
     {
       "title": "Before",
       "client": "Apple TV+",
+      "blurb": "Grief doesn't end. Neither does the sequence.",
       "description": "Title sequence post-production for the Apple TV+ limited series.",
       "thumbnail": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen.jpg",
       "media": [
@@ -108,6 +111,7 @@
     {
       "title": "Pocket Garden",
       "client": "Google Maps",
+      "blurb": "What happens when the real world becomes the interface, with wonder.",
       "description": "Open source Google Maps Geospatial API demo showcasing GPS-based VPS technology, produced for its debut at Google I/O.",
       "thumbnail": "/images/cdbf16e5ba0a35329c9675e97d174c252aa9303c-2048x2048.avif",
       "media": [
@@ -136,6 +140,7 @@
     {
       "title": "Faith and Liberty Discovery Center",
       "client": "American Bible Society",
+      "blurb": "A journey through the spiritual values that built a nation.",
       "description": "Interactive and Creative Technology consultation services for Philadelphia museum, charged with leadng media production and development of interactive exhibitry, RFP + ROM for tangible media device system, and immersive experiences multidisciplinary partner coordination. Oversaw the $2.75M content development and design phase.",
       "thumbnail": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_09-1440x960.jpg",
       "media": [
@@ -164,6 +169,7 @@
     {
       "title": "New York City Ballet Art Series",
       "client": "New York City Ballet / Lincoln Center",
+      "blurb": "Where Santtu Mustonen's handcrafted universe met the world's greatest stage.",
       "description": "Immersive multimedia installation in the Promenade of Lincoln Center's David H. Koch Theater by artist Santtu Mustonen.",
       "thumbnail": "/images/santtu-mustonen-nycb-5-1.jpg",
       "media": [
@@ -177,6 +183,7 @@
     {
       "title": "Spotify Year in Music",
       "client": "Digital Product + Platform API Integration",
+      "blurb": "The campaign that made listening personal. The first time.",
       "description": "WebGL and API integration for the inaugural Spotify Wrapped campaign - the first edition of what became one of the most celebrated annual digital experiences.",
       "thumbnail": "https://cdn.sanity.io/images/e2h42t5o/stage/f5cd6ea2cdec57b4885eafa083b0a0b888fe97e8-1600x800.jpg",
       "media": [
@@ -200,6 +207,7 @@
     {
       "title": "Robert Rauschenberg Foundation",
       "client": "Robert Rauschenberg Foundation",
+      "blurb": "A living archive for one of America's most restless minds.",
       "description": "Foundation portal and dynamic archive built in Drupal, creating a living digital home for the legacy of one of America's most influential artists.",
       "thumbnail": "https://www.rauschenbergfoundation.org/sites/default/files/styles/767x767/public/2026-04/Taking%20Venice%201.jpg",
       "media": [
@@ -213,6 +221,7 @@
     {
       "title": "DreamboxXx ",
       "client": "Video Arcade Cabinet and Residency ",
+      "blurb": "Nine games. One cabinet. A transmedia ark of underground communities.",
       "description": "Produced custom arcade cabinet replete with 9 original games known as the Dreamboxxx, created by Death by Audio, a community gift for the Dreamhouse Queens - a creative queer safe space merged with a DIY tech collective, culminating in a temporary residency of a multi-cabinet arcadium with grand opening and closing celebrations.",
       "thumbnail": "/images/Dreamboxxx-1.webp",
       "media": [
@@ -239,6 +248,7 @@
     {
       "title": "Sally LaPointe ",
       "client": "Brand Site + E-commerce",
+      "blurb": "Minimal by design. Anything but ordinary.",
       "description": "Led creative direction, design, development, launch, and management phases.\nDesigned minimalistic UI with streamlined page-to-page animation.\nLaunched hub for ready-to-wear collections and brand collaborations.\nBuilt e-commerce on Magento.",
       "thumbnail": "/images/a69417af-4eb1-42a7-befc-3c39f51c7263_fallsinglehp.jpg",
       "media": [
@@ -260,6 +270,7 @@
     {
       "title": "Armand de Brignac",
       "client": "Brand Site + Social Content ",
+      "blurb": "Jay-Z's champagne deserved a digital presence worthy of the bottle.",
       "description": "Led a multi-year integrated content and web production partnership with Armand de Brignac, Jay Z's luxury champagne brand — overseeing web design and development, content production, and social media strategy from concept through execution.",
       "thumbnail": "/images/armand.webp",
       "media": [
