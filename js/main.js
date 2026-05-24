@@ -302,10 +302,6 @@ async function loadProjects() {
         bar.addEventListener('mouseenter', () => {
           bar.classList.add('expanded');
           spotlight.expand();
-          // Scroll bar to center of viewport
-          setTimeout(() => {
-            bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 50);
         });
         bar.addEventListener('mouseleave', () => {
           bar.classList.remove('expanded');
