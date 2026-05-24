@@ -241,11 +241,16 @@ async function loadProjects() {
       return `<article class="project-bar" data-index="${i}" role="button" tabindex="0" aria-label="Open ${project.title || ''}">
         <div class="project-bar-bg" ${bg}></div>
         <canvas class="project-bar-spotlight"></canvas>
+        <div class="project-bar-reading-underlay"></div>
         <div class="project-bar-gradient"></div>
-        <div class="project-bar-client-expanded"><span>${project.client || ''}</span></div>
+        <div class="project-bar-hover-content">
+          <p class="project-bar-hover-client">${project.client || ''}</p>
+          <p class="project-bar-hover-blurb">${project.blurb || ''}</p>
+        </div>
         <div class="project-bar-meta">
           <span class="project-bar-title">${project.title || ''}</span>
           <span class="project-bar-client">${project.client || ''}</span>
+          <button class="project-bar-cta" data-index="${i}" aria-label="See project">See Project →</button>
           <div class="project-bar-sliver"></div>
         </div>
       </article>`;
@@ -257,16 +262,50 @@ async function loadProjects() {
       const spotlight = initBarSpotlight(bar, canvas);
       const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
+      // CTA button — navigate to project page
+      bar.querySelector('.project-bar-cta')?.addEventListener('click', e => {
+        e.stopPropagation();
+        const project = projectsData[parseInt(bar.dataset.index)];
+        window.location.href = `project.html?id=${encodeURIComponent(project.id || bar.dataset.index)}`;
+      });
+
       if (isTouchDevice) {
-        // Mobile: tap navigates to project page
-        bar.addEventListener('click', () => {
-          const project = projectsData[parseInt(bar.dataset.index)];
-          window.location.href = `project.html?id=${encodeURIComponent(project.id || bar.dataset.index)}`;
+        bar.addEventListener('click', (e) => {
+          // If already expanded and tapped the CTA — navigate
+          if (bar.classList.contains('expanded')) return;
+          
+          // Collapse any other open bars first
+          container.querySelectorAll('.project-bar.expanded').forEach(other => {
+            if (other !== bar) {
+              other.classList.remove('expanded');
+              other._spotlight?.collapse();
+            }
+          });
+
+          // Expand this bar and scroll to center
+          bar.classList.add('expanded');
+          spotlight.expand();
+          bar._spotlight = spotlight;
+          setTimeout(() => {
+            bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 50);
+        });
+
+        // Close if tapping outside
+        document.addEventListener('click', e => {
+          if (!bar.contains(e.target) && bar.classList.contains('expanded')) {
+            bar.classList.remove('expanded');
+            spotlight.collapse();
+          }
         });
       } else {
         bar.addEventListener('mouseenter', () => {
           bar.classList.add('expanded');
           spotlight.expand();
+          // Scroll bar to center of viewport
+          setTimeout(() => {
+            bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 50);
         });
         bar.addEventListener('mouseleave', () => {
           bar.classList.remove('expanded');
