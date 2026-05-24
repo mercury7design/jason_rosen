@@ -876,7 +876,7 @@ body.project-page { background: var(--ink); }
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
-  margin-bottom: 64px;
+  margin-bottom: 28px;
 }
 
 .skills-line {
@@ -958,6 +958,7 @@ body.project-page { background: var(--ink); }
 }
 
 @media (max-width: 768px) {
+  .skills-banner { position: relative; top: 0; margin-bottom: 28px; }
   .skills-line-inner { font-size: 20px; }
   .skills-banner { padding: 20px 0; gap: 12px; }
   .about-say-hello { font-size: 22px; }
