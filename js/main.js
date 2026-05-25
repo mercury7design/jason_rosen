@@ -236,9 +236,22 @@ async function loadProjects() {
     if (intro && data.work_intro) intro.textContent = data.work_intro;
     if (!projectsData.length) { container.innerHTML = '<p class="projects-loading">No projects yet.</p>'; return; }
 
+    const MOBILE_TITLES = {
+      'Harry Potter: Visions of Magic': 'Harry Potter VoM',
+      'Faith and Liberty Discovery Center': 'Faith & Liberty',
+      'New York City Ballet Art Series': 'NYCB Art Series',
+      'Spotify Year in Music': 'Spotify YIM 2015',
+      'Robert Rauschenberg Foundation': 'Rauschenberg Foundation',
+      'DreamboxXx ': 'DreamboxXx',
+      'Sally LaPointe ': 'Sally LaPointe',
+    };
+    const isMobileDevice = window.matchMedia('(hover: none)').matches;
     container.innerHTML = projectsData.map((project, i) => {
       const bg = project.thumbnail ? `style="background-image:url('${project.thumbnail}')"` : '';
-      const displayTitle = (window.matchMedia('(hover: none)').matches && project.mobile_title) ? project.mobile_title : project.title || '';
+      const rawTitle = project.title || '';
+      const displayTitle = isMobileDevice
+        ? (project.mobile_title || MOBILE_TITLES[rawTitle] || rawTitle.trim())
+        : rawTitle;
       return `<article class="project-bar" data-index="${i}" role="button" tabindex="0" aria-label="Open ${project.title || ''}">
         <div class="project-bar-bg" ${bg}></div>
         <canvas class="project-bar-spotlight"></canvas>
