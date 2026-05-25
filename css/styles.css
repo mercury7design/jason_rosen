@@ -1223,3 +1223,25 @@ body.project-page { background: var(--ink); }
     margin-bottom: 6px;
   }
 }
+
+/* === MOBILE HERO DRIFT AFTER QUOTE === */
+@media (max-width: 768px) {
+  .hero-center,
+  .hero-brand-left,
+  .hero-name-right {
+    transition: transform 1.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .hero-bookend.hero-quote-done .hero-center,
+  .hero-bookend.hero-quote-done .hero-brand-left,
+  .hero-bookend.hero-quote-done .hero-name-right {
+    transform: translateY(-48px);
+  }
+  .hero-quote {
+    transition: opacity 0.8s ease, height 0.8s ease;
+  }
+  .hero-bookend.hero-quote-done .hero-quote {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+  }
+}
