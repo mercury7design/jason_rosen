@@ -228,7 +228,7 @@ async function loadProjects() {
   const container = document.getElementById('projects');
   if (!container) return;
   try {
-    const res = await fetch('content/projects.json');
+    const res = await fetch('content/projects.json?v=3');
     if (!res.ok) throw new Error(res.statusText);
     const data = await res.json();
     projectsData = data.items || [];
