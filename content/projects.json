@@ -48,7 +48,8 @@
           "url": "https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg",
           "caption": "Steered the shaping of the brand story, including creative direction, visual identity, and campaign storytelling."
         }
-      ]
+      ],
+      "mobile_title": "Harry Potter VoM"
     },
     {
       "title": "Manhunt",
@@ -82,7 +83,8 @@
           "url": "https://a.storyblok.com/f/164420/952x867/2d8a376a62/05_dk_manhunt_031825.jpg",
           "caption": "Degraded imagery centers Booth's rage and the terror of a nation under threat."
         }
-      ]
+      ],
+      "mobile_title": "Manhunt"
     },
     {
       "title": "Before",
@@ -106,7 +108,8 @@
           "url": "https://www.stashmedia.tv/wp-content/uploads/Before-TV-series-titles-Apple-TV-by-Digital-Kitchen9.jpg",
           "caption": "Infrared digital cameras and vintage lenses helped create the sequence's otherworldly atmosphere."
         }
-      ]
+      ],
+      "mobile_title": "Before"
     },
     {
       "title": "Pocket Garden",
@@ -135,7 +138,8 @@
           "url": "https://cdn.sanity.io/images/uk7b627p/production/f55ed23e408ed931e85603ea191c88ec04d3afbf-2048x2048.png",
           "caption": "The project paired developer utility with a friendly visual system designed to make VPS technology legible."
         }
-      ]
+      ],
+      "mobile_title": "Pocket Garden"
     },
     {
       "title": "Faith and Liberty Discovery Center",
@@ -164,7 +168,8 @@
           "url": "https://localprojects.com/wp-content/uploads/2021/06/so2021019_02-1440x960.jpg",
           "caption": "The Unity gallery weaves individual choices into a collective data portrait."
         }
-      ]
+      ],
+      "mobile_title": "Faith & Liberty"
     },
     {
       "title": "New York City Ballet Art Series",
@@ -178,7 +183,8 @@
           "url": "http://www.santtumustonen.com/catalogue/the-new-york-city-ballet",
           "caption": "Combining handcrafted imagery with new technologies, Santtu Mustonnen presents an exhilirating immersive experience for New York City Ballet's 2017 Art Series."
         }
-      ]
+      ],
+      "mobile_title": "NYCB Art Series"
     },
     {
       "title": "Spotify Year in Music",
@@ -202,7 +208,8 @@
           "url": "https://cdn.sanity.io/images/e2h42t5o/stage/ddf71b61b23edc2c4d9f793596122cbb99bb02a2-1920x1080.png",
           "caption": "A custom CMS supported copy updates and translations across 35 languages and 57 countries."
         }
-      ]
+      ],
+      "mobile_title": "Spotify YIM 2015"
     },
     {
       "title": "Robert Rauschenberg Foundation",
@@ -216,7 +223,8 @@
           "url": "https://www.rauschenbergfoundation.org/sites/default/files/2026-04/01_rrf_EDIT.mp4",
           "caption": "The Robert Rauschenberg Foundation site brings together the artist's work, archives, programs, and legacy."
         }
-      ]
+      ],
+      "mobile_title": "Rauschenberg Foundation"
     },
     {
       "title": "DreamboxXx ",
@@ -243,7 +251,8 @@
           "type": "image",
           "image": "/images/Dreamboxxx.webp"
         }
-      ]
+      ],
+      "mobile_title": "DreamboxXx"
     },
     {
       "title": "Sally LaPointe ",
@@ -265,13 +274,14 @@
           "url": "https://vimeo.com/1190792557?activityReferer=1"
         },
         {}
-      ]
+      ],
+      "mobile_title": "Sally LaPointe"
     },
     {
       "title": "Armand de Brignac",
       "client": "Brand Site + Social Content ",
       "blurb": "Jay-Z's champagne deserved a digital presence worthy of the bottle.",
-      "description": "Led a multi-year integrated content and web production partnership with Armand de Brignac, Jay Z's luxury champagne brand — overseeing web design and development, content production, and social media strategy from concept through execution.",
+      "description": "Led a multi-year integrated content and web production partnership with Armand de Brignac, Jay Z's luxury champagne brand \u2014 overseeing web design and development, content production, and social media strategy from concept through execution.",
       "thumbnail": "/images/armand.webp",
       "media": [
         {
@@ -302,7 +312,8 @@
           "type": "video",
           "url": "https://vimeo.com/1190792504?share=copy&fl=sv&fe=ci"
         }
-      ]
+      ],
+      "mobile_title": "Armand de Brignac"
     }
   ]
 }
