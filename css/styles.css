@@ -1043,3 +1043,183 @@ body.project-page { background: var(--ink); }
   border-color: var(--gold) !important;
   color: var(--gold) !important;
 }
+
+/* === MOBILE PROJECT BARS === */
+@media (max-width: 768px) {
+  .project-bar {
+    height: 64px;
+  }
+  .project-bar.expanded {
+    height: min(75vw, 420px);
+  }
+  .project-bar-title {
+    font-size: clamp(14px, 3.5vw, 18px) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100vw - 120px);
+  }
+  .project-bar.expanded .project-bar-title {
+    font-size: clamp(16px, 4vw, 22px) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .project-bar-hover-blurb {
+    font-size: 13px !important;
+    max-width: calc(100vw - 48px);
+  }
+  .project-bar-hover-content {
+    bottom: 72px;
+  }
+  .project-bar-cta {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+  .project-bar-meta {
+    padding: 0 16px;
+    gap: 12px;
+  }
+}
+
+/* === HERO BOOKEND LAYOUT === */
+.hero-bookend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 clamp(32px,7vw,100px);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* LEFT — Golden Calf bottom aligned with logo bottom */
+.hero-brand-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: clamp(80px,10vw,140px);
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.hero-brand-left .work-title {
+  margin: 0;
+  font-size: clamp(22px,3vw,44px);
+  letter-spacing: 0.1em;
+}
+
+/* CENTER — logo + quote */
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero-quote {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.65;
+  pointer-events: none;
+  white-space: normal;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RIGHT — name top aligned with logo top */
+.hero-name-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: clamp(80px,10vw,140px);
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.hero-name {
+  font-family: 'Squada One', var(--font-display), sans-serif;
+  font-size: clamp(22px,3vw,44px);
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin: 0 0 8px;
+  white-space: nowrap;
+}
+
+.hero-title {
+  font-family: 'Squada One', var(--font-display), sans-serif;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin: 0;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+/* Mobile hero — centered stack */
+@media (max-width: 768px) {
+  .hero-bookend {
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 24px 32px;
+    gap: 0;
+  }
+  .hero-brand-left {
+    order: 3;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 0;
+    margin: 12px 0;
+  }
+  .hero-brand-left .work-title {
+    font-size: 28px;
+    letter-spacing: 0.1em;
+  }
+  .hero-center {
+    order: 2;
+    margin: 0;
+  }
+  .hero-quote {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 280px;
+    height: 96px;
+    order: 1;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+  }
+  .hero-name-right {
+    order: 4;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 0;
+    margin-top: 12px;
+  }
+  .hero-name {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+}
