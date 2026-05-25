@@ -238,6 +238,7 @@ async function loadProjects() {
 
     container.innerHTML = projectsData.map((project, i) => {
       const bg = project.thumbnail ? `style="background-image:url('${project.thumbnail}')"` : '';
+      const displayTitle = (window.matchMedia('(hover: none)').matches && project.mobile_title) ? project.mobile_title : project.title || '';
       return `<article class="project-bar" data-index="${i}" role="button" tabindex="0" aria-label="Open ${project.title || ''}">
         <div class="project-bar-bg" ${bg}></div>
         <canvas class="project-bar-spotlight"></canvas>
@@ -248,7 +249,7 @@ async function loadProjects() {
           <p class="project-bar-hover-blurb">${project.blurb || ''}</p>
         </div>
         <div class="project-bar-meta">
-          <span class="project-bar-title">${project.title || ''}</span>
+          <span class="project-bar-title">${displayTitle}</span>
           <span class="project-bar-client">${project.client || ''}</span>
           <button class="project-bar-cta" data-index="${i}" aria-label="See project">See Project →</button>
           <div class="project-bar-sliver"></div>
@@ -394,7 +395,6 @@ function triggerHeroQuote() {
       });
       setTimeout(() => {
         quoteEl.style.display = 'none';
-        document.querySelector('.hero-bookend')?.classList.add('hero-quote-done');
       }, 3000);
     }, HERO_QUOTE_LINES.length * 1000 + 4000);
   } else {
