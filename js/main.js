@@ -389,29 +389,16 @@ function triggerHeroQuote() {
   if (!quoteEl) return;
 
   if (isMobile) {
-    // Four lines stagger in
-    const lineEls = quoteEl.querySelectorAll('.hero-quote-line');
-    lineEls.forEach((el, i) => {
+    // Columns start hidden, stagger in on sparkle, stay forever
+    const colEls = quoteEl.querySelectorAll('.hero-quote-col');
+    colEls.forEach((el, i) => {
       setTimeout(() => {
         el.style.opacity = '1';
         el.style.transform = 'translateY(0)';
         el.style.filter = 'blur(0)';
       }, i * 1000);
     });
-    // All evaporate simultaneously
-    setTimeout(() => {
-      lineEls.forEach(el => {
-        el.style.transition = 'opacity 2.8s ease, transform 2.8s ease, filter 2.8s ease';
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(-6px)';
-        el.style.filter = 'blur(8px)';
-      });
-      setTimeout(() => {
-        // Just hide visually — never collapse, never move anything
-        quoteEl.style.opacity = '0';
-        quoteEl.style.pointerEvents = 'none';
-      }, 3000);
-    }, HERO_QUOTE_LINES.length * 1000 + 4000);
+    // No evaporation — they stay permanently
   } else {
     const wordEls = quoteEl.querySelectorAll('.hero-quote-word');
     wordEls.forEach((el, i) => {
@@ -449,18 +436,12 @@ function initHeroLayout() {
     document.head.appendChild(l);
   }
 
-  // Build quote HTML
+  // Build quote HTML — desktop only, mobile is hardcoded in HTML
   const quoteEl = document.getElementById('hero-quote');
-  if (quoteEl) {
-    if (isMobile) {
-      quoteEl.innerHTML = HERO_QUOTE_LINES.map(line =>
-        `<span class="hero-quote-line" style="display:block;opacity:0;transform:translateY(5px);filter:blur(3px);transition:opacity 1.8s ease,transform 1.8s cubic-bezier(0.16,1,0.3,1),filter 1.8s ease;">${line}</span>`
-      ).join('');
-    } else {
-      quoteEl.innerHTML = HERO_QUOTE_WORDS.map(word =>
-        `<span class="hero-quote-word" style="display:inline-block;margin-right:0.28em;opacity:0;transform:translateY(4px);filter:blur(3px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(0.16,1,0.3,1),filter 1.4s ease;">${word}</span>`
-      ).join('');
-    }
+  if (quoteEl && !isMobile) {
+    quoteEl.innerHTML = HERO_QUOTE_WORDS.map(word =>
+      `<span class="hero-quote-word" style="display:inline-block;margin-right:0.28em;opacity:0;transform:translateY(4px);filter:blur(3px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(0.16,1,0.3,1),filter 1.4s ease;">${word}</span>`
+    ).join('');
   }
 
   // Name stack — measure and match title width to name width
