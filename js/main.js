@@ -271,18 +271,13 @@ async function loadProjects() {
 
       if (isTouchDevice) {
         bar.addEventListener('click', (e) => {
-          // If already expanded and tapped the CTA — navigate
           if (bar.classList.contains('expanded')) return;
-          
-          // Collapse any other open bars first
           container.querySelectorAll('.project-bar.expanded').forEach(other => {
             if (other !== bar) {
               other.classList.remove('expanded');
               other._spotlight?.collapse();
             }
           });
-
-          // Expand this bar and scroll to center
           bar.classList.add('expanded');
           spotlight.expand();
           bar._spotlight = spotlight;
@@ -290,8 +285,6 @@ async function loadProjects() {
             bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, 50);
         });
-
-        // Close if tapping outside
         document.addEventListener('click', e => {
           if (!bar.contains(e.target) && bar.classList.contains('expanded')) {
             bar.classList.remove('expanded');
@@ -366,6 +359,109 @@ async function loadFooter() {
       if (email && data.email) { email.textContent = data.email; email.href = `mailto:${data.email}`; }
     });
   } catch (err) { console.error('Failed to load footer:', err); }
+}
+
+/* === HERO QUOTE === */
+const HERO_QUOTE_WORDS = 'To move people, first we must build the world they move through.'.split(' ');
+const HERO_QUOTE_LINES = ['To move people,', 'first we must', 'build the world', 'they move through.'];
+let heroQuoteTriggered = false;
+
+function triggerHeroQuote() {
+  if (heroQuoteTriggered) return;
+  heroQuoteTriggered = true;
+
+  const isMobile = window.matchMedia('(hover: none)').matches;
+  const quoteEl = document.getElementById('hero-quote');
+  if (!quoteEl) return;
+
+  if (isMobile) {
+    // Four lines stagger in
+    const lineEls = quoteEl.querySelectorAll('.hero-quote-line');
+    lineEls.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        el.style.filter = 'blur(0)';
+      }, i * 1000);
+    });
+    // All evaporate simultaneously
+    setTimeout(() => {
+      lineEls.forEach(el => {
+        el.style.transition = 'opacity 2.8s ease, transform 2.8s ease, filter 2.8s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-6px)';
+        el.style.filter = 'blur(8px)';
+      });
+      setTimeout(() => { quoteEl.style.display = 'none'; }, 3000);
+    }, HERO_QUOTE_LINES.length * 1000 + 4000);
+  } else {
+    // Desktop — word by word stagger
+    const wordEls = quoteEl.querySelectorAll('.hero-quote-word');
+    wordEls.forEach((el, i) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        el.style.filter = 'blur(0)';
+      }, i * 80);
+    });
+    // All evaporate simultaneously
+    setTimeout(() => {
+      wordEls.forEach(el => {
+        el.style.transition = 'opacity 2.8s ease, transform 2.8s ease, filter 2.8s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-6px)';
+        el.style.filter = 'blur(8px)';
+      });
+      setTimeout(() => { quoteEl.style.display = 'none'; }, 3000);
+    }, HERO_QUOTE_WORDS.length * 80 + 7000);
+  }
+}
+
+function initHeroLayout() {
+  const heroEl = document.querySelector('.work-hero');
+  if (!heroEl) return;
+  const isMobile = window.matchMedia('(hover: none)').matches;
+
+  // Inject Squada One font
+  if (!document.querySelector('link[href*="Squada"]')) {
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Squada+One&display=swap';
+    document.head.appendChild(l);
+  }
+
+  // Build quote HTML
+  const quoteEl = document.getElementById('hero-quote');
+  if (quoteEl) {
+    if (isMobile) {
+      quoteEl.innerHTML = HERO_QUOTE_LINES.map(line =>
+        `<span class="hero-quote-line" style="display:block;opacity:0;transform:translateY(5px);filter:blur(3px);transition:opacity 1.8s ease,transform 1.8s cubic-bezier(0.16,1,0.3,1),filter 1.8s ease;">${line}</span>`
+      ).join('');
+    } else {
+      quoteEl.innerHTML = HERO_QUOTE_WORDS.map(word =>
+        `<span class="hero-quote-word" style="display:inline-block;margin-right:0.28em;opacity:0;transform:translateY(4px);filter:blur(3px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(0.16,1,0.3,1),filter 1.4s ease;">${word}</span>`
+      ).join('');
+    }
+  }
+
+  // Name stack — measure and match title width to name width
+  const nameEl = document.querySelector('.hero-name');
+  const titleEl = document.querySelector('.hero-title');
+  if (nameEl && titleEl) {
+    function measureNameStack() {
+      const nameWidth = nameEl.offsetWidth;
+      titleEl.style.maxWidth = nameWidth + 'px';
+      let fs = parseFloat(window.getComputedStyle(nameEl).fontSize);
+      titleEl.style.fontSize = fs + 'px';
+      while (titleEl.scrollWidth > nameWidth && fs > 4) {
+        fs -= 0.5;
+        titleEl.style.fontSize = fs + 'px';
+      }
+    }
+    measureNameStack();
+    setTimeout(measureNameStack, 600);
+    window.addEventListener('resize', measureNameStack);
+  }
 }
 
 /* === EPHEMERA — LOGO GLINT ANIMATION === */
@@ -548,6 +644,8 @@ function initEphemera() {
           const op3 = t3 < 0.4 ? easeInOut(t3 / 0.4) : 1 - easeInOut((t3 - 0.4) / 0.6);
           drawStarGlint(logoCtx, sx + 5, sy + 4, glintSize * 0.38, op3 * 0.50);
         }
+        // Trigger quote at sparkle peak — fires once
+        if (t >= 0.38 && t <= 0.42) { triggerHeroQuote(); }
       } else {
         glintWait++;
         if (glintWait > 60 && glintWait < 120) {
@@ -736,4 +834,4 @@ loadPractice();
 loadFooter();
 initSkillsTicker();
 if (document.querySelector('.project-page-wrap')) loadProjectPage();
-if (document.querySelector('.work-hero')) initEphemera();
+if (document.querySelector('.work-hero')) { initHeroLayout(); initEphemera(); }
