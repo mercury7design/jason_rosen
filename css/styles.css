@@ -557,17 +557,17 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     left: auto !important;
     transform: none !important;
     width: 100% !important;
-    max-width: 340px;
+    max-width: 360px;
     height: auto;
-    min-height: 72px;
+    min-height: 80px;
     order: 1;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     text-align: center;
   }
   .hero-quote-col {
@@ -577,8 +577,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     gap: 3px;
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 13px;
-    color: rgba(255,255,255,0.82);
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
     line-height: 1.5;
     opacity: 0;
     transform: translateY(5px);
@@ -603,15 +603,8 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
     padding: 0;
     margin-top: 4px;
   }
-  .hero-name {
-    font-size: 26px;
-    margin-bottom: 6px;
-  }
-  .hero-title {
-    font-size: 15px;
-    opacity: 0.7;
-    letter-spacing: 0.08em;
-  }
+  .hero-name { font-size: 26px; margin-bottom: 6px; }
+  .hero-title { font-size: 15px; opacity: 0.7; letter-spacing: 0.08em; }
 }
 
 /* === WORK TITLE (old centered — keep for fallback) === */
