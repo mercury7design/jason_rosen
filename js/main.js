@@ -392,7 +392,10 @@ function triggerHeroQuote() {
         el.style.transform = 'translateY(-6px)';
         el.style.filter = 'blur(8px)';
       });
-      setTimeout(() => { quoteEl.style.display = 'none'; }, 3000);
+      setTimeout(() => {
+        quoteEl.style.display = 'none';
+        document.querySelector('.hero-bookend')?.classList.add('hero-quote-done');
+      }, 3000);
     }, HERO_QUOTE_LINES.length * 1000 + 4000);
   } else {
     // Desktop — word by word stagger
