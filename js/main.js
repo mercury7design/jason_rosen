@@ -394,11 +394,12 @@ function triggerHeroQuote() {
         el.style.filter = 'blur(8px)';
       });
       setTimeout(() => {
-        quoteEl.style.display = 'none';
+        // Just hide visually — never collapse, never move anything
+        quoteEl.style.opacity = '0';
+        quoteEl.style.pointerEvents = 'none';
       }, 3000);
     }, HERO_QUOTE_LINES.length * 1000 + 4000);
   } else {
-    // Desktop — word by word stagger
     const wordEls = quoteEl.querySelectorAll('.hero-quote-word');
     wordEls.forEach((el, i) => {
       setTimeout(() => {
@@ -407,7 +408,6 @@ function triggerHeroQuote() {
         el.style.filter = 'blur(0)';
       }, i * 80);
     });
-    // All evaporate simultaneously
     setTimeout(() => {
       wordEls.forEach(el => {
         el.style.transition = 'opacity 2.8s ease, transform 2.8s ease, filter 2.8s ease';
@@ -415,7 +415,10 @@ function triggerHeroQuote() {
         el.style.transform = 'translateY(-6px)';
         el.style.filter = 'blur(8px)';
       });
-      setTimeout(() => { quoteEl.style.display = 'none'; }, 3000);
+      setTimeout(() => {
+        quoteEl.style.opacity = '0';
+        quoteEl.style.pointerEvents = 'none';
+      }, 3000);
     }, HERO_QUOTE_WORDS.length * 80 + 7000);
   }
 }
