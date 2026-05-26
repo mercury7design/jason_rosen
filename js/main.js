@@ -760,71 +760,34 @@ async function loadProjectPage() {
 }
 
 /* === SKILLS TICKER === */
-function initSkillsTicker() {
-  const banner = document.querySelector('.skills-banner');
-  if (!banner) return;
+function initSkillRotator() {
+  const el = document.getElementById('about-skill-rotator');
+  if (!el) return;
 
-  const LINE1 = 'UX · UI · DESIGN · STRATEGY · CONCEPT · CREATIVE + ART DIRECTION · COPYWRITING · BRAND DNA · RESEARCH · DEVELOPMENT · PRODUCT · CAMPAIGN · EXPERIENTIAL';
-  const LINE2 = 'TECHNICAL · INTEGRATED · WEB + E-COMMERCE · SOUND DESIGN · GAME ENGINES · NEW BUSINESS · RFP + ROM FACILITATION · TALENT REPRESENTATION + RESOURCES · MUSEUMS · VIDEO GAMES · TANGIBLE MEDIA · LIVE PRODUCTION';
+  const SKILLS = [
+    'Immersive Attractions', 'Title Sequences', 'Brand Platforms',
+    'AR Experiences', 'Museums', 'Video Games', 'Tangible Media',
+    'Creative Direction', 'Production Leadership', 'Transmedia Production',
+    'Interactive Exhibitry', 'Experience Design', 'Experiential Marketing',
+    'Content Production', 'Digital Strategy', 'Partner Coordination',
+  ];
 
-  function setupLine(el, text, speed, startOffset) {
-    if (!el) return;
-    const repeated = `${text}     `.repeat(3);
-    el.textContent = repeated;
-    let x = startOffset || 0;
-    let w = 0;
-    setTimeout(() => { w = el.scrollWidth / 3; }, 200);
-    function tick() {
-      x -= speed;
-      if (w && x <= -w) x += w;
-      el.style.transform = `translateX(${x}px)`;
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+  let idx = 0;
+
+  function cycle() {
+    el.textContent = SKILLS[idx];
+    el.classList.add('visible');
+
+    setTimeout(() => {
+      el.classList.remove('visible');
+      setTimeout(() => {
+        idx = (idx + 1) % SKILLS.length;
+        cycle();
+      }, 1800);
+    }, 2500);
   }
 
-  setupLine(document.getElementById('skills-line-1'), LINE1, 0.9, 0);
-  setupLine(document.getElementById('skills-line-2'), LINE2, 0.55, -400);
-
-  // Ghost wave canvas
-  const canvas = document.getElementById('skills-ghost-wave');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let frame = 0;
-
-  function resizeCanvas() {
-    canvas.width = banner.offsetWidth;
-    canvas.height = banner.offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  function drawWave() {
-    frame++;
-    const W = canvas.width;
-    const H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-    const t = frame * 0.006;
-    const angle = Math.atan2(H, W);
-    const diagLen = Math.sqrt(W * W + H * H);
-    const waveHead = diagLen * 0.5 + Math.sin(t) * diagLen * 0.45;
-    const waveW = diagLen * 0.22 + Math.sin(t * 0.7) * diagLen * 0.06;
-    const intensity = 0.22 + Math.sin(t * 1.1) * 0.1;
-    const headX = Math.cos(angle) * waveHead;
-    const headY = Math.sin(angle) * waveHead;
-    const tailX = Math.cos(angle) * Math.max(0, waveHead - waveW);
-    const tailY = Math.sin(angle) * Math.max(0, waveHead - waveW);
-    const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
-    grad.addColorStop(0, 'rgba(255,248,210,0)');
-    grad.addColorStop(0.3, `rgba(255,248,210,${intensity * 0.35})`);
-    grad.addColorStop(0.55, `rgba(255,248,210,${intensity})`);
-    grad.addColorStop(0.75, `rgba(255,248,210,${intensity * 0.35})`);
-    grad.addColorStop(1, 'rgba(255,248,210,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
-    requestAnimationFrame(drawWave);
-  }
-  drawWave();
+  setTimeout(cycle, 600);
 }
 
 /* === INIT === */
@@ -832,6 +795,6 @@ loadProjects();
 loadAbout();
 loadPractice();
 loadFooter();
-initSkillsTicker();
+initSkillRotator();
 if (document.querySelector('.project-page-wrap')) loadProjectPage();
 if (document.querySelector('.work-hero')) { initHeroLayout(); initEphemera(); }
