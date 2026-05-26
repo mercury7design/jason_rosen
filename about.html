@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Space+Mono:ital,wght@1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=15">
 </head>
 <body class="page-about">
   <header class="site-header">
@@ -28,25 +28,14 @@
   <main class="main">
     <div class="mobile-menu" aria-hidden="true">
       <a href="index.html" class="mobile-link">W.O.R.K</a>
-      <a href="about.html" class="mobile-link">A.B.O.U.T</a>
+      <a href="about.html" class="mobile-link nav-link--active">A.B.O.U.T</a>
       <a href="resume.html" class="mobile-link">R.E.S.U.M.E</a>
     </div>
 
-    <!-- Skills ticker banner -->
-    <div class="skills-banner">
-      <div class="skills-line skills-line--1">
-        <div class="skills-line-inner" id="skills-line-1"></div>
-      </div>
-      <div class="skills-line skills-line--2">
-        <div class="skills-line-inner" id="skills-line-2"></div>
-      </div>
-      <canvas class="skills-ghost-wave" id="skills-ghost-wave"></canvas>
-    </div>
-
-    <!-- About content -->
     <div class="about-columns" id="about-content">
       <div class="about-headshot-wrap">
-        <img src="images/headshot.jpg" alt="Jason Scott Rosen" class="about-headshot" id="about-headshot">
+        <img src="images/headshot.jpg" alt="Jason Scott Rosen" class="about-headshot">
+        <p class="about-skill-rotator" id="about-skill-rotator"></p>
       </div>
       <div class="about-text">
         <div id="about-body"><p>Loading&hellip;</p></div>
@@ -65,6 +54,6 @@
       <a href="mailto:hello@agoldencalf.com" class="footer-email">hello@agoldencalf.com</a>
     </div>
   </footer>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=15"></script>
 </body>
 </html>
