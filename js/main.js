@@ -770,6 +770,9 @@ function initSkillRotator() {
     'Creative Direction', 'Production Leadership', 'Transmedia Production',
     'Interactive Exhibitry', 'Experience Design', 'Experiential Marketing',
     'Content Production', 'Digital Strategy', 'Partner Coordination',
+    'Web & E-Commerce', 'Brand Identity', 'Social Content',
+    'New Business Development', 'Artificial Intelligence', 'App Development',
+    'Keynote & Exhibition',
   ];
 
   let idx = 0;
