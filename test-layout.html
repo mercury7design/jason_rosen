@@ -195,11 +195,18 @@ figure.item .im { width: 100%; height: 100%; }
 .s2-b { position:absolute; right:3vw; top:26vh; width:30vw; height:42vh; z-index:3; transition-delay:.14s; box-shadow:-12px 12px 40px rgba(0,0,0,.7); }
 .s2-text { position:absolute; left:52vw; top:4vh; z-index:5; max-width:18ch; transition-delay:.28s; }
 
-.scene3 { position:relative; height:85vh; margin-top:4rem; }
-.s3-center { position:absolute; left:50%; top:4vh; transform:translateX(-50%); width:64vw; height:80vh; z-index:2; }
-.s3-left { position:absolute; left:0; top:28vh; width:18vw; height:28vh; z-index:3; transition-delay:.16s; box-shadow:10px 10px 40px rgba(0,0,0,.7); }
-.s3-right { position:absolute; right:0; bottom:8vh; width:16vw; height:24vh; z-index:3; transition-delay:.24s; box-shadow:-10px 10px 40px rgba(0,0,0,.7); }
-.s3-cap { position:absolute; bottom:0; left:50%; transform:translateX(-50%); z-index:5; transition-delay:.3s; text-align:center; }
+.scene3 { position:relative; height:90vh; margin-top:5rem; }
+/* Large video anchored left, tall */
+.s3-center { position:absolute; left:4vw; top:3vh; width:58vw; height:82vh; z-index:2; }
+/* Second video punches in from right, shorter, overlaps the center's right edge */
+.s3-left {
+  position:absolute; right:3vw; bottom:6vh;
+  width:38vw; height:48vh; z-index:3;
+  transition-delay:.16s; box-shadow:-14px 14px 50px rgba(0,0,0,.85);
+}
+/* hide third video slot — not enough separation at this size */
+.s3-right { display:none; }
+.s3-cap { position:absolute; bottom:0; left:4vw; z-index:5; transition-delay:.3s; }
 
 .scene4 { position:relative; height:80vh; margin-top:5rem; }
 .s4-pan { position:absolute; left:0; right:0; top:4vh; height:74vh; z-index:1; overflow:hidden; }
@@ -324,37 +331,22 @@ figure.item .im { width: 100%; height: 100%; }
   }
   .s2-text p { font-size: 1.2rem; }
 
-  /* ── SCENE 3: image full width, two videos side by side below ── */
+  /* ── SCENE 3: large video full width, second overlaps bottom-right ── */
   .scene3 { margin-top: 4rem; }
-  .s3-center { width: 100% !important; transform: none !important; }
-  .s3-center .vm, .s3-center .im { height: 65vw; }
-
-  /* Side-by-side pair with slight overlap */
-  .s3-left, .s3-right {
-    width: 55% !important;
-    display: inline-block;
-  }
+  .s3-center { width: 100% !important; transform: none !important; margin-bottom: -16vw; }
+  .s3-center .vm { height: 65vw; }
   .s3-left {
-    margin-top: -10vw;
-    margin-right: -5vw;
-    z-index: 3 !important;
-    box-shadow: 6px 6px 24px rgba(0,0,0,.7) !important;
-  }
-  .s3-left .vm { height: 40vw; }
-  .s3-right {
-    margin-top: 5vw;
+    display: block !important;
+    width: 62% !important;
+    right: 0 !important; bottom: auto !important;
+    left: auto !important; top: auto !important;
     align-self: flex-end;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 30px rgba(0,0,0,.8) !important;
   }
-  .s3-right .vm { height: 36vw; }
-
-  /* Put the pair side by side */
-  .scene3 { flex-wrap: wrap; }
-  .s3-left, .s3-right { flex: 0 0 auto; }
-
-  .s3-cap {
-    transform: none !important; left: auto !important;
-    width: 100%; padding: 1rem 6vw 0; text-align: left !important;
-  }
+  .s3-left .vm { height: 44vw; }
+  .s3-right { display: none !important; }
+  .s3-cap { transform: none !important; left: auto !important; padding: 1rem 6vw 0; }
 
   /* ── SCENE 4: full-bleed pan, punch overlaps bottom-right corner ── */
   .scene4 { margin-top: 4rem; }
