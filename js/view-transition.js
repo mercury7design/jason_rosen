@@ -1,105 +1,717 @@
-/* ═══════════════════════════════════════════════════════
-   VIEW TRANSITION — agoldencalf.com
-   Desktop: thumbnail morphs into project hero
-   Mobile:  fade through black (cinematic)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Golden Calf — Harry Potter: Visions of Magic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-   Add to index.html before </body>:
-   <script src="js/view-transition.js"></script>
+:root {
+  --black: #0d0e0c;
+  --gold: #b8924a;
+  --gold-dim: #6b5428;
+  --muted: #5c5a54;
+  --white: #f0ece4;
+  --nav-bg: #cdc5b4;
+}
 
-   Add to project.html <head>:
-   <style>
-     @media (hover: hover) {
-       ::view-transition-old(project-hero) {
-         animation: 480ms cubic-bezier(0.4,0,0.2,1) both vt-fade-out;
-       }
-       ::view-transition-new(project-hero) {
-         animation: 680ms cubic-bezier(0.16,1,0.3,1) both vt-fade-in;
-       }
-       ::view-transition-old(root) {
-         animation: 280ms ease both vt-fade-out;
-       }
-       ::view-transition-new(root) {
-         animation: 420ms ease both vt-fade-in;
-       }
-     }
+html { scroll-behavior: smooth; }
 
-     @media (hover: none) {
-       ::view-transition-old(root) {
-         animation: 320ms ease both vt-fade-out;
-         background: #0d0e0c;
-       }
-       ::view-transition-new(root) {
-         animation: 420ms ease 280ms both vt-fade-in;
-       }
-       ::view-transition-image-pair(root) {
-         isolation: isolate;
-       }
-     }
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: default;
+}
 
-     @keyframes vt-fade-in  { from { opacity: 0; } }
-     @keyframes vt-fade-out { to   { opacity: 0; } }
-   </style>
-   ═══════════════════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 999;
+  pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
 
-(function () {
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: var(--nav-bg);
+  display: flex; justify-content: center; gap: 3rem; padding: 0.85rem 2rem;
+}
+nav a {
+  font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .2em;
+  color: #3a3830; text-decoration: none; opacity: .65; transition: opacity .2s;
+}
+nav a:hover { opacity: 1; }
 
-  // Only run on pages with project bars
-  if (!document.querySelector('.projects')) return;
+/* ── MEDIA WRAPPERS ── */
+.vm {
+  position: relative;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #050608; display: block;
+}
+/* Smart crop — fills container (background=1 handles cropping server-side) */
+.vm iframe {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 177.78%; height: 177.78%;
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0; outline: none;
+  pointer-events: none;
+  display: block;
+}
+/* Full frame — fits within container, no crop */
+.vm.full-frame iframe {
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  transform: none;
+  min-width: unset; min-height: unset;
+  object-fit: contain;
+}
+.vm::after {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: transparent;
+}
 
-  const supportsVT = !!document.startViewTransition;
-  const isMobile   = window.matchMedia('(hover: none)').matches;
+/* Image: fills parent */
+.im {
+  position: relative; width: 100%; height: 100%;
+  overflow: hidden; display: block;
+}
+.im img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  pointer-events: none;
+}
+.im::after { content: ''; position: absolute; inset: 0; z-index: 1; }
 
-  /* ── Tag the clicked bar's background for desktop morph ── */
-  function tagThumbnail(bar) {
-    // Clear any previously tagged element first
-    document.querySelectorAll('.project-bar-bg').forEach(el => {
-      el.style.viewTransitionName = '';
-    });
-    if (!isMobile) {
-      const bg = bar.querySelector('.project-bar-bg');
-      if (bg) bg.style.viewTransitionName = 'project-hero';
-    }
+/* ── HERO ── */
+.hero {
+  position: relative; height: 100vh;
+  overflow: hidden; margin-top: 44px;
+}
+.hero .vm {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.hero .vm iframe {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 177.78%; height: 177.78%;
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: none; pointer-events: none;
+}
+.hero-vignette {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(to top,  rgba(13,14,12,.95) 0%, rgba(13,14,12,.1) 45%, transparent 70%),
+    linear-gradient(to right, rgba(13,14,12,.4) 0%, transparent 55%),
+    linear-gradient(to bottom, rgba(13,14,12,.5) 0%, transparent 35%);
+}
+.hero-title { position: absolute; bottom: 5.5rem; left: 7vw; z-index: 3; }
+.hero-title .eyebrow {
+  display: block; font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: .3em;
+  color: var(--gold); margin-bottom: 1rem;
+  opacity: 0; animation: fadeUp 1s ease 1.6s forwards;
+}
+.hero-title h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(3.8rem,7.5vw,7.5rem); line-height: .93; letter-spacing: -.02em;
+  opacity: 0; animation: fadeUp 1.2s ease 1.8s forwards;
+}
+.hero-title h1 em { font-style: italic; color: rgba(240,236,228,.42); display: block; }
+.hero-aside {
+  position: absolute; bottom: 6rem; right: 6vw;
+  text-align: right; z-index: 3;
+  opacity: 0; animation: fadeUp 1s ease 2.2s forwards;
+}
+.hero-aside span {
+  display: block; font-family: 'Cinzel', serif;
+  font-size: .55rem; letter-spacing: .2em; color: var(--muted); line-height: 2.1;
+}
+.scroll-cue {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 72px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim));
+  opacity: 0; animation: fadeIn 1s ease 2.7s forwards;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ── INTRO ── */
+.intro {
+  padding: 8rem 7vw 0;
+  display: grid; grid-template-columns: 55% 1fr; gap: 6vw; align-items: start;
+}
+.intro p { font-size: 1.1rem; line-height: 1.9; color: rgba(240,236,228,.68); }
+.intro .pull {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: clamp(1.5rem,2.2vw,2.2rem); line-height: 1.35;
+  color: rgba(240,236,228,.38);
+  border-left: 1px solid var(--gold-dim); padding-left: 2rem;
+}
+
+/* ── CANVAS ── */
+.canvas { position: relative; padding-bottom: 6rem; }
+
+.item {
+  position: relative;
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .75s ease, transform .75s ease;
+  will-change: transform, opacity;
+}
+.item.on { opacity: 1; transform: translateY(0); }
+
+/* All figures pass height down to media wrappers */
+figure.item { display: block; }
+figure.item .vm,
+figure.item .im { width: 100%; height: 100%; }
+
+.cap {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: .82rem; color: var(--muted); line-height: 1.55;
+  padding-top: .55rem; max-width: 32ch; transition: color .3s;
+}
+.item:hover .cap { color: rgba(240,236,228,.5); }
+
+.float-text p {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: clamp(1.3rem,1.9vw,2rem); line-height: 1.3;
+  color: rgba(240,236,228,.82); text-shadow: 0 2px 20px rgba(0,0,0,.9);
+}
+
+/* ── SCENES ── */
+.scene1 { position:relative; height:100vh; margin-top:7rem; }
+/* Main bleeds from LEFT, large */
+.s1-main { position:absolute; left:0; top:10vh; width:72vw; height:82vh; z-index:1; }
+/* Small overlaps from RIGHT — genuinely outside main's right edge */
+.s1-over {
+  position:absolute; right:2vw; top:6vh; width:32vw; height:44vh; z-index:3;
+  transition-delay:.18s; box-shadow:-10px 10px 36px rgba(0,0,0,.75);
+}
+.s1-cap { position:absolute; bottom:5vh; left:7vw; z-index:4; transition-delay:.3s; }
+
+.scene2 { position:relative; height:90vh; margin-top:8rem; }
+.s2-a { position:absolute; left:5vw; top:8vh; width:50vw; height:68vh; z-index:2; box-shadow:20px 20px 60px rgba(0,0,0,.8); }
+.s2-b { position:absolute; right:4vw; top:22vh; width:32vw; height:46vh; z-index:3; transition-delay:.14s; box-shadow:-12px 12px 40px rgba(0,0,0,.7); }
+.s2-text { position:absolute; left:48vw; top:5vh; z-index:5; max-width:20ch; transition-delay:.28s; }
+
+.scene3 { position:relative; height:85vh; margin-top:4rem; }
+.s3-center { position:absolute; left:50%; top:5vh; transform:translateX(-50%); width:62vw; height:76vh; z-index:2; }
+.s3-left { position:absolute; left:1vw; top:24vh; width:20vw; height:30vh; z-index:3; transition-delay:.16s; box-shadow:10px 10px 40px rgba(0,0,0,.7); }
+.s3-right { position:absolute; right:1vw; bottom:6vh; width:18vw; height:26vh; z-index:3; transition-delay:.24s; box-shadow:-10px 10px 40px rgba(0,0,0,.7); }
+.s3-cap { position:absolute; bottom:0; left:50%; transform:translateX(-50%); z-index:5; transition-delay:.3s; text-align:center; }
+
+.scene4 { position:relative; height:80vh; margin-top:5rem; }
+.s4-pan { position:absolute; left:0; right:0; top:5vh; height:72vh; z-index:1; overflow:hidden; }
+.s4-punch { position:absolute; right:6vw; top:0; width:24vw; height:30vh; z-index:3; transition-delay:.2s; box-shadow:0 16px 50px rgba(0,0,0,.85); }
+.s4-cap { position:absolute; bottom:1vh; left:7vw; z-index:4; transition-delay:.15s; }
+
+.scene5 { position:relative; height:110vh; margin-top:5rem; }
+.s5-portrait { position:absolute; left:7vw; top:5vh; width:32vw; height:62vh; z-index:2; }
+.s5-landscape { position:absolute; right:5vw; top:14vh; width:54vw; height:48vh; z-index:3; transition-delay:.12s; box-shadow:-16px 8px 50px rgba(0,0,0,.75); }
+
+.s5-text { position:absolute; right:7vw; bottom:8vh; z-index:5; max-width:28ch; text-align:right; transition-delay:.35s; }
+
+
+/* ── CLOSING ── */
+.closing {
+  margin-top:8rem; padding:3rem 7vw 7rem;
+  border-top:1px solid #1c1e1a;
+  display:flex; justify-content:space-between; align-items:flex-end;
+}
+.closing-tags { display:flex; flex-direction:column; gap:.4rem; }
+.closing-tags span { font-family:'Cinzel',serif; font-size:.55rem; letter-spacing:.2em; color:var(--muted); }
+.more-work {
+  font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.2em;
+  color:var(--gold); text-decoration:none;
+  border-bottom:1px solid var(--gold-dim); padding-bottom:.2rem;
+  transition:color .2s, border-color .2s;
+}
+.more-work:hover { color:var(--white); border-color:var(--white); }
+
+/* ════════════════════════════════════════
+   MOBILE — max-width 768px
+   Absolute collision → flowing vertical
+   with intentional edge-overlap moments
+════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  nav { gap: 1.5rem; padding: 0.75rem 1.5rem; }
+  nav a { font-size: .62rem; letter-spacing: .14em; }
+
+  /* Hero scales fine — just tighten text position */
+  .hero { height: 100svh; }
+  .hero-title { bottom: 4rem; left: 6vw; }
+  .hero-title h1 { font-size: clamp(2.8rem, 11vw, 4rem); }
+  .hero-aside { display: none; } /* clean on mobile */
+
+  /* Intro stacks single column */
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 4rem 6vw 0;
+    gap: 2rem;
+  }
+  .intro .pull {
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+    border-left: 1px solid var(--gold-dim);
+    padding-left: 1.2rem;
   }
 
-  /* ── Navigate with transition ── */
-  function navigateTo(href, bar) {
-    if (!supportsVT) {
-      window.location.href = href;
-      return;
-    }
+  /* Canvas reset — all scenes become flow containers */
+  .canvas { padding-bottom: 4rem; }
 
-    if (bar) tagThumbnail(bar);
-
-    document.startViewTransition(() => {
-      window.location.href = href;
-    });
+  /* ── Shared mobile scene reset ── */
+  .scene1, .scene2, .scene3,
+  .scene4, .scene5, .scene6, .scene7 {
+    position: relative;
+    height: auto;
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* gaps handled per-item */
   }
 
-  /* ── Intercept project bar CTA clicks ── */
-  document.addEventListener('click', (e) => {
-    const cta = e.target.closest('.project-bar-cta');
-    if (!cta) return;
+  /* All items back to normal flow */
+  .item {
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    top: auto !important; left: auto !important;
+    right: auto !important; bottom: auto !important;
+    transform: translateY(22px) !important; /* keep reveal anim */
+    box-shadow: none !important;
+    margin: 0;
+    z-index: auto !important;
+  }
+  .item.on { transform: translateY(0) !important; }
 
-    e.preventDefault();
-    e.stopPropagation();
+  /* All media fills need explicit height on mobile */
+  .vm, .im { height: 56vw; min-height: 200px; }
 
-    const bar = cta.closest('.project-bar');
-    const idx = bar?.dataset.index ?? '0';
-    const href = `project.html?id=${encodeURIComponent(idx)}`;
+  /* ── SCENE 1: main full width, over-image overlaps bottom edge ── */
+  .scene1 { margin-top: 3rem; }
+  .s1-main { width: 100% !important; margin-bottom: -18vw; }
+  .s1-main .vm { height: 62vw; }
+  .s1-over {
+    width: 58% !important;
+    align-self: flex-end;
+    margin-right: 0;
+    position: relative !important;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 30px rgba(0,0,0,.7) !important;
+  }
+  .s1-over .vm, .s1-over .im { height: 44vw; }
+  .s1-cap { margin-top: 1rem; padding: 0 6vw; }
 
-    navigateTo(href, bar);
-  }, true);
+  /* ── SCENE 2: large video full, smaller overlaps left edge ── */
+  .scene2 { margin-top: 4rem; }
+  .s2-a { width: 100% !important; margin-bottom: -14vw; }
+  .s2-a .vm { height: 65vw; }
+  .s2-b {
+    width: 62% !important;
+    align-self: flex-start;
+    margin-left: 5vw;
+    z-index: 3 !important;
+    box-shadow: 8px -8px 30px rgba(0,0,0,.7) !important;
+  }
+  .s2-b .vm { height: 46vw; }
+  .s2-text {
+    transform: none !important;
+    left: auto !important;
+    padding: 1.5rem 6vw 0;
+    align-self: flex-start;
+  }
+  .s2-text p { font-size: 1.2rem; }
 
-  /* ── Also intercept mobile expanded-bar taps ── */
-  document.addEventListener('click', (e) => {
-    const bar = e.target.closest('.project-bar');
-    if (!bar || !bar.classList.contains('expanded')) return;
-    if (e.target.closest('.project-bar-cta')) return; // handled above
+  /* ── SCENE 3: image full width, two videos side by side below ── */
+  .scene3 { margin-top: 4rem; }
+  .s3-center { width: 100% !important; transform: none !important; }
+  .s3-center .im { height: 65vw; }
 
-    const idx = bar.dataset.index ?? '0';
-    const href = `project.html?id=${encodeURIComponent(idx)}`;
+  /* Side-by-side pair with slight overlap */
+  .s3-left, .s3-right {
+    width: 55% !important;
+    display: inline-block;
+  }
+  .s3-left {
+    margin-top: -10vw;
+    margin-right: -5vw;
+    z-index: 3 !important;
+    box-shadow: 6px 6px 24px rgba(0,0,0,.7) !important;
+  }
+  .s3-left .vm { height: 40vw; }
+  .s3-right {
+    margin-top: 5vw;
+    align-self: flex-end;
+  }
+  .s3-right .vm { height: 36vw; }
 
-    navigateTo(href, bar);
+  /* Put the pair side by side */
+  .scene3 { flex-wrap: wrap; }
+  .s3-left, .s3-right { flex: 0 0 auto; }
+
+  .s3-cap {
+    transform: none !important; left: auto !important;
+    width: 100%; padding: 1rem 6vw 0; text-align: left !important;
+  }
+
+  /* ── SCENE 4: full-bleed pan, punch overlaps bottom-right corner ── */
+  .scene4 { margin-top: 4rem; }
+  .s4-pan { width: 100% !important; margin-bottom: -16vw; }
+  .s4-pan .vm { height: 62vw; }
+  .s4-punch {
+    width: 48% !important;
+    align-self: flex-end;
+    margin-right: 4vw;
+    z-index: 3 !important;
+    box-shadow: -6px -6px 28px rgba(0,0,0,.8) !important;
+  }
+  .s4-punch .vm { height: 34vw; }
+  .s4-cap { padding: 1rem 6vw 0; }
+
+  /* ── SCENE 5: portrait full, landscape overlaps, video below ── */
+  .scene5 { margin-top: 4rem; }
+  .s5-portrait { width: 100% !important; margin-bottom: -12vw; }
+  .s5-portrait .im { height: 72vw; }
+  .s5-landscape {
+    width: 78% !important;
+    align-self: flex-end;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 30px rgba(0,0,0,.75) !important;
+  }
+  .s5-landscape .im { height: 52vw; }
+  .s5-peek { width: 100% !important; margin-top: 1.5rem; }
+  .s5-peek .vm { height: 56vw; }
+  .s5-text {
+    right: auto !important; bottom: auto !important;
+    text-align: left !important;
+    padding: 1rem 6vw 0;
+  }
+
+  /* ── SCENE 6: polaroid stack — keep the rotations, stack with offset ── */
+  .scene6 { margin-top: 5rem; padding: 0 8vw; gap: 0; }
+
+  .s6-a {
+    width: 85% !important;
+    align-self: flex-start;
+    transform: rotate(-1.5deg) translateY(22px) !important;
+    margin-bottom: -10vw;
+    box-shadow: 8px 12px 32px rgba(0,0,0,.75) !important;
+    z-index: 2 !important;
+  }
+  .s6-a.on { transform: rotate(-1.5deg) translateY(0) !important; }
+  .s6-a .vm { height: 54vw; }
+
+  .s6-b {
+    width: 80% !important;
+    align-self: flex-end;
+    transform: rotate(1.2deg) translateY(22px) !important;
+    margin-bottom: -8vw;
+    box-shadow: -8px 10px 32px rgba(0,0,0,.8) !important;
+    z-index: 3 !important;
+  }
+  .s6-b.on { transform: rotate(1.2deg) translateY(0) !important; }
+  .s6-b .vm { height: 50vw; }
+
+  .s6-c {
+    width: 75% !important;
+    align-self: center;
+    transform: rotate(-0.6deg) translateY(22px) !important;
+    margin-bottom: 2rem;
+    box-shadow: 4px 10px 28px rgba(0,0,0,.85) !important;
+    z-index: 4 !important;
+  }
+  .s6-c.on { transform: rotate(-0.6deg) translateY(0) !important; }
+  .s6-c .vm { height: 46vw; }
+
+  /* ── SCENE 7: big video full, small overlaps bottom-right ── */
+  .scene7 { margin-top: 3rem; }
+  .s7-big { width: 100% !important; margin-bottom: -18vw; }
+  .s7-big .vm { height: 65vw; }
+  .s7-small {
+    width: 52% !important;
+    align-self: flex-end;
+    margin-right: 0;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 32px rgba(0,0,0,.85) !important;
+  }
+  .s7-small .im, .s7-small .vm { height: 38vw; }
+  .s7-text {
+    right: auto !important; top: auto !important;
+    padding: 1.5rem 6vw 0;
+    align-self: flex-start;
+  }
+  .s7-text p { font-size: 1.3rem; }
+
+  /* Closing stacks */
+  .closing {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 3rem 6vw 5rem;
+    margin-top: 5rem;
+  }
+
+  /* Caption universal padding on mobile */
+  .cap { padding-left: 0; }
+}
+  /* ── VIEW TRANSITIONS ──
+     The hero video wrapper gets the same name as the
+     thumbnail that launched it. The browser morphs
+     between them automatically.                      */
+  @keyframes fade-in  { from { opacity: 0; } }
+  @keyframes fade-out { to   { opacity: 0; } }
+  @keyframes slide-from-bottom {
+    from { transform: translateY(40px); opacity: 0; }
+  }
+
+  ::view-transition-old(project-hero) {
+    animation: 520ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out;
+  }
+  ::view-transition-new(project-hero) {
+    animation: 620ms cubic-bezier(0.16, 1, 0.3, 1) both fade-in;
+  }
+
+  /* Everything else on the incoming page fades up softly */
+  ::view-transition-old(root) {
+    animation: 300ms ease both fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 500ms ease both fade-in;
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#">W.O.R.K</a>
+  <a href="#">A.B.O.U.T</a>
+  <a href="#">R.E.S.U.M.E</a>
+</nav>
+
+<!-- HERO — media[0] video -->
+<div class="hero">
+  <div class="vm" style="view-transition-name: project-hero;">
+    <iframe src="https://player.vimeo.com/video/1190792779?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+  <div class="hero-vignette"></div>
+  <div class="hero-title">
+    <span class="eyebrow">Immersive Attraction</span>
+    <h1>Harry Potter:<br><em>Visions of Magic</em></h1>
+  </div>
+  <div class="hero-aside">
+    <span>Singapore · Europe · Americas</span>
+    <span>2023 — 2025</span>
+    <span>Three Instances</span>
+  </div>
+  <div class="scroll-cue"></div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <p>Three large-scale immersive attractions brought the wizarding world to life across four continents — a permanent installation in Singapore and two traveling units touring Europe and the Americas. I managed the media and interactive technology production of a high-stakes multi-market touring operation, overseeing vendor contracts, client and partner relationships, and on-site coordination across all three instances.</p>
+  <p class="pull">"Holding the creative integrity of beloved IP at global scale was the defining challenge."</p>
+</div>
+
+<div class="canvas">
+
+  <!-- SCENE 1: media[1] large right · media[7] image overlapping top-left -->
+  <div class="scene1">
+    <figure class="item s1-main">
+      <div class="vm full-frame">
+        <iframe src="https://player.vimeo.com/video/1190792772?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <figure class="item s1-over">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <div class="item s1-cap">
+      <p class="cap">The wizarding world rendered at architectural scale — environment as narrative, space as story.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 2: media[2] large left · media[3] smaller right · text over seam -->
+  <div class="scene2">
+    <figure class="item s2-a">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792701?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <figure class="item s2-b">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <div class="item s2-text float-text">
+      <p>A bespoke interactive wand gives visitors agency — triggering hidden effects and revealing layers of the story.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 3: media[8] still image center · media[4] video left · media[5] video right -->
+  <div class="scene3">
+    <figure class="item s3-center">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792675?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <figure class="item s3-left">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792718?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <figure class="item s3-right">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792695?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <div class="item s3-cap">
+      <p class="cap" style="text-align:center;">Steered the shaping of the brand story — creative direction, visual identity, campaign storytelling.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 4: media[6] full-bleed panoramic · media[1] video punching top-right -->
+  <div class="scene4">
+    <figure class="item s4-pan">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792666?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <figure class="item s4-punch">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792652?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <div class="item s4-cap">
+      <p class="cap">The environments remix iconic IP into a contemporary multi-sensory experience for global audiences.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 5: still image portrait left · still image landscape right · video peeking below -->
+  <div class="scene5">
+    <figure class="item s5-portrait">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792685?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <figure class="item s5-landscape">
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792749?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </figure>
+    <div class="item s5-text">
+      <p class="cap" style="text-align:right; max-width:24ch;">Interactive technology — wand tracking, spatial audio, real-time systems. Localized per market.</p>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="closing">
+  <div class="closing-tags">
+    <span>Immersive Experience Production</span>
+    <span>Media & Interactive Technology</span>
+    <span>Multi-Market Touring Operations</span>
+  </div>
+  <a href="#" class="more-work">← More Work</a>
+</div>
+
+<script>
+// ── Scroll reveal
+const items = document.querySelectorAll('.item');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
   });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+items.forEach(el => io.observe(el));
 
-})();
+// ── Hover repulsion
+const scenes = document.querySelectorAll('.scene1,.scene2,.scene3,.scene4,.scene5');
+
+function getCenter(el) {
+  const r = el.getBoundingClientRect();
+  return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+}
+function baseTransform(el) {
+  if (el.classList.contains('s6-a')) return 'rotate(-1.5deg)';
+  if (el.classList.contains('s6-b')) return 'rotate(1.2deg)';
+  if (el.classList.contains('s6-c')) return 'rotate(-0.6deg)';
+  return '';
+}
+function buildTransform(el, tx, ty, scale) {
+  const b = baseTransform(el);
+  const t = `translate(${tx}px,${ty}px) scale(${scale})`;
+  return b ? `${b} ${t}` : t;
+}
+
+scenes.forEach(scene => {
+  const members = Array.from(scene.querySelectorAll('.item'));
+  members.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const hc = getCenter(el);
+      members.forEach(sib => {
+        if (sib === el) {
+          sib.style.transition = 'transform .45s cubic-bezier(.25,.46,.45,.94), opacity .45s ease';
+          sib.style.transform = buildTransform(sib, 0, -3, 1.015);
+          sib.style.zIndex = '10'; sib.style.opacity = '1';
+        } else {
+          const sc = getCenter(sib);
+          const dx = sc.x - hc.x, dy = sc.y - hc.y;
+          const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+          const str = Math.min(24, 1800 / dist);
+          sib.style.transition = 'transform .55s cubic-bezier(.25,.46,.45,.94), opacity .55s ease';
+          sib.style.transform = buildTransform(sib, (dx/dist)*str, (dy/dist)*str, 0.97);
+          sib.style.opacity = '0.68';
+        }
+      });
+    });
+    el.addEventListener('mouseleave', () => {
+      members.forEach(sib => {
+        sib.style.transition = 'transform .7s cubic-bezier(.25,.46,.45,.94), opacity .7s ease';
+        sib.style.transform = baseTransform(sib);
+        sib.style.opacity = ''; sib.style.zIndex = '';
+      });
+    });
+  });
+});
+
+// ── Back navigation — smooth return to homepage
+document.querySelector('.more-work')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (document.startViewTransition) {
+    document.startViewTransition(() => {
+      window.location.href = 'index.html';
+    });
+  } else {
+    window.location.href = 'index.html';
+  }
+});
+
+// lazy video loader no longer needed — all Vimeo iframes
+</script>
+<!-- = document.querySelectorAll('video[preload="none"]');
+const videoIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.load();
+      e.target.play().catch(() => {});
+      videoIO.unobserve(e.target);
+    }
+  });
+}, { rootMargin: '200px' });
+lazyVideos.forEach(v => videoIO.observe(v)); -->
+</body>
+</html>
