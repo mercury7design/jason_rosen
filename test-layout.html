@@ -65,14 +65,7 @@ nav a:hover { opacity: 1; }
   pointer-events: none;
   display: block;
 }
-/* Full frame — fits within container, no crop */
-.vm.full-frame iframe {
-  width: 100%; height: 100%;
-  top: 0; left: 0;
-  transform: none;
-  min-width: unset; min-height: unset;
-  object-fit: contain;
-}
+
 .vm::after {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: transparent;
@@ -100,10 +93,8 @@ nav a:hover { opacity: 1; }
 }
 .hero .vm iframe {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 177.78%; height: 177.78%;
-  min-width: 100%; min-height: 100%;
-  transform: translate(-50%, -50%);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   border: none; pointer-events: none;
 }
 .hero-vignette {
@@ -190,17 +181,19 @@ figure.item .im { width: 100%; height: 100%; }
 
 /* ── SCENES ── */
 .scene1 { position:relative; height:100vh; margin-top:7rem; }
-.s1-main { position:absolute; right:0; top:4vh; width:78vw; height:82vh; z-index:1; }
+/* Main bleeds from LEFT, large */
+.s1-main { position:absolute; left:0; top:10vh; width:72vw; height:82vh; z-index:1; }
+/* Small overlaps from RIGHT — genuinely outside main's right edge */
 .s1-over {
-  position:absolute; left:4vw; top:8vh; width:24vw; height:34vh; z-index:3;
-  transition-delay:.18s; box-shadow:10px 10px 36px rgba(0,0,0,.75);
+  position:absolute; right:2vw; top:6vh; width:32vw; height:44vh; z-index:3;
+  transition-delay:.18s; box-shadow:-10px 10px 36px rgba(0,0,0,.75);
 }
 .s1-cap { position:absolute; bottom:5vh; left:7vw; z-index:4; transition-delay:.3s; }
 
 .scene2 { position:relative; height:90vh; margin-top:8rem; }
-.s2-a { position:absolute; left:5vw; top:5vh; width:52vw; height:72vh; z-index:2; box-shadow:20px 20px 60px rgba(0,0,0,.8); }
-.s2-b { position:absolute; right:4vw; top:18vh; width:36vw; height:52vh; z-index:3; transition-delay:.14s; box-shadow:-12px 12px 40px rgba(0,0,0,.7); }
-.s2-text { position:absolute; left:5vw; top:3vh; z-index:5; max-width:24ch; transition-delay:.28s; }
+.s2-a { position:absolute; left:5vw; top:8vh; width:50vw; height:68vh; z-index:2; box-shadow:20px 20px 60px rgba(0,0,0,.8); }
+.s2-b { position:absolute; right:4vw; top:22vh; width:32vw; height:46vh; z-index:3; transition-delay:.14s; box-shadow:-12px 12px 40px rgba(0,0,0,.7); }
+.s2-text { position:absolute; left:48vw; top:5vh; z-index:5; max-width:20ch; transition-delay:.28s; }
 
 .scene3 { position:relative; height:85vh; margin-top:4rem; }
 .s3-center { position:absolute; left:50%; top:5vh; transform:translateX(-50%); width:62vw; height:76vh; z-index:2; }
@@ -527,13 +520,13 @@ figure.item .im { width: 100%; height: 100%; }
   <!-- SCENE 1: media[1] large right · media[7] image overlapping top-left -->
   <div class="scene1">
     <figure class="item s1-main">
-      <div class="vm full-frame">
-        <iframe src="https://player.vimeo.com/video/1190792772?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792772?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s1-over">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s1-cap">
@@ -550,7 +543,7 @@ figure.item .im { width: 100%; height: 100%; }
     </figure>
     <figure class="item s2-b">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s2-text float-text">
