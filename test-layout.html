@@ -443,6 +443,31 @@ nav a:hover { opacity: 1; }
   /* Caption universal padding on mobile */
   .cap { padding-left: 0; }
 }
+  /* ── VIEW TRANSITIONS ──
+     The hero video wrapper gets the same name as the
+     thumbnail that launched it. The browser morphs
+     between them automatically.                      */
+  @keyframes fade-in  { from { opacity: 0; } }
+  @keyframes fade-out { to   { opacity: 0; } }
+  @keyframes slide-from-bottom {
+    from { transform: translateY(40px); opacity: 0; }
+  }
+
+  ::view-transition-old(project-hero) {
+    animation: 520ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out;
+  }
+  ::view-transition-new(project-hero) {
+    animation: 620ms cubic-bezier(0.16, 1, 0.3, 1) both fade-in;
+  }
+
+  /* Everything else on the incoming page fades up softly */
+  ::view-transition-old(root) {
+    animation: 300ms ease both fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 500ms ease both fade-in;
+  }
+
 </style>
 </head>
 <body>
@@ -455,10 +480,8 @@ nav a:hover { opacity: 1; }
 
 <!-- HERO — media[0] video -->
 <div class="hero">
-  <div class="vm">
-    <video autoplay muted loop playsinline preload="auto">
-      <source src="https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4" type="video/mp4">
-    </video>
+  <div class="vm" style="view-transition-name: project-hero;">
+    <iframe src="https://player.vimeo.com/video/1190792779?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
   <div class="hero-vignette"></div>
   <div class="hero-title">
@@ -485,15 +508,12 @@ nav a:hover { opacity: 1; }
   <div class="scene1">
     <figure class="item s1-main">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792772?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s1-over">
-      <div class="im">
-        <img src="https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg"
-             alt="Large-scale scenic environments" loading="lazy" />
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s1-cap">
@@ -505,16 +525,12 @@ nav a:hover { opacity: 1; }
   <div class="scene2">
     <figure class="item s2-a">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792701?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s2-b">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s2-text float-text">
@@ -525,23 +541,18 @@ nav a:hover { opacity: 1; }
   <!-- SCENE 3: media[8] still image center · media[4] video left · media[5] video right -->
   <div class="scene3">
     <figure class="item s3-center">
-      <div class="im">
-        <img src="https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg"
-             alt="Brand story and visual identity" loading="lazy" />
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792675?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s3-left">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792718?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s3-right">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792695?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s3-cap">
@@ -553,16 +564,12 @@ nav a:hover { opacity: 1; }
   <div class="scene4">
     <figure class="item s4-pan">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/1faccd22c1/20_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792666?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s4-punch">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792652?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s4-cap">
@@ -573,22 +580,18 @@ nav a:hover { opacity: 1; }
   <!-- SCENE 5: still image portrait left · still image landscape right · video peeking below -->
   <div class="scene5">
     <figure class="item s5-portrait">
-      <div class="im">
-        <img src="https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg"
-             alt="Visitor experience" loading="lazy" />
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792685?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s5-landscape">
-      <div class="im">
-        <img src="https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg"
-             alt="Immersive environments" loading="lazy" />
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792749?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s5-peek">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792779?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s5-text">
@@ -600,23 +603,17 @@ nav a:hover { opacity: 1; }
   <div class="scene6">
     <figure class="item s6-a">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792772?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s6-b">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s6-c">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792701?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
   </div>
@@ -625,15 +622,12 @@ nav a:hover { opacity: 1; }
   <div class="scene7">
     <figure class="item s7-big">
       <div class="vm">
-        <video autoplay muted loop playsinline preload="none">
-          <source src="https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s7-small">
-      <div class="im">
-        <img src="https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg"
-             alt="Production details" loading="lazy" />
+      <div class="vm">
+        <iframe src="https://player.vimeo.com/video/1190792675?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s7-text float-text">
@@ -712,8 +706,21 @@ scenes.forEach(scene => {
   });
 });
 
-// ── Lazy-load videos as they enter the viewport
-const lazyVideos = document.querySelectorAll('video[preload="none"]');
+// ── Back navigation — smooth return to homepage
+document.querySelector('.more-work')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (document.startViewTransition) {
+    document.startViewTransition(() => {
+      window.location.href = 'index.html';
+    });
+  } else {
+    window.location.href = 'index.html';
+  }
+});
+
+// lazy video loader no longer needed — all Vimeo iframes
+</script>
+<!-- = document.querySelectorAll('video[preload="none"]');
 const videoIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -723,7 +730,6 @@ const videoIO = new IntersectionObserver((entries) => {
     }
   });
 }, { rootMargin: '200px' });
-lazyVideos.forEach(v => videoIO.observe(v));
-</script>
+lazyVideos.forEach(v => videoIO.observe(v)); -->
 </body>
 </html>
