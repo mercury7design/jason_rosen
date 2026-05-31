@@ -727,7 +727,13 @@ async function loadProjectPage() {
         `;
       }
 
-      if (block.innerHTML) mediaEl.appendChild(block);
+      if (block.innerHTML) {
+        // Tag the first media item for the View Transitions morph
+        if (mediaEl.children.length === 0) {
+          block.style.viewTransitionName = 'project-hero';
+        }
+        mediaEl.appendChild(block);
+      }
     });
 
     // Init HLS videos
