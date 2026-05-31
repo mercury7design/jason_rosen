@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Golden Calf — Harry Potter: Visions of Magic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0d0e0c;
+  --gold: #b8924a;
+  --gold-dim: #6b5428;
+  --muted: #5c5a54;
+  --white: #f0ece4;
+  --nav-bg: #cdc5b4;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 999;
+  pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: var(--nav-bg);
+  display: flex; justify-content: center; gap: 3rem; padding: 0.85rem 2rem;
+}
+nav a {
+  font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .2em;
+  color: #3a3830; text-decoration: none; opacity: .65; transition: opacity .2s;
+}
+nav a:hover { opacity: 1; }
+
+/* ── MEDIA WRAPPERS ── */
+/* Video: fills parent, no controls, no click-through */
+.vm {
+  position: relative; width: 100%; height: 100%;
+  overflow: hidden; background: #050608; display: block;
+}
+.vm video {
+  position: absolute; top: 50%; left: 50%;
+  width: 177.78%; height: 177.78%; /* 16:9 oversized to crop letterbox */
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover; pointer-events: none;
+}
+.vm::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+
+/* Image: fills parent */
+.im {
+  position: relative; width: 100%; height: 100%;
+  overflow: hidden; display: block;
+}
+.im img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  pointer-events: none;
+}
+.im::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 100vh;
+  overflow: hidden; margin-top: 44px;
+}
+.hero .vm { position: absolute; inset: 0; }
+.hero-vignette {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(to top,  rgba(13,14,12,.95) 0%, rgba(13,14,12,.1) 45%, transparent 70%),
+    linear-gradient(to right, rgba(13,14,12,.4) 0%, transparent 55%),
+    linear-gradient(to bottom, rgba(13,14,12,.5) 0%, transparent 35%);
+}
+.hero-title { position: absolute; bottom: 5.5rem; left: 7vw; z-index: 3; }
+.hero-title .eyebrow {
+  display: block; font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: .3em;
+  color: var(--gold); margin-bottom: 1rem;
+  opacity: 0; animation: fadeUp 1s ease 1.6s forwards;
+}
+.hero-title h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(3.8rem,7.5vw,7.5rem); line-height: .93; letter-spacing: -.02em;
+  opacity: 0; animation: fadeUp 1.2s ease 1.8s forwards;
+}
+.hero-title h1 em { font-style: italic; color: rgba(240,236,228,.42); display: block; }
+.hero-aside {
+  position: absolute; bottom: 6rem; right: 6vw;
+  text-align: right; z-index: 3;
+  opacity: 0; animation: fadeUp 1s ease 2.2s forwards;
+}
+.hero-aside span {
+  display: block; font-family: 'Cinzel', serif;
+  font-size: .55rem; letter-spacing: .2em; color: var(--muted); line-height: 2.1;
+}
+.scroll-cue {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 72px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim));
+  opacity: 0; animation: fadeIn 1s ease 2.7s forwards;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ── INTRO ── */
+.intro {
+  padding: 8rem 7vw 0;
+  display: grid; grid-template-columns: 55% 1fr; gap: 6vw; align-items: start;
+}
+.intro p { font-size: 1.1rem; line-height: 1.9; color: rgba(240,236,228,.68); }
+.intro .pull {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: clamp(1.5rem,2.2vw,2.2rem); line-height: 1.35;
+  color: rgba(240,236,228,.38);
+  border-left: 1px solid var(--gold-dim); padding-left: 2rem;
+}
+
+/* ── CANVAS ── */
+.canvas { position: relative; padding-bottom: 6rem; }
+
+.item {
+  position: relative;
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .75s ease, transform .75s ease;
+  will-change: transform, opacity;
+}
+.item.on { opacity: 1; transform: translateY(0); }
+
+.cap {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: .82rem; color: var(--muted); line-height: 1.55;
+  padding-top: .55rem; max-width: 32ch; transition: color .3s;
+}
+.item:hover .cap { color: rgba(240,236,228,.5); }
+
+.float-text p {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: clamp(1.3rem,1.9vw,2rem); line-height: 1.3;
+  color: rgba(240,236,228,.82); text-shadow: 0 2px 20px rgba(0,0,0,.9);
+}
+
+/* ── SCENES ── */
+.scene1 { position:relative; height:100vh; margin-top:7rem; }
+.s1-main { position:absolute; right:0; top:4vh; width:78vw; height:82vh; z-index:1; }
+.s1-over {
+  position:absolute; left:4vw; top:0; width:30vw; height:42vh; z-index:3;
+  transition-delay:.18s; box-shadow:12px 12px 40px rgba(0,0,0,.7);
+}
+.s1-cap { position:absolute; bottom:5vh; left:7vw; z-index:4; transition-delay:.3s; }
+
+.scene2 { position:relative; height:90vh; margin-top:8rem; }
+.s2-a { position:absolute; left:5vw; top:5vh; width:52vw; height:72vh; z-index:2; box-shadow:20px 20px 60px rgba(0,0,0,.8); }
+.s2-b { position:absolute; right:4vw; top:18vh; width:36vw; height:52vh; z-index:3; transition-delay:.14s; box-shadow:-12px 12px 40px rgba(0,0,0,.7); }
+.s2-text { position:absolute; left:50%; top:0; transform:translateX(-28%); z-index:5; max-width:26ch; transition-delay:.28s; }
+
+.scene3 { position:relative; height:85vh; margin-top:4rem; }
+.s3-center { position:absolute; left:50%; top:8vh; transform:translateX(-50%); width:56vw; height:70vh; z-index:2; }
+.s3-left { position:absolute; left:3vw; top:20vh; width:24vw; height:36vh; z-index:3; transition-delay:.16s; box-shadow:10px 10px 40px rgba(0,0,0,.7); }
+.s3-right { position:absolute; right:3vw; bottom:4vh; width:22vw; height:30vh; z-index:3; transition-delay:.24s; box-shadow:-10px 10px 40px rgba(0,0,0,.7); }
+.s3-cap { position:absolute; bottom:0; left:50%; transform:translateX(-50%); z-index:5; transition-delay:.3s; text-align:center; }
+
+.scene4 { position:relative; height:80vh; margin-top:5rem; }
+.s4-pan { position:absolute; left:0; right:0; top:8vh; height:68vh; z-index:1; }
+.s4-punch { position:absolute; right:8vw; top:0; width:28vw; height:34vh; z-index:3; transition-delay:.2s; box-shadow:0 16px 50px rgba(0,0,0,.85); }
+.s4-cap { position:absolute; bottom:1vh; left:7vw; z-index:4; transition-delay:.15s; }
+
+.scene5 { position:relative; height:110vh; margin-top:5rem; }
+.s5-portrait { position:absolute; left:7vw; top:5vh; width:32vw; height:62vh; z-index:2; }
+.s5-landscape { position:absolute; right:5vw; top:14vh; width:54vw; height:48vh; z-index:3; transition-delay:.12s; box-shadow:-16px 8px 50px rgba(0,0,0,.75); }
+.s5-peek { position:absolute; left:14vw; bottom:8vh; width:36vw; height:30vh; z-index:4; transition-delay:.24s; box-shadow:10px -6px 40px rgba(0,0,0,.8); }
+.s5-text { position:absolute; right:7vw; bottom:8vh; z-index:5; max-width:28ch; text-align:right; transition-delay:.35s; }
+
+.scene6 { position:relative; height:90vh; margin-top:6rem; }
+.s6-a { position:absolute; left:10vw; top:5vh; width:42vw; height:54vh; z-index:2; transform:rotate(-1.5deg) translateY(22px); box-shadow:12px 20px 50px rgba(0,0,0,.75); }
+.s6-a.on { transform:rotate(-1.5deg) translateY(0); }
+.s6-b { position:absolute; right:8vw; top:14vh; width:36vw; height:48vh; z-index:3; transition-delay:.16s; transform:rotate(1.2deg) translateY(22px); box-shadow:-10px 14px 44px rgba(0,0,0,.8); }
+.s6-b.on { transform:rotate(1.2deg) translateY(0); }
+.s6-c { position:absolute; left:32vw; bottom:3vh; width:28vw; height:36vh; z-index:4; transition-delay:.28s; transform:rotate(-0.6deg) translateY(22px); box-shadow:6px 16px 40px rgba(0,0,0,.85); }
+.s6-c.on { transform:rotate(-0.6deg) translateY(0); }
+
+.scene7 { position:relative; height:75vh; margin-top:4rem; }
+.s7-big { position:absolute; left:0; top:0; width:70vw; height:72vh; z-index:1; }
+.s7-small { position:absolute; right:5vw; bottom:5vh; width:28vw; height:36vh; z-index:3; transition-delay:.18s; box-shadow:-14px 14px 50px rgba(0,0,0,.85); }
+.s7-text { position:absolute; right:6vw; top:3vh; z-index:4; max-width:22ch; transition-delay:.1s; }
+
+/* ── CLOSING ── */
+.closing {
+  margin-top:8rem; padding:3rem 7vw 7rem;
+  border-top:1px solid #1c1e1a;
+  display:flex; justify-content:space-between; align-items:flex-end;
+}
+.closing-tags { display:flex; flex-direction:column; gap:.4rem; }
+.closing-tags span { font-family:'Cinzel',serif; font-size:.55rem; letter-spacing:.2em; color:var(--muted); }
+.more-work {
+  font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.2em;
+  color:var(--gold); text-decoration:none;
+  border-bottom:1px solid var(--gold-dim); padding-bottom:.2rem;
+  transition:color .2s, border-color .2s;
+}
+.more-work:hover { color:var(--white); border-color:var(--white); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#">W.O.R.K</a>
+  <a href="#">A.B.O.U.T</a>
+  <a href="#">R.E.S.U.M.E</a>
+</nav>
+
+<!-- HERO — media[0] video -->
+<div class="hero">
+  <div class="vm">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-vignette"></div>
+  <div class="hero-title">
+    <span class="eyebrow">Immersive Attraction</span>
+    <h1>Harry Potter:<br><em>Visions of Magic</em></h1>
+  </div>
+  <div class="hero-aside">
+    <span>Singapore · Europe · Americas</span>
+    <span>2023 — 2025</span>
+    <span>Three Instances</span>
+  </div>
+  <div class="scroll-cue"></div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <p>Three large-scale immersive attractions brought the wizarding world to life across four continents — a permanent installation in Singapore and two traveling units touring Europe and the Americas. I managed the media and interactive technology production of a high-stakes multi-market touring operation, overseeing vendor contracts, client and partner relationships, and on-site coordination across all three instances.</p>
+  <p class="pull">"Holding the creative integrity of beloved IP at global scale was the defining challenge."</p>
+</div>
+
+<div class="canvas">
+
+  <!-- SCENE 1: media[1] large right · media[7] image overlapping top-left -->
+  <div class="scene1">
+    <figure class="item s1-main">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s1-over">
+      <div class="im">
+        <img src="https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg"
+             alt="Large-scale scenic environments" loading="lazy" />
+      </div>
+    </figure>
+    <div class="item s1-cap">
+      <p class="cap">The wizarding world rendered at architectural scale — environment as narrative, space as story.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 2: media[2] large left · media[3] smaller right · text over seam -->
+  <div class="scene2">
+    <figure class="item s2-a">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s2-b">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <div class="item s2-text float-text">
+      <p>A bespoke interactive wand gives visitors agency — triggering hidden effects and revealing layers of the story.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 3: media[8] still image center · media[4] video left · media[5] video right -->
+  <div class="scene3">
+    <figure class="item s3-center">
+      <div class="im">
+        <img src="https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg"
+             alt="Brand story and visual identity" loading="lazy" />
+      </div>
+    </figure>
+    <figure class="item s3-left">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s3-right">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <div class="item s3-cap">
+      <p class="cap" style="text-align:center;">Steered the shaping of the brand story — creative direction, visual identity, campaign storytelling.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 4: media[6] full-bleed panoramic · media[1] video punching top-right -->
+  <div class="scene4">
+    <figure class="item s4-pan">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/1faccd22c1/20_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s4-punch">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/321cd98114/10_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <div class="item s4-cap">
+      <p class="cap">The environments remix iconic IP into a contemporary multi-sensory experience for global audiences.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 5: still image portrait left · still image landscape right · video peeking below -->
+  <div class="scene5">
+    <figure class="item s5-portrait">
+      <div class="im">
+        <img src="https://a.storyblok.com/f/164420/1481x1473/6a61aaf927/07_dk_hp_031125.jpg"
+             alt="Visitor experience" loading="lazy" />
+      </div>
+    </figure>
+    <figure class="item s5-landscape">
+      <div class="im">
+        <img src="https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg"
+             alt="Immersive environments" loading="lazy" />
+      </div>
+    </figure>
+    <figure class="item s5-peek">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/38001e8133/12_dk_hp_031725_hd.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <div class="item s5-text">
+      <p class="cap" style="text-align:right; max-width:24ch;">Interactive technology — wand tracking, spatial audio, real-time systems. Localized per market.</p>
+    </div>
+  </div>
+
+  <!-- SCENE 6: polaroid toss — three videos at slight rotations -->
+  <div class="scene6">
+    <figure class="item s6-a">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/356d96ddc8/13_dk_hp_031725_hd.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s6-b">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/02a4e4da06/15_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s6-c">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/2a855011a1/14_dk_hp_031725.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+  </div>
+
+  <!-- SCENE 7: hero video reprise dominant left · still image small right -->
+  <div class="scene7">
+    <figure class="item s7-big">
+      <div class="vm">
+        <video autoplay muted loop playsinline preload="none">
+          <source src="https://a.storyblok.com/f/164420/x/cb89a701d6/01_preview_dk_hp_042925_hd.mp4" type="video/mp4">
+        </video>
+      </div>
+    </figure>
+    <figure class="item s7-small">
+      <div class="im">
+        <img src="https://a.storyblok.com/f/164420/1877x1045/cce78b939f/03_dk_hp_031125.jpg"
+             alt="Production details" loading="lazy" />
+      </div>
+    </figure>
+    <div class="item s7-text float-text">
+      <p>Three continents.<br>Three instances.<br>One vision held.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="closing">
+  <div class="closing-tags">
+    <span>Immersive Experience Production</span>
+    <span>Media & Interactive Technology</span>
+    <span>Multi-Market Touring Operations</span>
+  </div>
+  <a href="#" class="more-work">← More Work</a>
+</div>
+
+<script>
+// ── Scroll reveal
+const items = document.querySelectorAll('.item');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+items.forEach(el => io.observe(el));
+
+// ── Hover repulsion
+const scenes = document.querySelectorAll('.scene1,.scene2,.scene3,.scene4,.scene5,.scene6,.scene7');
+
+function getCenter(el) {
+  const r = el.getBoundingClientRect();
+  return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+}
+function baseTransform(el) {
+  if (el.classList.contains('s6-a')) return 'rotate(-1.5deg)';
+  if (el.classList.contains('s6-b')) return 'rotate(1.2deg)';
+  if (el.classList.contains('s6-c')) return 'rotate(-0.6deg)';
+  return '';
+}
+function buildTransform(el, tx, ty, scale) {
+  const b = baseTransform(el);
+  const t = `translate(${tx}px,${ty}px) scale(${scale})`;
+  return b ? `${b} ${t}` : t;
+}
+
+scenes.forEach(scene => {
+  const members = Array.from(scene.querySelectorAll('.item'));
+  members.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const hc = getCenter(el);
+      members.forEach(sib => {
+        if (sib === el) {
+          sib.style.transition = 'transform .45s cubic-bezier(.25,.46,.45,.94), opacity .45s ease';
+          sib.style.transform = buildTransform(sib, 0, -3, 1.015);
+          sib.style.zIndex = '10'; sib.style.opacity = '1';
+        } else {
+          const sc = getCenter(sib);
+          const dx = sc.x - hc.x, dy = sc.y - hc.y;
+          const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+          const str = Math.min(24, 1800 / dist);
+          sib.style.transition = 'transform .55s cubic-bezier(.25,.46,.45,.94), opacity .55s ease';
+          sib.style.transform = buildTransform(sib, (dx/dist)*str, (dy/dist)*str, 0.97);
+          sib.style.opacity = '0.68';
+        }
+      });
+    });
+    el.addEventListener('mouseleave', () => {
+      members.forEach(sib => {
+        sib.style.transition = 'transform .7s cubic-bezier(.25,.46,.45,.94), opacity .7s ease';
+        sib.style.transform = baseTransform(sib);
+        sib.style.opacity = ''; sib.style.zIndex = '';
+      });
+    });
+  });
+});
+
+// ── Lazy-load videos as they enter the viewport
+const lazyVideos = document.querySelectorAll('video[preload="none"]');
+const videoIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.load();
+      e.target.play().catch(() => {});
+      videoIO.unobserve(e.target);
+    }
+  });
+}, { rootMargin: '200px' });
+lazyVideos.forEach(v => videoIO.observe(v));
+</script>
+</body>
+</html>
