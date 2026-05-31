@@ -215,6 +215,234 @@ nav a:hover { opacity: 1; }
   transition:color .2s, border-color .2s;
 }
 .more-work:hover { color:var(--white); border-color:var(--white); }
+
+/* ════════════════════════════════════════
+   MOBILE — max-width 768px
+   Absolute collision → flowing vertical
+   with intentional edge-overlap moments
+════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  nav { gap: 1.5rem; padding: 0.75rem 1.5rem; }
+  nav a { font-size: .62rem; letter-spacing: .14em; }
+
+  /* Hero scales fine — just tighten text position */
+  .hero { height: 100svh; }
+  .hero-title { bottom: 4rem; left: 6vw; }
+  .hero-title h1 { font-size: clamp(2.8rem, 11vw, 4rem); }
+  .hero-aside { display: none; } /* clean on mobile */
+
+  /* Intro stacks single column */
+  .intro {
+    grid-template-columns: 1fr;
+    padding: 4rem 6vw 0;
+    gap: 2rem;
+  }
+  .intro .pull {
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+    border-left: 1px solid var(--gold-dim);
+    padding-left: 1.2rem;
+  }
+
+  /* Canvas reset — all scenes become flow containers */
+  .canvas { padding-bottom: 4rem; }
+
+  /* ── Shared mobile scene reset ── */
+  .scene1, .scene2, .scene3,
+  .scene4, .scene5, .scene6, .scene7 {
+    position: relative;
+    height: auto;
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* gaps handled per-item */
+  }
+
+  /* All items back to normal flow */
+  .item {
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    top: auto !important; left: auto !important;
+    right: auto !important; bottom: auto !important;
+    transform: translateY(22px) !important; /* keep reveal anim */
+    box-shadow: none !important;
+    margin: 0;
+    z-index: auto !important;
+  }
+  .item.on { transform: translateY(0) !important; }
+
+  /* All media fills need explicit height on mobile */
+  .vm, .im { height: 56vw; min-height: 200px; }
+
+  /* ── SCENE 1: main full width, over-image overlaps bottom edge ── */
+  .scene1 { margin-top: 3rem; }
+  .s1-main { width: 100% !important; margin-bottom: -18vw; }
+  .s1-main .vm { height: 62vw; }
+  .s1-over {
+    width: 58% !important;
+    align-self: flex-end;
+    margin-right: 0;
+    position: relative !important;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 30px rgba(0,0,0,.7) !important;
+  }
+  .s1-over .vm, .s1-over .im { height: 44vw; }
+  .s1-cap { margin-top: 1rem; padding: 0 6vw; }
+
+  /* ── SCENE 2: large video full, smaller overlaps left edge ── */
+  .scene2 { margin-top: 4rem; }
+  .s2-a { width: 100% !important; margin-bottom: -14vw; }
+  .s2-a .vm { height: 65vw; }
+  .s2-b {
+    width: 62% !important;
+    align-self: flex-start;
+    margin-left: 5vw;
+    z-index: 3 !important;
+    box-shadow: 8px -8px 30px rgba(0,0,0,.7) !important;
+  }
+  .s2-b .vm { height: 46vw; }
+  .s2-text {
+    transform: none !important;
+    left: auto !important;
+    padding: 1.5rem 6vw 0;
+    align-self: flex-start;
+  }
+  .s2-text p { font-size: 1.2rem; }
+
+  /* ── SCENE 3: image full width, two videos side by side below ── */
+  .scene3 { margin-top: 4rem; }
+  .s3-center { width: 100% !important; transform: none !important; }
+  .s3-center .im { height: 65vw; }
+
+  /* Side-by-side pair with slight overlap */
+  .s3-left, .s3-right {
+    width: 55% !important;
+    display: inline-block;
+  }
+  .s3-left {
+    margin-top: -10vw;
+    margin-right: -5vw;
+    z-index: 3 !important;
+    box-shadow: 6px 6px 24px rgba(0,0,0,.7) !important;
+  }
+  .s3-left .vm { height: 40vw; }
+  .s3-right {
+    margin-top: 5vw;
+    align-self: flex-end;
+  }
+  .s3-right .vm { height: 36vw; }
+
+  /* Put the pair side by side */
+  .scene3 { flex-wrap: wrap; }
+  .s3-left, .s3-right { flex: 0 0 auto; }
+
+  .s3-cap {
+    transform: none !important; left: auto !important;
+    width: 100%; padding: 1rem 6vw 0; text-align: left !important;
+  }
+
+  /* ── SCENE 4: full-bleed pan, punch overlaps bottom-right corner ── */
+  .scene4 { margin-top: 4rem; }
+  .s4-pan { width: 100% !important; margin-bottom: -16vw; }
+  .s4-pan .vm { height: 62vw; }
+  .s4-punch {
+    width: 48% !important;
+    align-self: flex-end;
+    margin-right: 4vw;
+    z-index: 3 !important;
+    box-shadow: -6px -6px 28px rgba(0,0,0,.8) !important;
+  }
+  .s4-punch .vm { height: 34vw; }
+  .s4-cap { padding: 1rem 6vw 0; }
+
+  /* ── SCENE 5: portrait full, landscape overlaps, video below ── */
+  .scene5 { margin-top: 4rem; }
+  .s5-portrait { width: 100% !important; margin-bottom: -12vw; }
+  .s5-portrait .im { height: 72vw; }
+  .s5-landscape {
+    width: 78% !important;
+    align-self: flex-end;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 30px rgba(0,0,0,.75) !important;
+  }
+  .s5-landscape .im { height: 52vw; }
+  .s5-peek { width: 100% !important; margin-top: 1.5rem; }
+  .s5-peek .vm { height: 56vw; }
+  .s5-text {
+    right: auto !important; bottom: auto !important;
+    text-align: left !important;
+    padding: 1rem 6vw 0;
+  }
+
+  /* ── SCENE 6: polaroid stack — keep the rotations, stack with offset ── */
+  .scene6 { margin-top: 5rem; padding: 0 8vw; gap: 0; }
+
+  .s6-a {
+    width: 85% !important;
+    align-self: flex-start;
+    transform: rotate(-1.5deg) translateY(22px) !important;
+    margin-bottom: -10vw;
+    box-shadow: 8px 12px 32px rgba(0,0,0,.75) !important;
+    z-index: 2 !important;
+  }
+  .s6-a.on { transform: rotate(-1.5deg) translateY(0) !important; }
+  .s6-a .vm { height: 54vw; }
+
+  .s6-b {
+    width: 80% !important;
+    align-self: flex-end;
+    transform: rotate(1.2deg) translateY(22px) !important;
+    margin-bottom: -8vw;
+    box-shadow: -8px 10px 32px rgba(0,0,0,.8) !important;
+    z-index: 3 !important;
+  }
+  .s6-b.on { transform: rotate(1.2deg) translateY(0) !important; }
+  .s6-b .vm { height: 50vw; }
+
+  .s6-c {
+    width: 75% !important;
+    align-self: center;
+    transform: rotate(-0.6deg) translateY(22px) !important;
+    margin-bottom: 2rem;
+    box-shadow: 4px 10px 28px rgba(0,0,0,.85) !important;
+    z-index: 4 !important;
+  }
+  .s6-c.on { transform: rotate(-0.6deg) translateY(0) !important; }
+  .s6-c .vm { height: 46vw; }
+
+  /* ── SCENE 7: big video full, small overlaps bottom-right ── */
+  .scene7 { margin-top: 3rem; }
+  .s7-big { width: 100% !important; margin-bottom: -18vw; }
+  .s7-big .vm { height: 65vw; }
+  .s7-small {
+    width: 52% !important;
+    align-self: flex-end;
+    margin-right: 0;
+    z-index: 3 !important;
+    box-shadow: -8px -8px 32px rgba(0,0,0,.85) !important;
+  }
+  .s7-small .im, .s7-small .vm { height: 38vw; }
+  .s7-text {
+    right: auto !important; top: auto !important;
+    padding: 1.5rem 6vw 0;
+    align-self: flex-start;
+  }
+  .s7-text p { font-size: 1.3rem; }
+
+  /* Closing stacks */
+  .closing {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 3rem 6vw 5rem;
+    margin-top: 5rem;
+  }
+
+  /* Caption universal padding on mobile */
+  .cap { padding-left: 0; }
+}
 </style>
 </head>
 <body>
