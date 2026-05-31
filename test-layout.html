@@ -683,18 +683,37 @@ document.querySelector('.more-work')?.addEventListener('click', (e) => {
   }
 });
 
-// lazy video loader no longer needed — all Vimeo iframes
-</script>
-<!-- = document.querySelectorAll('video[preload="none"]');
-const videoIO = new IntersectionObserver((entries) => {
+// ── Vimeo lazy loader
+// Hero iframe loads immediately.
+// All other iframes: src is stored in data-src and only swapped in
+// when the container is 200px from entering the viewport.
+
+document.querySelectorAll('.vm iframe').forEach((iframe, i) => {
+  // Hero is first iframe — load immediately
+  if (i === 0) return;
+
+  // Stash the real src, remove it so the browser doesn't load it
+  const realSrc = iframe.getAttribute('src');
+  iframe.removeAttribute('src');
+  iframe.dataset.src = realSrc;
+});
+
+const lazyIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.load();
-      e.target.play().catch(() => {});
-      videoIO.unobserve(e.target);
+      const iframe = e.target.querySelector('iframe[data-src]');
+      if (iframe) {
+        iframe.src = iframe.dataset.src;
+        delete iframe.dataset.src;
+      }
+      lazyIO.unobserve(e.target);
     }
   });
-}, { rootMargin: '200px' });
-lazyVideos.forEach(v => videoIO.observe(v)); -->
-</body>
-</html>
+}, { rootMargin: '300px 0px' }); // start loading 300px before visible
+
+// Observe each .vm container (not the iframe directly)
+document.querySelectorAll('.vm').forEach((vm, i) => {
+  if (i === 0) return; // skip hero
+  lazyIO.observe(vm);
+});
+</script>
