@@ -54,13 +54,11 @@ nav a:hover { opacity: 1; }
   overflow: hidden;
   background: #050608; display: block;
 }
-/* All iframes inside .vm — full cover, no border, no click-through */
+/* All iframes inside .vm — full frame visible, no crop, no border */
 .vm iframe {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 200%; height: 200%;
-  min-width: 100%; min-height: 100%;
-  transform: translate(-50%, -50%);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   border: 0; outline: none;
   pointer-events: none;
   display: block;
@@ -504,7 +502,7 @@ figure.item .im { width: 100%; height: 100%; }
 <!-- HERO — media[0] video -->
 <div class="hero">
   <div class="vm" style="view-transition-name: project-hero;">
-    <iframe src="https://player.vimeo.com/video/1190792779?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe src="https://player.vimeo.com/video/1190792779?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
   <div class="hero-vignette"></div>
   <div class="hero-title">
@@ -531,12 +529,12 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene1">
     <figure class="item s1-main">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792772?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792772?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s1-over">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792709?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s1-cap">
@@ -548,12 +546,12 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene2">
     <figure class="item s2-a">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792701?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792701?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s2-b">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792655?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s2-text float-text">
@@ -565,17 +563,17 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene3">
     <figure class="item s3-center">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792675?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792675?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s3-left">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792718?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792718?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s3-right">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792695?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792695?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s3-cap">
@@ -587,12 +585,12 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene4">
     <figure class="item s4-pan">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792666?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792666?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s4-punch">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792652?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792652?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s4-cap">
@@ -604,17 +602,17 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene5">
     <figure class="item s5-portrait">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792685?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792685?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s5-landscape">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792749?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792749?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s5-peek">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792779?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792779?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s5-text">
@@ -626,17 +624,17 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene6">
     <figure class="item s6-a">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792772?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792772?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s6-b">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792709?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792709?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s6-c">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792701?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792701?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
   </div>
@@ -645,12 +643,12 @@ figure.item .im { width: 100%; height: 100%; }
   <div class="scene7">
     <figure class="item s7-big">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792655?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792655?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <figure class="item s7-small">
       <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792675?background=1&autoplay=1&loop=1&muted=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/1190792675?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
     <div class="item s7-text float-text">
