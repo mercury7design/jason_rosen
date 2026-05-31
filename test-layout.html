@@ -610,51 +610,11 @@ figure.item .im { width: 100%; height: 100%; }
         <iframe src="https://player.vimeo.com/video/1190792749?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </figure>
-    <figure class="item s5-peek">
-      <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792779?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </figure>
     <div class="item s5-text">
       <p class="cap" style="text-align:right; max-width:24ch;">Interactive technology — wand tracking, spatial audio, real-time systems. Localized per market.</p>
     </div>
   </div>
 
-  <!-- SCENE 6: polaroid toss — three videos at slight rotations -->
-  <div class="scene6">
-    <figure class="item s6-a">
-      <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792772?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </figure>
-    <figure class="item s6-b">
-      <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792709?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </figure>
-    <figure class="item s6-c">
-      <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792701?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </figure>
-  </div>
-
-  <!-- SCENE 7: hero video reprise dominant left · still image small right -->
-  <div class="scene7">
-    <figure class="item s7-big">
-      <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792655?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </figure>
-    <figure class="item s7-small">
-      <div class="vm">
-        <iframe src="https://player.vimeo.com/video/1190792675?background=0&autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&dnt=1&transparent=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </figure>
-    <div class="item s7-text float-text">
-      <p>Three continents.<br>Three instances.<br>One vision held.</p>
-    </div>
-  </div>
 
 </div>
 
@@ -678,7 +638,7 @@ const io = new IntersectionObserver((entries) => {
 items.forEach(el => io.observe(el));
 
 // ── Hover repulsion
-const scenes = document.querySelectorAll('.scene1,.scene2,.scene3,.scene4,.scene5,.scene6,.scene7');
+const scenes = document.querySelectorAll('.scene1,.scene2,.scene3,.scene4,.scene5');
 
 function getCenter(el) {
   const r = el.getBoundingClientRect();
