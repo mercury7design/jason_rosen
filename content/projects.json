@@ -210,12 +210,20 @@
       "title": "Robert Rauschenberg Foundation",
       "client": "Digital Archive & Web",
       "description": "Rauschenberg made work that refused categorization — his foundation's digital home needed to match that restlessness. I led design, development, and launch of the Foundation portal in Drupal, building a living archive of his artwork, writing, programs, and legacy in a system designed to grow. The challenge was creating infrastructure that felt as dynamic as his practice without imposing a curatorial voice that didn't belong there.",
-      "thumbnail": "https://www.rauschenbergfoundation.org/sites/default/files/styles/767x767/public/2026-04/Taking%20Venice%201.jpg",
+      "thumbnail": "/images/rauschenberg.jpg",
       "media": [
         {
           "type": "video",
           "url": "https://vimeo.com/226316494",
           "caption": "The Robert Rauschenberg Foundation site brings together the artist's work, archives, programs, and legacy."
+        },
+        {
+          "type": "image",
+          "image": "/images/rauschenberg-before.png"
+        },
+        {
+          "type": "image",
+          "image": "/images/rauschenberg-after2.jpg"
         }
       ]
     },
