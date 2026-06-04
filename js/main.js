@@ -428,13 +428,7 @@ function initHeroLayout() {
   if (!heroEl) return;
   const isMobile = window.matchMedia('(hover: none)').matches;
 
-  // Inject Squada One font
-  if (!document.querySelector('link[href*="Squada"]')) {
-    const l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Squada+One&display=swap';
-    document.head.appendChild(l);
-  }
+  // Cinzel loaded via index.html — no dynamic injection needed
 
   // Build quote HTML — desktop only, mobile is hardcoded in HTML
   const quoteEl = document.getElementById('hero-quote');
