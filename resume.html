@@ -45,7 +45,10 @@
   }
 
   @media print {
-    body { display: none; }
+    body { display: block; padding-top: 0; background: none; }
+    .site-nav, .hamburger, .mobile-menu, .pdf-btn-inline { display: none !important; }
+    .page { max-width: 100%; padding: 0.5in 0.65in; box-shadow: none; }
+    .closing { margin-top: 0.2in; padding-top: 0.15in; }
   }
 
   /* ── HEADER ── */
